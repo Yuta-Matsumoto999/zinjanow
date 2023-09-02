@@ -30,7 +30,7 @@ final _formKey = GlobalKey<FormState>();
                 child: const Center(
                   child: Text("Sign Up", style: TextStyle(
                       color: Colors.black,
-                      fontSize: 30,
+                      fontSize: 28,
                       fontWeight: FontWeight.w900
                     ),
                   ),

@@ -31,7 +31,7 @@ class _LoginState extends State<Login> {
                 child: const Center(
                   child: Text("Log In", style: TextStyle(
                       color: Colors.black,
-                      fontSize: 30,
+                      fontSize: 28,
                       fontWeight: FontWeight.w900
                     ),
                   ),

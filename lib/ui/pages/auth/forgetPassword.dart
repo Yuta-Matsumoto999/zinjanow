@@ -29,7 +29,7 @@ class _ForgetPassWordState extends State<ForgetPassWord> {
                 child: const Center(
                   child: Text("Forget Password", style: TextStyle(
                       color: Colors.black,
-                      fontSize: 30,
+                      fontSize: 28,
                       fontWeight: FontWeight.w900
                     ),
                   ),

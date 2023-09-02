@@ -21,7 +21,7 @@ class CompletePasswordResetLink extends StatelessWidget {
                 child: const Center(
                   child: Text("Send Reset Link", style: TextStyle(
                       color: Colors.black,
-                      fontSize: 30,
+                      fontSize: 28,
                       fontWeight: FontWeight.w900
                     ),
                   ),
