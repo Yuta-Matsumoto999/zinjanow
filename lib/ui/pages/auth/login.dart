@@ -73,7 +73,7 @@ class _LoginState extends State<Login> {
                         )
                       ),
                       Container(
-                        margin: const EdgeInsets.only(top: 20),
+                        margin: const EdgeInsets.only(top: 10),
                         child: RoundedButton(title: "Log In", color: 0xFFFFFFFF, marginTop: 0, marginBottom: 15, onPressedCallBack: () => {
                           Navigator.push(
                             context,

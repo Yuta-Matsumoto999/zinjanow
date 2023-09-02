@@ -15,8 +15,8 @@ class GoogleLoginButton extends StatelessWidget {
       margin: const EdgeInsets.only(top: 10),
       child: Center(
         child: SizedBox(
-          width: size.width * 0.65,
-          height: size.height * 0.065,
+          width: size.width * 0.7,
+          height: size.height * 0.068,
           child: ElevatedButton.icon(
             icon: const ImageIcon(
               AssetImage("images/google-icon-2048x2048-czn3g8x8.png")

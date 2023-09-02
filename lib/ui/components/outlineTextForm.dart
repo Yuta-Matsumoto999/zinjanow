@@ -21,7 +21,7 @@ class _OutlineTextFormState extends State<OutlineTextForm> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          margin: const EdgeInsets.only(bottom: 1),
+          margin: const EdgeInsets.only(bottom: 2),
           child: Text(widget.label, style: const TextStyle(
               color: Colors.black54,
               fontWeight: FontWeight.w800,

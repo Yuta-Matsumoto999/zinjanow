@@ -24,7 +24,7 @@ class RoundedButton extends StatelessWidget {
       child: Center(
         child: SizedBox(
           width: size.width * 0.8,
-          height: size.height * 0.065,
+          height: size.height * 0.068,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: Color(color),
