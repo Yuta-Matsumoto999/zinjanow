@@ -21,7 +21,7 @@ class _HomeState extends State<Home> {
           children: [
             UserName(),
             CategoryTitle(titleText: "current shrines"),
-            CategoryTitle(titleText: "checked in shrines"),
+            CategoryTitle(titleText: "checked in"),
             CategoryTitle(titleText: "favorite")
           ]
         ) 

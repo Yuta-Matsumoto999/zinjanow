@@ -5,12 +5,14 @@ class RoundedButton extends StatelessWidget {
   final int color;
   final double marginTop;
   final double marginBottom;
+  final Function()? onPressedCallBack;
   const RoundedButton({
     Key? key,
     required this.title,
     required this.color,
     required this.marginTop,
-    required this.marginBottom
+    required this.marginBottom,
+    this.onPressedCallBack
   }) : super(key: key);
   
   @override
@@ -24,13 +26,16 @@ class RoundedButton extends StatelessWidget {
           width: size.width * 0.8,
           height: size.height * 0.065,
           child: ElevatedButton(
-            child: Text(title),
             style: ElevatedButton.styleFrom(
               backgroundColor: Color(color),
               foregroundColor: Colors.black,
               shape: const StadiumBorder(),
             ),
-            onPressed: () {},
+            child: Text(title, style: const TextStyle(
+                fontSize: 16
+              ),
+            ),
+            onPressed: () => onPressedCallBack!(),
           ),
         ),
       )

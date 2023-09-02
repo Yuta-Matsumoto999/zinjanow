@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-// import 'package:zinjanow_app/ui/pages/home.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:zinjanow_app/ui/pages/welcome.dart';
-// import 'package:zinjanow_app/welcome.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // Flutterの初期化を確認
+  await Supabase.initialize(
+    url: 'https://zxtaqogvnvefstthehif.supabase.co',
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp4dGFxb2d2bnZlZnN0dGhlaGlmIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTM1NTQxOTEsImV4cCI6MjAwOTEzMDE5MX0.xx9TqYA9C9a5kHr1xqcJYq7c_I9I9itGaVumU0igQjI',
+  );
   runApp(const MyApp());
 }
 
@@ -19,7 +23,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Welcome(),
+      home: const Welcome()
     );
   }
 }
