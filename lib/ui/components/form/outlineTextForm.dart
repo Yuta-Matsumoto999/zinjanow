@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zinjanow_app/core/constants/customColor.dart';
 import 'package:zinjanow_app/ui/validation/excuteValidation.dart';
 import 'package:zinjanow_app/ui/validation/validator.dart';
 
@@ -14,7 +15,7 @@ class OutlineTextForm extends StatefulWidget {
     required this.hintText,
     required this.onChangeCallBack,
     required this.validators,
-    required this.setIsValid
+    required this.setIsValid,
   }) : super(key: key);
 
   @override
