@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
-import 'package:zinjanow_app/ui/components/background.dart';
-import 'package:zinjanow_app/ui/components/roundedButton.dart';
+import 'package:zinjanow_app/ui/components/welcome/background.dart';
+import 'package:zinjanow_app/ui/components/button/roundedButton.dart';
 import 'package:zinjanow_app/ui/pages/auth/login.dart';
 import 'package:zinjanow_app/ui/pages/auth/register.dart';
 
@@ -41,7 +41,8 @@ class Welcome extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => const Login())
               )
             }, 
-            isActive: true
+            isActive: true,
+            isLoading: "idel",
           ),
           RoundedButton(
             title: "Sign up",  
@@ -55,7 +56,8 @@ class Welcome extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => const Register())
               )
             },  
-            isActive: true
+            isActive: true,
+            isLoading: "idel",
           )
         ]
       )

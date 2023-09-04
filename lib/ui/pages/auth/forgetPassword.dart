@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
-import 'package:zinjanow_app/ui/components/outlineTextForm.dart';
-import 'package:zinjanow_app/ui/components/roundedButton.dart';
+import 'package:zinjanow_app/ui/components/form/outlineTextForm.dart';
+import 'package:zinjanow_app/ui/components/button/roundedButton.dart';
 import 'package:zinjanow_app/ui/pages/auth/completePasswordResetLink.dart';
 import 'package:zinjanow_app/ui/pages/auth/register.dart';
 import 'package:zinjanow_app/ui/validation/validator/email_validator.dart';
@@ -21,6 +21,7 @@ class _ForgetPassWordState extends State<ForgetPassWord> {
   String email = '';
   bool isValidEmail = true;
   bool isButtonActive = false;
+  String buttonLoading = "idel";
 
   void _setEmail(String value) {
     setState(() {
@@ -41,11 +42,23 @@ class _ForgetPassWordState extends State<ForgetPassWord> {
     }
   }
 
+  void _setButtonLoading(String value) {
+    setState(() {
+      buttonLoading = value;
+    });
+  }
+
   void _navigateCompletePage() {
-    Navigator.push(
-      context, 
-      MaterialPageRoute(builder: (context) => const CompletePasswordResetLink())
-    );
+    _setButtonLoading("loading");
+
+    // ここでログイン処理
+
+    // 成功したら -> _setButtonLoading("success");
+      // Navigator.push(
+      //   context, 
+      //   MaterialPageRoute(builder: (context) => const CompletePasswordResetLink())
+      // );
+    // 失敗したら -> _setButtonLoading("failed");
   }
 
   @override
@@ -105,7 +118,8 @@ class _ForgetPassWordState extends State<ForgetPassWord> {
                           marginTop: 0, 
                           marginBottom: 15, 
                           onPressedCallBack: _navigateCompletePage, 
-                          isActive: isButtonActive
+                          isActive: isButtonActive,
+                          isLoading: buttonLoading,
                         ),
                       ),
                       Container(

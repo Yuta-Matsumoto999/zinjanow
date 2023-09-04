@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:zinjanow_app/ui/components/button/failed.dart';
+import 'package:zinjanow_app/ui/components/button/idel.dart';
+import 'package:zinjanow_app/ui/components/button/loading.dart';
+import 'package:zinjanow_app/ui/components/button/success.dart';
 
 class RoundedButton extends StatefulWidget {
     final String title;
@@ -7,6 +11,7 @@ class RoundedButton extends StatefulWidget {
     final double marginTop;
     final double marginBottom;
     final bool isActive;
+    final String isLoading;
     final Function()? onPressedCallBack;
     const RoundedButton({
       Key? key,
@@ -16,13 +21,14 @@ class RoundedButton extends StatefulWidget {
       required this.marginTop,
       required this.marginBottom,
       required this.isActive,
+      required this.isLoading,
       this.onPressedCallBack
     }) : super(key: key);
   @override
   State<RoundedButton> createState() => _RoundedButtonState();
 }
 
-class _RoundedButtonState extends State<RoundedButton> {
+class _RoundedButtonState extends State<RoundedButton> {  
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -32,18 +38,26 @@ class _RoundedButtonState extends State<RoundedButton> {
       child: Center(
         child: SizedBox(
           width: size.width * 0.8,
-          height: size.height * 0.068,
+          height: size.height * 0.07,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: Color(widget.backGroundColor),
-              foregroundColor: Color(widget.textColor),
-              shape: const StadiumBorder(),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15)
+              )
             ),
             onPressed: widget.isActive ? () => widget.onPressedCallBack!() : null,
-            child: Text(widget.title, style: const TextStyle(
-                fontSize: 16
-              ),
-            ),
+            child: (() {
+              if (widget.isLoading == "idel") {
+                return Idel(title: widget.title, textColor: widget.textColor);
+              } else if(widget.isLoading == "loading") {
+                return Laoding(textColor: widget.textColor, backGroundColor: widget.backGroundColor);
+              } else if(widget.isLoading == "success") {
+                return const Success();
+              } else if(widget.isLoading == "failed") {
+                return Failed(title: widget.title, textColor: widget.textColor);
+              }
+            })(),
           ),
         ),
       )

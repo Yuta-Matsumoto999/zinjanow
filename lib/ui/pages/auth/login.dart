@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
-import 'package:zinjanow_app/ui/components/googleLoginButton.dart';
-import 'package:zinjanow_app/ui/components/outlineTextForm.dart';
-import 'package:zinjanow_app/ui/components/roundedButton.dart';
+import 'package:zinjanow_app/ui/components/button/googleLoginButton.dart';
+import 'package:zinjanow_app/ui/components/form/outlineTextForm.dart';
+import 'package:zinjanow_app/ui/components/button/roundedButton.dart';
 import 'package:zinjanow_app/ui/pages/auth/forgetPassword.dart';
 import 'package:zinjanow_app/ui/pages/auth/register.dart';
 import 'package:zinjanow_app/ui/pages/home.dart';
@@ -23,9 +23,10 @@ class _LoginState extends State<Login> {
 
   String email = '';
   String password = '';
-  bool _isValidEmail = true;
-  bool _isValidPassword = true;
+  bool isValidEmail = true;
+  bool isValidPassword = true;
   bool isButtonActive = false;
+  String buttonLoading = "idel";
 
   void _setEmail(String value) {
     setState(() {
@@ -41,14 +42,14 @@ class _LoginState extends State<Login> {
 
   void _setIsValidEmail(bool isValid) {
     setState(() {
-      _isValidEmail = isValid;
+      isValidEmail = isValid;
       _setButtonAvtive();
     });
   }
 
   void _setIsValidPassword(bool isValid) {
     setState(() {
-      _isValidPassword = isValid;
+      isValidPassword = isValid;
       _setButtonAvtive();
     });
   }
@@ -64,18 +65,37 @@ class _LoginState extends State<Login> {
   }
 
   bool isAllValid() {
-    return _isValidEmail && _isValidPassword;
+    return isValidEmail && isValidPassword;
+  }
+
+  void _setButtonLoading(String value) {
+    setState(() {
+      buttonLoading = value;
+    });
   }
 
   void _login() {
-    Navigator.push(
-      context, 
-      MaterialPageRoute(builder: (context) => const Home())
-    );
+    _setButtonLoading("loading");
+
+    // ここでログイン処理
+
+    // 成功したら -> _setButtonLoading("success");
+      // Navigator.push(
+      //   context, 
+      //   MaterialPageRoute(builder: (context) => const Home())
+      // );
+    // 失敗したら -> _setButtonLoading("failed");
   }
 
   void _googleAuthenticate() {
     // ここにGoogle login の処理
+
+    // 成功したら -> _setButtonLoading("success");
+      // Navigator.push(
+      //   context, 
+      //   MaterialPageRoute(builder: (context) => const Home())
+      // );
+    // 失敗したら -> _setButtonLoading("failed");
   }
   
   @override
@@ -163,7 +183,8 @@ class _LoginState extends State<Login> {
                           marginTop: 0, 
                           marginBottom: 15, 
                           onPressedCallBack: _login, 
-                          isActive: isButtonActive
+                          isActive: isButtonActive,
+                          isLoading: buttonLoading,
                         ),
                       ),
                       Container(

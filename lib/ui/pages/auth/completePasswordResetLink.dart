@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
-import 'package:zinjanow_app/ui/components/roundedButton.dart';
+import 'package:zinjanow_app/ui/components/button/roundedButton.dart';
 import 'package:zinjanow_app/ui/pages/auth/forgetPassword.dart';
 import 'package:zinjanow_app/ui/pages/auth/login.dart';
 
@@ -13,6 +13,7 @@ class CompletePasswordResetLink extends StatefulWidget {
 
 class _CompletePasswordResetLinkState extends State<CompletePasswordResetLink> {
   bool isButtonActive = true;
+  String buttonLoading = "idel";
 
   void _navigateLoginPage() {
     Navigator.push(
@@ -78,7 +79,8 @@ class _CompletePasswordResetLinkState extends State<CompletePasswordResetLink> {
                   marginTop: 0, 
                   marginBottom: 15, 
                   onPressedCallBack: _navigateLoginPage, 
-                  isActive: isButtonActive
+                  isActive: isButtonActive,
+                  isLoading: buttonLoading,
                 ),
               ),          
             ],

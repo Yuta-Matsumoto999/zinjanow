@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
-import 'package:zinjanow_app/ui/components/googleLoginButton.dart';
-import 'package:zinjanow_app/ui/components/roundedButton.dart';
-import 'package:zinjanow_app/ui/components/outlineTextForm.dart';
+import 'package:zinjanow_app/ui/components/button/googleLoginButton.dart';
+import 'package:zinjanow_app/ui/components/button/roundedButton.dart';
+import 'package:zinjanow_app/ui/components/form/outlineTextForm.dart';
 import 'package:zinjanow_app/ui/pages/auth/login.dart';
 import 'package:zinjanow_app/ui/pages/home.dart';
 import 'package:zinjanow_app/ui/validation/validator/confirmValidator.dart';
@@ -25,11 +25,12 @@ class _RegisterState extends State<Register> {
   String email = '';
   String password = '';
   String passwordConfirm = '';
-  bool _isValidName = false;
-  bool _isValidEmail = false;
-  bool _isValidPassword = false;
-  bool _isValidPasswordComfirm = false;
+  bool isValidName = true;
+  bool isValidEmail = true;
+  bool isValidPassword = true;
+  bool isValidPasswordComfirm = true;
   bool isButtonActive = false;
+  String buttonLoading = "idel";
 
   void _setName(String value) {
     setState(() {
@@ -57,28 +58,28 @@ class _RegisterState extends State<Register> {
 
   void _setIsValidName(bool isValid) {
     setState(() {
-      _isValidName = isValid;
+      isValidName = isValid;
       _setButtonAvtive();
     });
   }
 
   void _setIsValidEmail(bool isValid) {
     setState(() {
-      _isValidEmail = isValid;
+      isValidEmail = isValid;
       _setButtonAvtive();
     });
   }
 
   void _setIsValidPassword(bool isValid) {
     setState(() {
-      _isValidPassword = isValid;
+      isValidPassword = isValid;
       _setButtonAvtive();
     });
   }
 
   void _setIsValidPasswordConfirm(bool isValid) {
     setState(() {
-      _isValidPasswordComfirm = isValid;
+      isValidPasswordComfirm = isValid;
       _setButtonAvtive();
     });
   }
@@ -93,19 +94,39 @@ class _RegisterState extends State<Register> {
     }
   }
 
+  void _setButtonLoading(String value) {
+    setState(() {
+      buttonLoading = value;
+    });
+  }
+
+  bool isAllValid() {
+    return isValidName && isValidEmail && isValidPassword && isValidPasswordComfirm;
+  }
+
+
   void _register() {
-    Navigator.push(
-      context, 
-      MaterialPageRoute(builder: (context) => const Home())
-    );
+    _setButtonLoading("loading");
+
+    // ここでregister処理
+
+    // 成功したら -> _setButtonLoading("success");
+      // Navigator.push(
+      //   context, 
+      //   MaterialPageRoute(builder: (context) => const Home())
+      // );
+    // 失敗したら -> _setButtonLoading("failed");
   }
 
   void _googleAuthenticate() {
     // ここにGoogle login の処理
-  }
 
-  bool isAllValid() {
-    return _isValidName && _isValidEmail && _isValidPassword && _isValidPasswordComfirm;
+    // 成功したら -> _setButtonLoading("success");
+      // Navigator.push(
+      //   context, 
+      //   MaterialPageRoute(builder: (context) => const Home())
+      // );
+    // 失敗したら -> _setButtonLoading("failed");
   }
 
   @override
@@ -183,7 +204,7 @@ class _RegisterState extends State<Register> {
                           onChangeCallBack: _setPasswordConfirm,
                           validators: [
                             RequiredValidator(),
-                            ConfirmValidator(password, "パスワード"),
+                            ConfirmValidator(password, "password"),
                             MinValidator(6),
                             MaxValidator(100)
                           ],
@@ -199,7 +220,8 @@ class _RegisterState extends State<Register> {
                           marginTop: 0, 
                           marginBottom: 15, 
                           onPressedCallBack: _register, 
-                          isActive: isButtonActive
+                          isActive: isButtonActive,
+                          isLoading: buttonLoading,
                         ),
                       ),
                       Container(
