@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:zinjanow_app/core/constants/customColor.dart';
 import 'package:zinjanow_app/ui/components/roundedButton.dart';
 import 'package:zinjanow_app/ui/pages/auth/forgetPassword.dart';
 import 'package:zinjanow_app/ui/pages/auth/login.dart';
 
-class CompletePasswordResetLink extends StatelessWidget {
+class CompletePasswordResetLink extends StatefulWidget {
   const CompletePasswordResetLink({super.key});
+
+  @override
+  State<CompletePasswordResetLink> createState() => _CompletePasswordResetLinkState();
+}
+
+class _CompletePasswordResetLinkState extends State<CompletePasswordResetLink> {
+  bool isButtonActive = true;
+
+  void _navigateLoginPage() {
+    Navigator.push(
+      context, 
+      MaterialPageRoute(builder: (context) => const Login())
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,12 +71,15 @@ class CompletePasswordResetLink extends StatelessWidget {
               ),
               Container(
                 // margin: const EdgeInsets.only(top: 50),
-                child: RoundedButton(title: "Back to Login", color: 0xFFFFFFFF, marginTop: 0, marginBottom: 15, onPressedCallBack: () => {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const Login())
-                  )
-                }),
+                child: RoundedButton(
+                  title: "Back to Login", 
+                  backGroundColor: CustomColor.buttonBlack, 
+                  textColor: CustomColor.textWhite, 
+                  marginTop: 0, 
+                  marginBottom: 15, 
+                  onPressedCallBack: _navigateLoginPage, 
+                  isActive: isButtonActive
+                ),
               ),          
             ],
           ),

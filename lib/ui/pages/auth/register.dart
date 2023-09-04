@@ -1,31 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
 import 'package:zinjanow_app/ui/components/googleLoginButton.dart';
-import 'package:zinjanow_app/ui/components/outlineTextForm.dart';
 import 'package:zinjanow_app/ui/components/roundedButton.dart';
-import 'package:zinjanow_app/ui/pages/auth/forgetPassword.dart';
-import 'package:zinjanow_app/ui/pages/auth/register.dart';
+import 'package:zinjanow_app/ui/components/outlineTextForm.dart';
+import 'package:zinjanow_app/ui/pages/auth/login.dart';
 import 'package:zinjanow_app/ui/pages/home.dart';
+import 'package:zinjanow_app/ui/validation/validator/confirmValidator.dart';
 import 'package:zinjanow_app/ui/validation/validator/email_validator.dart';
 import 'package:zinjanow_app/ui/validation/validator/maxVlidator.dart';
 import 'package:zinjanow_app/ui/validation/validator/minValidator.dart';
 import 'package:zinjanow_app/ui/validation/validator/required_validator.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class Register extends StatefulWidget {
+  const Register({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Register> createState() => _RegisterState();
 }
 
-class _LoginState extends State<Login> {
+class _RegisterState extends State<Register> {
   final _formKey = GlobalKey<FormState>();
 
+  String name = '';
   String email = '';
   String password = '';
-  bool _isValidEmail = true;
-  bool _isValidPassword = true;
+  String passwordConfirm = '';
+  bool _isValidName = false;
+  bool _isValidEmail = false;
+  bool _isValidPassword = false;
+  bool _isValidPasswordComfirm = false;
   bool isButtonActive = false;
+
+  void _setName(String value) {
+    setState(() {
+      name = value;
+    });
+  }
 
   void _setEmail(String value) {
     setState(() {
@@ -36,6 +46,19 @@ class _LoginState extends State<Login> {
   void _setPassword(String value) {
     setState(() {
       password = value;
+    });
+  }
+
+  void _setPasswordConfirm(String value) {
+    setState(() {
+      passwordConfirm = value;
+    });
+  }
+
+  void _setIsValidName(bool isValid) {
+    setState(() {
+      _isValidName = isValid;
+      _setButtonAvtive();
     });
   }
 
@@ -53,21 +76,24 @@ class _LoginState extends State<Login> {
     });
   }
 
+  void _setIsValidPasswordConfirm(bool isValid) {
+    setState(() {
+      _isValidPasswordComfirm = isValid;
+      _setButtonAvtive();
+    });
+  }
+
   void _setButtonAvtive() {
     bool isValid = isAllValid();
 
-    if(isValid && email != "" && password != "") {
+    if(isValid && name != "" && email != "" && password != "" && passwordConfirm != "") {
       isButtonActive = true;
     } else {
       isButtonActive = false;
     }
   }
 
-  bool isAllValid() {
-    return _isValidEmail && _isValidPassword;
-  }
-
-  void _login() {
+  void _register() {
     Navigator.push(
       context, 
       MaterialPageRoute(builder: (context) => const Home())
@@ -77,7 +103,11 @@ class _LoginState extends State<Login> {
   void _googleAuthenticate() {
     // ここにGoogle login の処理
   }
-  
+
+  bool isAllValid() {
+    return _isValidName && _isValidEmail && _isValidPassword && _isValidPasswordComfirm;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,7 +121,7 @@ class _LoginState extends State<Login> {
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10),
                 child: const Center(
-                  child: Text("Log In", style: TextStyle(
+                  child: Text("Sign Up", style: TextStyle(
                       color: Colors.black,
                       fontSize: 28,
                       fontWeight: FontWeight.w900
@@ -105,6 +135,19 @@ class _LoginState extends State<Login> {
                   child: Column(
                     children: <Widget>[
                       Container(
+                        margin: const EdgeInsets.only(top: 5, bottom: 10),
+                        child: OutlineTextForm(
+                          label: "Name", 
+                          hintText: "Your NickName",
+                          onChangeCallBack: _setName,
+                          validators: [
+                            RequiredValidator(),
+                            MaxValidator(100)
+                          ],
+                          setIsValid: _setIsValidName,
+                        ),
+                      ),
+                      Container(
                         margin: const EdgeInsets.symmetric(vertical: 10),
                         child: OutlineTextForm(
                           label: "Email", 
@@ -113,7 +156,7 @@ class _LoginState extends State<Login> {
                           validators: [
                             RequiredValidator(),
                             EmailValidator(),
-                            MaxValidator(100),
+                            MaxValidator(100)
                           ],
                           setIsValid: _setIsValidEmail,
                         ),
@@ -134,48 +177,40 @@ class _LoginState extends State<Login> {
                       ),
                       Container(
                         margin: const EdgeInsets.symmetric(vertical: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            TextButton(
-                              onPressed: () => {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => const ForgetPassWord())
-                                )
-                              }, 
-                              child: const Text("Forgot Password",style: TextStyle(
-                                  color: Colors.black54,
-                                  fontWeight: FontWeight.w900,
-                                  fontSize: 16
-                                )
-                              )
-                            ),
+                        child: OutlineTextForm(
+                          label: "Password-comfirm", 
+                          hintText: "password confirm",
+                          onChangeCallBack: _setPasswordConfirm,
+                          validators: [
+                            RequiredValidator(),
+                            ConfirmValidator(password, "パスワード"),
+                            MinValidator(6),
+                            MaxValidator(100)
                           ],
-                        )
+                          setIsValid: _setIsValidPasswordConfirm,
+                        ),
                       ),
                       Container(
-                        margin: const EdgeInsets.only(top: 10),
+                        margin: const EdgeInsets.only(top: 20),
                         child: RoundedButton(
-                          title: "Log In", 
+                          title: "Sign Up", 
                           backGroundColor: CustomColor.buttonBlack, 
                           textColor: CustomColor.textWhite, 
                           marginTop: 0, 
                           marginBottom: 15, 
-                          onPressedCallBack: _login, 
+                          onPressedCallBack: _register, 
                           isActive: isButtonActive
                         ),
                       ),
                       Container(
-                        margin: const EdgeInsets.only(top: 5),
                         child: TextButton(
                           onPressed: () => {
                             Navigator.push(
                               context, 
-                              MaterialPageRoute(builder: (context) => const Register())
+                              MaterialPageRoute(builder: (context) => const Login())
                             )
                           },
-                          child: const Text("Would you like to create an account??", style: TextStyle(
+                          child: const Text("Do you already have an account??", style: TextStyle(
                               fontWeight: FontWeight.w400,
                               color: Colors.black87,
                               fontSize: 14
@@ -190,11 +225,10 @@ class _LoginState extends State<Login> {
                       ),
                       Container(
                         margin: const EdgeInsets.only(top: 5),
-                        child: const Text("Log In With Google", style: TextStyle(
-                            color: Colors.black54,
-                            fontWeight: FontWeight.w600
-                          ),
-                        ),
+                        child: const Text("SignIn With Google", style: TextStyle(
+                          color: Colors.black54,
+                          fontWeight: FontWeight.w600
+                        ),),
                       ),
                       GoogleLoginButton(onPressedCallBack: _googleAuthenticate)
                     ],

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:zinjanow_app/core/constants/customColor.dart';
 import 'package:zinjanow_app/ui/components/outlineTextForm.dart';
 import 'package:zinjanow_app/ui/components/roundedButton.dart';
 import 'package:zinjanow_app/ui/pages/auth/completePasswordResetLink.dart';
-import 'package:zinjanow_app/ui/pages/auth/regoister.dart';
+import 'package:zinjanow_app/ui/pages/auth/register.dart';
+import 'package:zinjanow_app/ui/validation/validator/email_validator.dart';
+import 'package:zinjanow_app/ui/validation/validator/maxVlidator.dart';
+import 'package:zinjanow_app/ui/validation/validator/required_validator.dart';
 
 class ForgetPassWord extends StatefulWidget {
   const ForgetPassWord({super.key});
@@ -13,6 +17,36 @@ class ForgetPassWord extends StatefulWidget {
 
 class _ForgetPassWordState extends State<ForgetPassWord> {
   final _formKey = GlobalKey<FormState>();
+
+  String email = '';
+  bool isValidEmail = true;
+  bool isButtonActive = false;
+
+  void _setEmail(String value) {
+    setState(() {
+      email = value;
+    });
+  }
+
+  void _setIsValidEmail(bool isValid) {
+    setState(() {
+      isValidEmail = isValid;
+      _setButtonAvtive();
+    });
+  }
+
+  void _setButtonAvtive() {
+    if(email != "" && isValidEmail) {
+      isButtonActive = true;
+    }
+  }
+
+  void _navigateCompletePage() {
+    Navigator.push(
+      context, 
+      MaterialPageRoute(builder: (context) => const CompletePasswordResetLink())
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,16 +84,29 @@ class _ForgetPassWordState extends State<ForgetPassWord> {
                       ),
                       Container(
                         margin: const EdgeInsets.only(top: 40, bottom: 20),
-                        child: const OutlineTextForm(label: "Email", hintText: "Email Address"),
+                        child: OutlineTextForm(
+                          label: "Email", 
+                          hintText: "Email Address",
+                          onChangeCallBack: _setEmail,
+                          validators: [
+                            RequiredValidator(),
+                            EmailValidator(),
+                            MaxValidator(100)
+                          ],
+                          setIsValid: _setIsValidEmail,
+                        ),
                       ),
                       Container(
                         margin: const EdgeInsets.only(top:  40),
-                        child: RoundedButton(title: "Send", color: 0xFFFFFFFF, marginTop: 0, marginBottom: 15, onPressedCallBack: () => {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => const CompletePasswordResetLink())
-                          )
-                        }),
+                        child: RoundedButton(
+                          title: "Send", 
+                          backGroundColor: CustomColor.buttonBlack, 
+                          textColor: CustomColor.textWhite, 
+                          marginTop: 0, 
+                          marginBottom: 15, 
+                          onPressedCallBack: _navigateCompletePage, 
+                          isActive: isButtonActive
+                        ),
                       ),
                       Container(
                         margin: const EdgeInsets.only(top: 5),
