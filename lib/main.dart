@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
 import 'package:zinjanow_app/ui/pages/welcome.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
+  await dotenv.load(fileName: '.env');
   WidgetsFlutterBinding.ensureInitialized(); // Flutterの初期化を確認
   await Supabase.initialize(
-    url: 'https://zxtaqogvnvefstthehif.supabase.co',
-    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp4dGFxb2d2bnZlZnN0dGhlaGlmIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTM1NTQxOTEsImV4cCI6MjAwOTEzMDE5MX0.xx9TqYA9C9a5kHr1xqcJYq7c_I9I9itGaVumU0igQjI',
+    url: dotenv.get('SUPABASE_URL'),
+    anonKey: dotenv.get('SUPABASE_ANON_KEY'),
   );
   runApp(const MyApp());
 }
