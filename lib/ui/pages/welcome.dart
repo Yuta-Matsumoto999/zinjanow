@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:zinjanow_app/core/constants/customColor.dart';
 import 'package:zinjanow_app/ui/components/background.dart';
 import 'package:zinjanow_app/ui/components/roundedButton.dart';
 import 'package:zinjanow_app/ui/pages/auth/login.dart';
-import 'package:zinjanow_app/ui/pages/auth/regoister.dart';
+import 'package:zinjanow_app/ui/pages/auth/register.dart';
 
 class Welcome extends StatelessWidget {
-  const Welcome({
-    super.key,
-  });
+  const Welcome({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,18 +29,34 @@ class Welcome extends StatelessWidget {
           SizedBox(
             height: size.height * 0.53,
           ),
-          RoundedButton(title: "Login", color: 0xFFFFFFFF, marginTop: 0, marginBottom: 38, onPressedCallBack: () => {
-            Navigator.push(
-              context, 
-              MaterialPageRoute(builder: (context) => const Login())
-            )
-          }),
-          RoundedButton(title: "Sign up", color: 0xFFFFFFFF, marginTop: 0, marginBottom: 0, onPressedCallBack: () => {
-            Navigator.push(
-              context, 
-              MaterialPageRoute(builder: (context) => const Register())
-            )
-          })
+          RoundedButton(
+            title: "Login", 
+            backGroundColor: CustomColor.buttonWhite, 
+            textColor: CustomColor.buttonBlack, 
+            marginTop: 0, 
+            marginBottom: 38, 
+            onPressedCallBack: () => {
+              Navigator.push(
+                context, 
+                MaterialPageRoute(builder: (context) => const Login())
+              )
+            }, 
+            isActive: true
+          ),
+          RoundedButton(
+            title: "Sign up",  
+            backGroundColor: CustomColor.buttonWhite, 
+            textColor: CustomColor.buttonBlack, 
+            marginTop: 0, 
+            marginBottom: 0, 
+            onPressedCallBack: () => {
+              Navigator.push(
+                context, 
+                MaterialPageRoute(builder: (context) => const Register())
+              )
+            },  
+            isActive: true
+          )
         ]
       )
     );
