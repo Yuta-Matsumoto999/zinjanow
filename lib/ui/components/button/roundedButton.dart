@@ -28,7 +28,7 @@ class RoundedButton extends StatefulWidget {
   State<RoundedButton> createState() => _RoundedButtonState();
 }
 
-class _RoundedButtonState extends State<RoundedButton> {  
+class _RoundedButtonState extends State<RoundedButton> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -44,9 +44,10 @@ class _RoundedButtonState extends State<RoundedButton> {
               backgroundColor: Color(widget.backGroundColor),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15)
-              )
+              ),
+              splashFactory: NoSplash.splashFactory,
             ),
-            onPressed: widget.isActive ? () => widget.onPressedCallBack!() : null,
+            onPressed: widget.isActive ? () => {widget.onPressedCallBack!()} : null,
             child: (() {
               if (widget.isLoading == "idel") {
                 return Idel(title: widget.title, textColor: widget.textColor);
