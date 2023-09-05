@@ -108,6 +108,7 @@ class _ForgetPassWordState extends State<ForgetPassWord> {
                           ],
                           setIsValid: _setIsValidEmail,
                           buttonState: buttonLoading,
+                          usedPassword: false,
                         ),
                       ),
                       Container(

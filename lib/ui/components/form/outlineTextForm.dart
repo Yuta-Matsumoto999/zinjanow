@@ -12,6 +12,7 @@ class OutlineTextForm extends StatefulWidget {
   final List<Validator> validators;
   final Function setIsValid;
   final String buttonState;
+  final bool usedPassword;
   const OutlineTextForm({
     Key? key,
     required this.label,
@@ -19,7 +20,8 @@ class OutlineTextForm extends StatefulWidget {
     required this.onChangeCallBack,
     required this.validators,
     required this.setIsValid,
-    required this.buttonState
+    required this.buttonState,
+    required this.usedPassword
   }) : super(key: key);
 
   @override
@@ -29,10 +31,23 @@ class OutlineTextForm extends StatefulWidget {
 class _OutlineTextFormState extends State<OutlineTextForm> {
 
   String? _errorText;
+  bool hideText = true;
+
+  @override
+  void initState() {
+    hideText = widget.usedPassword;
+    super.initState();
+  }
 
   void seterrorText(String? value) {
     setState(() {
       _errorText = value;
+    });
+  }
+
+  void setHideText() {
+    setState(() {
+      hideText = !hideText;
     });
   }
 
@@ -56,11 +71,16 @@ class _OutlineTextFormState extends State<OutlineTextForm> {
               borderRadius: BorderRadius.circular(10),
             ),
             hintText: widget.hintText,
+            suffixIcon: widget.usedPassword ? IconButton(
+              icon: Icon(hideText ? Icons.visibility_off : Icons.visibility, size: 18),
+              onPressed: () => setHideText(),
+            ) : null
           ),
           onChanged: (String value) {
             _validate(value);
           },
           enabled: widget.buttonState == "idel" ? true : false,
+          obscureText: hideText,
         ),
         _errorText != null 
         ? Container(

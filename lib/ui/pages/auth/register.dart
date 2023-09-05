@@ -166,7 +166,8 @@ class _RegisterState extends State<Register> {
                             MaxValidator(100)
                           ],
                           setIsValid: _setIsValidName,
-                          buttonState: buttonLoading, 
+                          buttonState: buttonLoading,
+                          usedPassword: false,
                         ),
                       ),
                       Container(
@@ -182,6 +183,7 @@ class _RegisterState extends State<Register> {
                           ],
                           setIsValid: _setIsValidEmail,
                           buttonState: buttonLoading,
+                          usedPassword: false,
                         ),
                       ),
                       Container(
@@ -197,6 +199,7 @@ class _RegisterState extends State<Register> {
                           ],
                           setIsValid: _setIsValidPassword,
                           buttonState: buttonLoading,
+                          usedPassword: true,
                         ),
                       ),
                       Container(
@@ -213,6 +216,7 @@ class _RegisterState extends State<Register> {
                           ],
                           setIsValid: _setIsValidPasswordConfirm,
                           buttonState: buttonLoading,
+                          usedPassword: true,
                         ),
                       ),
                       Container(

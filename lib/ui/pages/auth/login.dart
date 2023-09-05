@@ -137,6 +137,7 @@ class _LoginState extends State<Login> {
                           ],
                           setIsValid: _setIsValidEmail,
                           buttonState: buttonLoading,
+                          usedPassword: false,
                         ),
                       ),
                       Container(
@@ -152,6 +153,7 @@ class _LoginState extends State<Login> {
                           ],
                           setIsValid: _setIsValidPassword,
                           buttonState: buttonLoading,
+                          usedPassword: true,
                         ),
                       ),
                       Container(
