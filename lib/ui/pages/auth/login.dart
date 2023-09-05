@@ -109,7 +109,7 @@ class _LoginState extends State<Login> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                margin: const EdgeInsets.symmetric(vertical: 10),
+                margin: const EdgeInsets.only(top: 20),
                 child: const Center(
                   child: Text("Log In", style: TextStyle(
                       color: Colors.black,
@@ -136,6 +136,7 @@ class _LoginState extends State<Login> {
                             MaxValidator(100),
                           ],
                           setIsValid: _setIsValidEmail,
+                          buttonState: buttonLoading,
                         ),
                       ),
                       Container(
@@ -150,6 +151,7 @@ class _LoginState extends State<Login> {
                             MaxValidator(100)
                           ],
                           setIsValid: _setIsValidPassword,
+                          buttonState: buttonLoading,
                         ),
                       ),
                       Container(
@@ -217,7 +219,7 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                       ),
-                      GoogleLoginButton(onPressedCallBack: _googleAuthenticate)
+                      GoogleLoginButton(onPressedCallBack: _googleAuthenticate, buttonState: buttonLoading)
                     ],
                   ),
                 ),

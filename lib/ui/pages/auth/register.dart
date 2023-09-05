@@ -140,7 +140,7 @@ class _RegisterState extends State<Register> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                margin: const EdgeInsets.symmetric(vertical: 10),
+                margin: const EdgeInsets.only(top: 20),
                 child: const Center(
                   child: Text("Sign Up", style: TextStyle(
                       color: Colors.black,
@@ -166,6 +166,7 @@ class _RegisterState extends State<Register> {
                             MaxValidator(100)
                           ],
                           setIsValid: _setIsValidName,
+                          buttonState: buttonLoading, 
                         ),
                       ),
                       Container(
@@ -180,6 +181,7 @@ class _RegisterState extends State<Register> {
                             MaxValidator(100)
                           ],
                           setIsValid: _setIsValidEmail,
+                          buttonState: buttonLoading,
                         ),
                       ),
                       Container(
@@ -194,6 +196,7 @@ class _RegisterState extends State<Register> {
                             MaxValidator(100)
                           ],
                           setIsValid: _setIsValidPassword,
+                          buttonState: buttonLoading,
                         ),
                       ),
                       Container(
@@ -209,6 +212,7 @@ class _RegisterState extends State<Register> {
                             MaxValidator(100)
                           ],
                           setIsValid: _setIsValidPasswordConfirm,
+                          buttonState: buttonLoading,
                         ),
                       ),
                       Container(
@@ -252,7 +256,7 @@ class _RegisterState extends State<Register> {
                           fontWeight: FontWeight.w600
                         ),),
                       ),
-                      GoogleLoginButton(onPressedCallBack: _googleAuthenticate)
+                      GoogleLoginButton(onPressedCallBack: _googleAuthenticate, buttonState: buttonLoading)
                     ],
                   ),
                 ),

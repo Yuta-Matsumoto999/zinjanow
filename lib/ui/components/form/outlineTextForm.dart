@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
 import 'package:zinjanow_app/ui/validation/excuteValidation.dart';
@@ -9,6 +11,7 @@ class OutlineTextForm extends StatefulWidget {
   final Function onChangeCallBack;
   final List<Validator> validators;
   final Function setIsValid;
+  final String buttonState;
   const OutlineTextForm({
     Key? key,
     required this.label,
@@ -16,6 +19,7 @@ class OutlineTextForm extends StatefulWidget {
     required this.onChangeCallBack,
     required this.validators,
     required this.setIsValid,
+    required this.buttonState
   }) : super(key: key);
 
   @override
@@ -56,6 +60,7 @@ class _OutlineTextFormState extends State<OutlineTextForm> {
           onChanged: (String value) {
             _validate(value);
           },
+          enabled: widget.buttonState == "idel" ? true : false,
         ),
         _errorText != null 
         ? Container(

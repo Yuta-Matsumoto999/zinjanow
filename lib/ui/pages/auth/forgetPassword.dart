@@ -107,6 +107,7 @@ class _ForgetPassWordState extends State<ForgetPassWord> {
                             MaxValidator(100)
                           ],
                           setIsValid: _setIsValidEmail,
+                          buttonState: buttonLoading,
                         ),
                       ),
                       Container(
