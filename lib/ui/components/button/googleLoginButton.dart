@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 class GoogleLoginButton extends StatelessWidget {
   final Function() onPressedCallBack;
+  final String buttonState;
   const GoogleLoginButton({
     Key? key,
-    required this.onPressedCallBack
+    required this.onPressedCallBack,
+    required this.buttonState,
   }) : super(key: key);
 
   @override
@@ -26,8 +28,9 @@ class GoogleLoginButton extends StatelessWidget {
               backgroundColor: Colors.blueAccent,
               foregroundColor: Colors.white,
               shape: const StadiumBorder(),
+              splashFactory: NoSplash.splashFactory
             ),
-            onPressed: onPressedCallBack(),
+            onPressed: buttonState == "idel" ? () => onPressedCallBack() : null,
           ),
         ),
       )
