@@ -1,4 +1,4 @@
-import 'package:zinjanow_app/ui/validation/validator.dart';
+import 'package:zinjanow_app/ui/view/validation/validator.dart';
 
 class ExcuteValidate<T> {
   final Function onChangeCallBack;

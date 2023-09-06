@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:zinjanow_app/ui/components/button/failed.dart';
-import 'package:zinjanow_app/ui/components/button/idel.dart';
-import 'package:zinjanow_app/ui/components/button/loading.dart';
-import 'package:zinjanow_app/ui/components/button/success.dart';
+import 'package:zinjanow_app/ui/view/components/button/failed.dart';
+import 'package:zinjanow_app/ui/view/components/button/idel.dart';
+import 'package:zinjanow_app/ui/view/components/button/loading.dart';
+import 'package:zinjanow_app/ui/view/components/button/success.dart';
 
 class RoundedButton extends StatefulWidget {
     final String title;

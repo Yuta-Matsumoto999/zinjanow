@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
-import 'package:zinjanow_app/ui/components/button/roundedButton.dart';
-import 'package:zinjanow_app/ui/pages/auth/forgetPassword.dart';
-import 'package:zinjanow_app/ui/pages/auth/login.dart';
+import 'package:zinjanow_app/ui/view/components/button/roundedButton.dart';
+import 'package:zinjanow_app/ui/view/pages/auth/forgetPassword.dart';
+import 'package:zinjanow_app/ui/view/pages/auth/login.dart';
 
 class CompletePasswordResetLink extends StatefulWidget {
   const CompletePasswordResetLink({super.key});

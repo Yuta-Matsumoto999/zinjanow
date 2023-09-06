@@ -1,5 +1,5 @@
-import 'package:zinjanow_app/ui/validation/message.dart';
-import 'package:zinjanow_app/ui/validation/validator.dart';
+import 'package:zinjanow_app/ui/view/validation/message.dart';
+import 'package:zinjanow_app/ui/view/validation/validator.dart';
 
 class MaxValidator implements Validator<String> {
   final int maxLength;

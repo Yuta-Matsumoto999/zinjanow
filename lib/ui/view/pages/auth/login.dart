@@ -1,42 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
-import 'package:zinjanow_app/ui/components/button/googleLoginButton.dart';
-import 'package:zinjanow_app/ui/components/button/roundedButton.dart';
-import 'package:zinjanow_app/ui/components/form/outlineTextForm.dart';
-import 'package:zinjanow_app/ui/pages/auth/login.dart';
-import 'package:zinjanow_app/ui/pages/home.dart';
-import 'package:zinjanow_app/ui/validation/validator/confirmValidator.dart';
-import 'package:zinjanow_app/ui/validation/validator/email_validator.dart';
-import 'package:zinjanow_app/ui/validation/validator/maxVlidator.dart';
-import 'package:zinjanow_app/ui/validation/validator/minValidator.dart';
-import 'package:zinjanow_app/ui/validation/validator/required_validator.dart';
+import 'package:zinjanow_app/ui/view/components/button/googleLoginButton.dart';
+import 'package:zinjanow_app/ui/view/components/form/outlineTextForm.dart';
+import 'package:zinjanow_app/ui/view/components/button/roundedButton.dart';
+import 'package:zinjanow_app/ui/view/pages/auth/forgetPassword.dart';
+import 'package:zinjanow_app/ui/view/pages/auth/register.dart';
+import 'package:zinjanow_app/ui/view/pages/home.dart';
+import 'package:zinjanow_app/ui/view/validation/validator/email_validator.dart';
+import 'package:zinjanow_app/ui/view/validation/validator/maxVlidator.dart';
+import 'package:zinjanow_app/ui/view/validation/validator/minValidator.dart';
+import 'package:zinjanow_app/ui/view/validation/validator/required_validator.dart';
 
-class Register extends StatefulWidget {
-  const Register({super.key});
+class Login extends StatefulWidget {
+  const Login({super.key});
 
   @override
-  State<Register> createState() => _RegisterState();
+  State<Login> createState() => _LoginState();
 }
 
-class _RegisterState extends State<Register> {
+class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
 
-  String name = '';
   String email = '';
   String password = '';
-  String passwordConfirm = '';
-  bool isValidName = true;
   bool isValidEmail = true;
   bool isValidPassword = true;
-  bool isValidPasswordComfirm = true;
   bool isButtonActive = false;
   String buttonLoading = "idel";
-
-  void _setName(String value) {
-    setState(() {
-      name = value;
-    });
-  }
 
   void _setEmail(String value) {
     setState(() {
@@ -47,19 +37,6 @@ class _RegisterState extends State<Register> {
   void _setPassword(String value) {
     setState(() {
       password = value;
-    });
-  }
-
-  void _setPasswordConfirm(String value) {
-    setState(() {
-      passwordConfirm = value;
-    });
-  }
-
-  void _setIsValidName(bool isValid) {
-    setState(() {
-      isValidName = isValid;
-      _setButtonAvtive();
     });
   }
 
@@ -77,21 +54,18 @@ class _RegisterState extends State<Register> {
     });
   }
 
-  void _setIsValidPasswordConfirm(bool isValid) {
-    setState(() {
-      isValidPasswordComfirm = isValid;
-      _setButtonAvtive();
-    });
-  }
-
   void _setButtonAvtive() {
     bool isValid = isAllValid();
 
-    if(isValid && name != "" && email != "" && password != "" && passwordConfirm != "") {
+    if(isValid && email != "" && password != "") {
       isButtonActive = true;
     } else {
       isButtonActive = false;
     }
+  }
+
+  bool isAllValid() {
+    return isValidEmail && isValidPassword;
   }
 
   void _setButtonLoading(String value) {
@@ -100,15 +74,10 @@ class _RegisterState extends State<Register> {
     });
   }
 
-  bool isAllValid() {
-    return isValidName && isValidEmail && isValidPassword && isValidPasswordComfirm;
-  }
-
-
-  void _register() {
+  void _login() {
     _setButtonLoading("loading");
 
-    // ここでregister処理
+    // ここでログイン処理
 
     // 成功したら -> _setButtonLoading("success");
       // Navigator.push(
@@ -128,7 +97,7 @@ class _RegisterState extends State<Register> {
       // );
     // 失敗したら -> _setButtonLoading("failed");
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -142,7 +111,7 @@ class _RegisterState extends State<Register> {
               Container(
                 margin: const EdgeInsets.only(top: 20),
                 child: const Center(
-                  child: Text("Sign Up", style: TextStyle(
+                  child: Text("Log In", style: TextStyle(
                       color: Colors.black,
                       fontSize: 28,
                       fontWeight: FontWeight.w900
@@ -156,21 +125,6 @@ class _RegisterState extends State<Register> {
                   child: Column(
                     children: <Widget>[
                       Container(
-                        margin: const EdgeInsets.only(top: 5, bottom: 10),
-                        child: OutlineTextForm(
-                          label: "Name", 
-                          hintText: "Your NickName",
-                          onChangeCallBack: _setName,
-                          validators: [
-                            RequiredValidator(),
-                            MaxValidator(100)
-                          ],
-                          setIsValid: _setIsValidName,
-                          buttonState: buttonLoading,
-                          usedPassword: false,
-                        ),
-                      ),
-                      Container(
                         margin: const EdgeInsets.symmetric(vertical: 10),
                         child: OutlineTextForm(
                           label: "Email", 
@@ -179,7 +133,7 @@ class _RegisterState extends State<Register> {
                           validators: [
                             RequiredValidator(),
                             EmailValidator(),
-                            MaxValidator(100)
+                            MaxValidator(100),
                           ],
                           setIsValid: _setIsValidEmail,
                           buttonState: buttonLoading,
@@ -204,43 +158,49 @@ class _RegisterState extends State<Register> {
                       ),
                       Container(
                         margin: const EdgeInsets.symmetric(vertical: 10),
-                        child: OutlineTextForm(
-                          label: "Password-comfirm", 
-                          hintText: "password confirm",
-                          onChangeCallBack: _setPasswordConfirm,
-                          validators: [
-                            RequiredValidator(),
-                            ConfirmValidator(password, "password"),
-                            MinValidator(6),
-                            MaxValidator(100)
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            TextButton(
+                              onPressed: () => {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const ForgetPassWord())
+                                )
+                              }, 
+                              child: const Text("Forgot Password",style: TextStyle(
+                                  color: Colors.black54,
+                                  fontWeight: FontWeight.w900,
+                                  fontSize: 16
+                                )
+                              )
+                            ),
                           ],
-                          setIsValid: _setIsValidPasswordConfirm,
-                          buttonState: buttonLoading,
-                          usedPassword: true,
-                        ),
+                        )
                       ),
                       Container(
-                        margin: const EdgeInsets.only(top: 20),
+                        margin: const EdgeInsets.only(top: 10),
                         child: RoundedButton(
-                          title: "Sign Up", 
+                          title: "Log In", 
                           backGroundColor: CustomColor.buttonBlack, 
                           textColor: CustomColor.textWhite, 
                           marginTop: 0, 
                           marginBottom: 15, 
-                          onPressedCallBack: _register, 
+                          onPressedCallBack: _login, 
                           isActive: isButtonActive,
                           isLoading: buttonLoading,
                         ),
                       ),
                       Container(
+                        margin: const EdgeInsets.only(top: 5),
                         child: TextButton(
                           onPressed: () => {
                             Navigator.push(
                               context, 
-                              MaterialPageRoute(builder: (context) => const Login())
+                              MaterialPageRoute(builder: (context) => const Register())
                             )
                           },
-                          child: const Text("Do you already have an account??", style: TextStyle(
+                          child: const Text("Would you like to create an account??", style: TextStyle(
                               fontWeight: FontWeight.w400,
                               color: Colors.black87,
                               fontSize: 14
@@ -255,10 +215,11 @@ class _RegisterState extends State<Register> {
                       ),
                       Container(
                         margin: const EdgeInsets.only(top: 5),
-                        child: const Text("SignIn With Google", style: TextStyle(
-                          color: Colors.black54,
-                          fontWeight: FontWeight.w600
-                        ),),
+                        child: const Text("Log In With Google", style: TextStyle(
+                            color: Colors.black54,
+                            fontWeight: FontWeight.w600
+                          ),
+                        ),
                       ),
                       GoogleLoginButton(onPressedCallBack: _googleAuthenticate, buttonState: buttonLoading)
                     ],

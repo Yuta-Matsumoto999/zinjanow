@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
-import 'package:zinjanow_app/ui/components/welcome/background.dart';
-import 'package:zinjanow_app/ui/components/button/roundedButton.dart';
-import 'package:zinjanow_app/ui/pages/auth/login.dart';
-import 'package:zinjanow_app/ui/pages/auth/register.dart';
+import 'package:zinjanow_app/ui/view/components/welcome/background.dart';
+import 'package:zinjanow_app/ui/view/components/button/roundedButton.dart';
+import 'package:zinjanow_app/ui/view/pages/auth/login.dart';
+import 'package:zinjanow_app/ui/view/pages/auth/register.dart';
 
 class Welcome extends StatelessWidget {
   const Welcome({super.key});

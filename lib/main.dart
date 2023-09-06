@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
-import 'package:zinjanow_app/ui/pages/welcome.dart';
+import 'package:zinjanow_app/ui/view/pages/welcome.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
