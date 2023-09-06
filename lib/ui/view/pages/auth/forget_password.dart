@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
-import 'package:zinjanow_app/ui/view/components/form/outlineTextForm.dart';
-import 'package:zinjanow_app/ui/view/components/button/roundedButton.dart';
-import 'package:zinjanow_app/ui/view/pages/auth/completePasswordResetLink.dart';
+import 'package:zinjanow_app/ui/view/components/auth/button/rounded_button.dart';
+import 'package:zinjanow_app/ui/view/components/auth/form/outline_text_form.dart';
+import 'package:zinjanow_app/ui/view/pages/auth/complete_password_reset_link.dart';
 import 'package:zinjanow_app/ui/view/pages/auth/register.dart';
 import 'package:zinjanow_app/ui/view/validation/validator/email_validator.dart';
-import 'package:zinjanow_app/ui/view/validation/validator/maxVlidator.dart';
+import 'package:zinjanow_app/ui/view/validation/validator/max_validator.dart';
 import 'package:zinjanow_app/ui/view/validation/validator/required_validator.dart';
 
 class ForgetPassWord extends StatefulWidget {

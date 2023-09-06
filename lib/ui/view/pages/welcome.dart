@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
+import 'package:zinjanow_app/ui/view/components/auth/button/rounded_button.dart';
 import 'package:zinjanow_app/ui/view/components/welcome/background.dart';
-import 'package:zinjanow_app/ui/view/components/button/roundedButton.dart';
 import 'package:zinjanow_app/ui/view/pages/auth/login.dart';
 import 'package:zinjanow_app/ui/view/pages/auth/register.dart';
 
-class Welcome extends StatelessWidget {
+class Welcome extends ConsumerWidget {
+  final authProvider = "name";
+
   const Welcome({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     Size size = MediaQuery.of(context).size;
     return Background(
       child: Column(

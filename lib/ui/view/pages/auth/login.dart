@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
-import 'package:zinjanow_app/ui/view/components/button/googleLoginButton.dart';
-import 'package:zinjanow_app/ui/view/components/form/outlineTextForm.dart';
-import 'package:zinjanow_app/ui/view/components/button/roundedButton.dart';
-import 'package:zinjanow_app/ui/view/pages/auth/forgetPassword.dart';
+import 'package:zinjanow_app/ui/view/components/auth/button/google_login_button.dart';
+import 'package:zinjanow_app/ui/view/components/auth/button/rounded_button.dart';
+import 'package:zinjanow_app/ui/view/components/auth/form/outline_text_form.dart';
+import 'package:zinjanow_app/ui/view/pages/auth/forget_password.dart';
 import 'package:zinjanow_app/ui/view/pages/auth/register.dart';
-import 'package:zinjanow_app/ui/view/pages/home.dart';
 import 'package:zinjanow_app/ui/view/validation/validator/email_validator.dart';
-import 'package:zinjanow_app/ui/view/validation/validator/maxVlidator.dart';
-import 'package:zinjanow_app/ui/view/validation/validator/minValidator.dart';
+import 'package:zinjanow_app/ui/view/validation/validator/max_validator.dart';
+import 'package:zinjanow_app/ui/view/validation/validator/min_validator.dart';
 import 'package:zinjanow_app/ui/view/validation/validator/required_validator.dart';
 
 class Login extends StatefulWidget {
@@ -74,17 +73,19 @@ class _LoginState extends State<Login> {
     });
   }
 
-  void _login() {
+  Future<void> _login() async {
     _setButtonLoading("loading");
 
-    // ここでログイン処理
+    // if(res) {
+    //   _setButtonLoading("success");
 
-    // 成功したら -> _setButtonLoading("success");
-      // Navigator.push(
-      //   context, 
-      //   MaterialPageRoute(builder: (context) => const Home())
-      // );
-    // 失敗したら -> _setButtonLoading("failed");
+    //   Navigator.push(
+    //     context, 
+    //     MaterialPageRoute(builder: (context) => const Home())
+    //   );
+    // } else {
+    //   _setButtonLoading("failed");
+    // }
   }
 
   void _googleAuthenticate() {

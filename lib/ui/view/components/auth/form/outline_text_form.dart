@@ -1,8 +1,5 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
-import 'package:zinjanow_app/core/constants/customColor.dart';
-import 'package:zinjanow_app/ui/view/validation/excuteValidation.dart';
+import 'package:zinjanow_app/ui/view/validation/excute_validation.dart';
 import 'package:zinjanow_app/ui/view/validation/validator.dart';
 
 class OutlineTextForm extends StatefulWidget {

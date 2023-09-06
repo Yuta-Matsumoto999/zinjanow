@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:zinjanow_app/ui/view/components/categoryTitle.dart';
+import 'package:zinjanow_app/ui/view/components/category_title.dart';
 import 'package:zinjanow_app/ui/view/components/header.dart';
-import 'package:zinjanow_app/ui/view/components/home/userName.dart';
+import 'package:zinjanow_app/ui/view/components/home/user_name.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
