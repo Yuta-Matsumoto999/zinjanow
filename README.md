@@ -16,19 +16,25 @@ I wanted to create something for learning, so I created this application in flut
 <b>supabase_flutter: ^1.10.14</b><br />
 https://pub.dev/packages/supabase_flutter<br />
 <br />
+<b>freezed 2.4.2</b><br />
+https://pub.dev/packages/freezed<br />
+<br />
+<b>flutter_riverpod 2.4.0</b><br />
+https://pub.dev/packages/flutter_riverpod<br />
+<br />
 ※ add here<br />
 <br />
 
 ## List of Functions
 
-・Authentication function <br />
+・Login <br />
 　　・Email and Password <br />
 　　・Google Account <br />
-・Register Account <br />
+・Sign up <br />
 　　・Email and Password <br />
-　　・Google Account <br />
 ・Search shrines from your location <br />
 ・Route indication to the shrine <br />
 ・Add shrine to favorites  <br />
 ・Add Visit History (check-in) <br />
+・Follow each other account <br />
 <br />
