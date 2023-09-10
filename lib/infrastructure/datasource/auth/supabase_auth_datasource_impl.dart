@@ -20,4 +20,20 @@ class SupabaseAuthDatasourceImpl implements SupabaseAuthDatasource {
       throw Exception();
     }
   }
+
+  @override
+  Future<AuthCheckedUser> signup(String name, String email, String password) async {
+    try {
+      await supabase.auth.signUp(
+        email: email,
+        password: password,
+        data: {"user_name": name}
+      );
+      return AuthCheckedUser(isAuth: true, message: null);
+    } on AuthException catch (err) {
+      return AuthCheckedUser(isAuth: false, message: err.message);
+    } catch(err) {
+      throw Exception();
+    }
+  }
 }

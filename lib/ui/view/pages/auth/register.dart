@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
+import 'package:zinjanow_app/ui/notify/auth/signup_notifier.dart';
 import 'package:zinjanow_app/ui/view/components/auth/button/google_login_button.dart';
 import 'package:zinjanow_app/ui/view/components/auth/button/rounded_button.dart';
 import 'package:zinjanow_app/ui/view/components/auth/form/outline_text_form.dart';
@@ -11,14 +13,14 @@ import 'package:zinjanow_app/ui/view/validation/validator/max_validator.dart';
 import 'package:zinjanow_app/ui/view/validation/validator/min_validator.dart';
 import 'package:zinjanow_app/ui/view/validation/validator/required_validator.dart';
 
-class Register extends StatefulWidget {
+class Register extends ConsumerStatefulWidget {
   const Register({super.key});
 
   @override
-  State<Register> createState() => _RegisterState();
+  RegisterState createState() => RegisterState();
 }
 
-class _RegisterState extends State<Register> {
+class RegisterState extends ConsumerState<Register> {
   final _formKey = GlobalKey<FormState>();
 
   String name = '';
@@ -105,17 +107,61 @@ class _RegisterState extends State<Register> {
   }
 
 
-  void _register() {
+  Future<void> _signup() async {
     _setButtonLoading("loading");
+    final signupProvider = ref.watch(signupNotifierProvider.notifier);
+    await ref.read(signupNotifierProvider.notifier).signup(name, email, password);
 
-    // ここでregister処理
+    signupProvider.state.when(data: (authState) {
+      if(authState.isAuth == true) {
+        _setButtonLoading("success");
+        Navigator.push(
+          context, 
+          MaterialPageRoute(builder: (context) => const Home())
+        );
+      } else {
+        _setButtonLoading("idel");
 
-    // 成功したら -> _setButtonLoading("success");
-      // Navigator.push(
-      //   context, 
-      //   MaterialPageRoute(builder: (context) => const Home())
-      // );
-    // 失敗したら -> _setButtonLoading("failed");
+        final snackbar =  SnackBar(
+          padding: const EdgeInsets.all(10),
+          margin: const EdgeInsets.all(10),
+          content: Row(
+            children: [
+              const Icon(
+                Icons.info,
+                color: Colors.red,
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 10),
+                child: Text(authState.message!, style: const TextStyle(
+                    color: Colors.red,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600
+                  )
+                )
+              )
+            ],
+          ),
+          shape: BeveledRectangleBorder(
+            borderRadius: BorderRadius.circular(5)
+          ),
+          behavior: SnackBarBehavior.floating,
+          showCloseIcon: true,
+          closeIconColor: const Color(CustomColor.snackbarCloseIconColor),
+          backgroundColor: const Color(CustomColor.snackbarError)
+        );
+
+        ScaffoldMessenger.of(context).showSnackBar(snackbar);
+      }
+    }, 
+    error: (error, _) {
+      //
+    }, 
+    loading: () {
+      setState(() {
+        isButtonActive = false;
+      });
+    });
   }
 
   void _googleAuthenticate() {
@@ -160,7 +206,7 @@ class _RegisterState extends State<Register> {
                         child: OutlineTextForm(
                           label: "Name", 
                           hintText: "Your NickName",
-                          onChangeCallBack: _setName,
+                          setValue: _setName,
                           validators: [
                             RequiredValidator(),
                             MaxValidator(100)
@@ -175,7 +221,7 @@ class _RegisterState extends State<Register> {
                         child: OutlineTextForm(
                           label: "Email", 
                           hintText: "Email Address",
-                          onChangeCallBack: _setEmail,
+                          setValue: _setEmail,
                           validators: [
                             RequiredValidator(),
                             EmailValidator(),
@@ -191,7 +237,7 @@ class _RegisterState extends State<Register> {
                         child: OutlineTextForm(
                           label: "Password", 
                           hintText: "password",
-                          onChangeCallBack: _setPassword,
+                          setValue: _setPassword,
                           validators: [
                             RequiredValidator(),
                             MinValidator(6),
@@ -207,7 +253,7 @@ class _RegisterState extends State<Register> {
                         child: OutlineTextForm(
                           label: "Password-comfirm", 
                           hintText: "password confirm",
-                          onChangeCallBack: _setPasswordConfirm,
+                          setValue: _setPasswordConfirm,
                           validators: [
                             RequiredValidator(),
                             ConfirmValidator(password, "password"),
@@ -227,7 +273,7 @@ class _RegisterState extends State<Register> {
                           textColor: CustomColor.textWhite, 
                           marginTop: 0, 
                           marginBottom: 15, 
-                          onPressedCallBack: _register, 
+                          onPressedCallBack: _signup, 
                           isActive: isButtonActive,
                           isLoading: buttonLoading,
                         ),

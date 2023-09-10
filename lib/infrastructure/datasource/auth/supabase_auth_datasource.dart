@@ -9,4 +9,5 @@ final supabaseAuthDatasourceProvider = Provider<SupabaseAuthDatasource>(
 
 abstract class SupabaseAuthDatasource {
   Future<AuthCheckedUser> login(String email, String password);
+  Future<AuthCheckedUser> signup(String name, String email, String password);
 }
