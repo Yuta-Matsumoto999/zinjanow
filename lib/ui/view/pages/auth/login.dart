@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
+import 'package:zinjanow_app/ui/notify/auth/login/login_notifier.dart';
 import 'package:zinjanow_app/ui/view/components/auth/button/google_login_button.dart';
 import 'package:zinjanow_app/ui/view/components/auth/button/rounded_button.dart';
 import 'package:zinjanow_app/ui/view/components/auth/form/outline_text_form.dart';
 import 'package:zinjanow_app/ui/view/pages/auth/forget_password.dart';
 import 'package:zinjanow_app/ui/view/pages/auth/register.dart';
+import 'package:zinjanow_app/ui/view/pages/home.dart';
 import 'package:zinjanow_app/ui/view/validation/validator/email_validator.dart';
 import 'package:zinjanow_app/ui/view/validation/validator/max_validator.dart';
 import 'package:zinjanow_app/ui/view/validation/validator/min_validator.dart';
 import 'package:zinjanow_app/ui/view/validation/validator/required_validator.dart';
 
-class Login extends StatefulWidget {
+class Login extends ConsumerStatefulWidget {
   const Login({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  LoginState createState() => LoginState();
 }
 
-class _LoginState extends State<Login> {
+class LoginState extends ConsumerState<Login> {
   final _formKey = GlobalKey<FormState>();
 
   String email = '';
@@ -25,6 +28,7 @@ class _LoginState extends State<Login> {
   bool isValidEmail = true;
   bool isValidPassword = true;
   bool isButtonActive = false;
+  String? authErrorMessage = "";
   String buttonLoading = "idel";
 
   void _setEmail(String value) {
@@ -75,17 +79,59 @@ class _LoginState extends State<Login> {
 
   Future<void> _login() async {
     _setButtonLoading("loading");
+    final loginProvider = ref.watch(loginNotifierProvider.notifier);
+    await ref.read(loginNotifierProvider.notifier).login(email, password);
 
-    // if(res) {
-    //   _setButtonLoading("success");
+    loginProvider.state.when(data: (authState) {
+      if(authState.isAuth == true) {
+        _setButtonLoading("success");
+        Navigator.push(
+          context, 
+          MaterialPageRoute(builder: (context) => const Home())
+        );
+      } else {
+        _setButtonLoading("idel");
 
-    //   Navigator.push(
-    //     context, 
-    //     MaterialPageRoute(builder: (context) => const Home())
-    //   );
-    // } else {
-    //   _setButtonLoading("failed");
-    // }
+        final snackbar =  SnackBar(
+          padding: const EdgeInsets.all(10),
+          margin: const EdgeInsets.all(10),
+          content: Row(
+            children: [
+              const Icon(
+                Icons.dangerous,
+                color: Colors.red,
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 10),
+                child: Text(authState.message!, style: const TextStyle(
+                    color: Colors.red,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600
+                  )
+                )
+              )
+            ],
+          ),
+          shape: BeveledRectangleBorder(
+            borderRadius: BorderRadius.circular(5)
+          ),
+          behavior: SnackBarBehavior.floating,
+          showCloseIcon: true,
+          closeIconColor: const Color(CustomColor.snackbarCloseIconColor),
+          backgroundColor: const Color(CustomColor.snackbarError)
+        );
+
+        ScaffoldMessenger.of(context).showSnackBar(snackbar);
+      }
+    }, 
+    error: (error, _) { 
+      // 
+    },
+    loading: () {
+      setState(() {
+        isButtonActive = false;
+      });
+    });
   }
 
   void _googleAuthenticate() {
@@ -130,7 +176,7 @@ class _LoginState extends State<Login> {
                         child: OutlineTextForm(
                           label: "Email", 
                           hintText: "Email Address",
-                          onChangeCallBack: _setEmail,
+                          setValue: _setEmail,
                           validators: [
                             RequiredValidator(),
                             EmailValidator(),
@@ -146,7 +192,7 @@ class _LoginState extends State<Login> {
                         child: OutlineTextForm(
                           label: "Password", 
                           hintText: "password",
-                          onChangeCallBack: _setPassword,
+                          setValue: _setPassword,
                           validators: [
                             RequiredValidator(),
                             MinValidator(6),
@@ -226,7 +272,7 @@ class _LoginState extends State<Login> {
                     ],
                   ),
                 ),
-              ),            
+              ),
             ],
           ),
         )
