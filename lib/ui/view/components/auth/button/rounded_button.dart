@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:zinjanow_app/ui/view/components/auth/button/failed.dart';
 import 'package:zinjanow_app/ui/view/components/auth/button/idel.dart';
 import 'package:zinjanow_app/ui/view/components/auth/button/loading.dart';
 import 'package:zinjanow_app/ui/view/components/auth/button/success.dart';
@@ -55,8 +54,6 @@ class _RoundedButtonState extends State<RoundedButton> {
                 return Laoding(textColor: widget.textColor, backGroundColor: widget.backGroundColor);
               } else if(widget.isLoading == "success") {
                 return const Success();
-              } else if(widget.isLoading == "failed") {
-                return Failed(title: widget.title, textColor: widget.textColor);
               }
             })(),
           ),
