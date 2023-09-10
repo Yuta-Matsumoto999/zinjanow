@@ -6,7 +6,12 @@ class ExcuteValidate<T> {
   final Function setIsValid;
   final Function seterrorText;
 
-  ExcuteValidate(this.validators, this.onChangeCallBack, this.setIsValid, this.seterrorText);
+  ExcuteValidate(
+    this.validators, 
+    this.onChangeCallBack, 
+    this.setIsValid, 
+    this.seterrorText
+  );
 
   void excute(T value) {
     onChangeCallBack(value);

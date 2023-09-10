@@ -5,7 +5,7 @@ import 'package:zinjanow_app/ui/view/validation/validator.dart';
 class OutlineTextForm extends StatefulWidget {
   final String label;
   final String hintText;
-  final Function onChangeCallBack;
+  final Function setValue;
   final List<Validator> validators;
   final Function setIsValid;
   final String buttonState;
@@ -14,7 +14,7 @@ class OutlineTextForm extends StatefulWidget {
     Key? key,
     required this.label,
     required this.hintText,
-    required this.onChangeCallBack,
+    required this.setValue,
     required this.validators,
     required this.setIsValid,
     required this.buttonState,
@@ -36,15 +36,15 @@ class _OutlineTextFormState extends State<OutlineTextForm> {
     super.initState();
   }
 
-  void seterrorText(String? value) {
-    setState(() {
-      _errorText = value;
-    });
-  }
-
   void setHideText() {
     setState(() {
       hideText = !hideText;
+    });
+  }
+
+  void _setErrorMessage(String? value) {
+    setState(() {
+      _errorText = value;
     });
   }
 
@@ -93,12 +93,6 @@ class _OutlineTextFormState extends State<OutlineTextForm> {
   }
 
   void _validate(String value) {
-    ExcuteValidate(widget.validators, widget.onChangeCallBack, widget.setIsValid, seterrorText).excute(value);
+    ExcuteValidate(widget.validators, widget.setValue, widget.setIsValid, _setErrorMessage).excute(value);
   }
-
-  // Color _bindColor() {
-  //   if(_errorText == null) {
-  //     return
-  //   }
-  // }
 }
