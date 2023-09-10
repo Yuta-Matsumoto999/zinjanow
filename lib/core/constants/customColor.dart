@@ -5,4 +5,6 @@ class CustomColor {
   static const buttonBlack = 0xFF252525;
   static const buttonWhite = 0xD9FFFFFF;
   static const formError = 0xFFf08080;
+  static const snackbarError = 0xFFFDE3E1;
+  static const snackbarCloseIconColor = 0xFFC3BABA;
 }
