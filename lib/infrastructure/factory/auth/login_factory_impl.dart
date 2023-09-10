@@ -4,10 +4,9 @@ import 'package:zinjanow_app/infrastructure/model/auth/auth_checked_user.dart';
 
 class LoginFactoryImpl implements LoginFactory {
   @override
-  AuthCheck create({required bool isAuth, String? name, String? message}) {
+  AuthCheck create({required bool isAuth, String? message}) {
     return AuthCheck(
       isAuth: isAuth,
-      name: name,
       message: message
     );
   }
@@ -16,7 +15,6 @@ class LoginFactoryImpl implements LoginFactory {
   AuthCheck createFromModel(AuthCheckedUser authCheckedUser) {
     return AuthCheck(
       isAuth: authCheckedUser.isAuth,
-      name: authCheckedUser.name,
       message: authCheckedUser.message
     );
   }
