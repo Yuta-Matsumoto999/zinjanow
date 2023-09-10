@@ -12,6 +12,7 @@ class Success extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 10),
           child: const Icon(
             Icons.check_circle,
+            color: Colors.white,
           ),
         ),
         const Text("Success", style: TextStyle(
