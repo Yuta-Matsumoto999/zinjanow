@@ -36,4 +36,16 @@ class SupabaseAuthDatasourceImpl implements SupabaseAuthDatasource {
       throw Exception();
     }
   }
+
+  @override
+  Future<AuthCheckedUser> logout() async {
+    try {
+      await supabase.auth.signOut();
+      return AuthCheckedUser(isAuth: false, message: null);
+    } on AuthException catch (err) {
+      return AuthCheckedUser(isAuth: true, message: err.message);
+    } catch(err) {
+      throw Exception();
+    }
+  }
 }
