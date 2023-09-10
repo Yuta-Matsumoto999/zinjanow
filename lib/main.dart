@@ -3,6 +3,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
 import 'package:zinjanow_app/ui/view/pages/welcome.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
   await dotenv.load(fileName: '.env');
@@ -11,7 +12,10 @@ void main() async {
     url: dotenv.get('SUPABASE_URL'),
     anonKey: dotenv.get('SUPABASE_ANON_KEY'),
   );
-  runApp(const MyApp());
+
+  runApp(
+    ProviderScope(child: MyApp())
+  );
 }
 
 class MyApp extends StatelessWidget {
