@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
-import 'package:zinjanow_app/ui/notify/auth/login/login_notifier.dart';
+import 'package:zinjanow_app/ui/notify/auth/login_notifier.dart';
 import 'package:zinjanow_app/ui/view/components/auth/button/google_login_button.dart';
 import 'package:zinjanow_app/ui/view/components/auth/button/rounded_button.dart';
 import 'package:zinjanow_app/ui/view/components/auth/form/outline_text_form.dart';
@@ -98,7 +98,7 @@ class LoginState extends ConsumerState<Login> {
           content: Row(
             children: [
               const Icon(
-                Icons.dangerous,
+                Icons.info,
                 color: Colors.red,
               ),
               Container(
