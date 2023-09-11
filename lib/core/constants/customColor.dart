@@ -1,5 +1,6 @@
 class CustomColor {
   static const mainTheme = 0xFFC67777;
+  static const mainBackground = 0xFFF5F5F5;
   static const textBlack = 0xFF000000;
   static const textWhite = 0xFFFFFFFF;
   static const buttonBlack = 0xFF252525;
