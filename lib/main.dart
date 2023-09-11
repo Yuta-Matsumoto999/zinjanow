@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
-import 'package:zinjanow_app/ui/view/pages/welcome.dart';
+import 'package:zinjanow_app/ui/view/pages/splash.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -14,7 +14,7 @@ void main() async {
   );
 
   runApp(
-    ProviderScope(child: MyApp())
+    const ProviderScope(child: MyApp())
   );
 }
 
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(CustomColor.mainTheme)),
         useMaterial3: true,
       ),
-      home: const Welcome()
+      home: const Splash()
     );
   }
 }
