@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zinjanow_app/infrastructure/datasource/auth/supabase_auth_datasource_impl.dart';
-import 'package:zinjanow_app/infrastructure/model/auth/auth_checked_user.dart';
+import 'package:zinjanow_app/infrastructure/model/auth/auth_check_response_model.dart';
 
 final supabaseAuthDatasourceProvider = Provider<SupabaseAuthDatasource>(
   (ref) =>
@@ -8,7 +8,7 @@ final supabaseAuthDatasourceProvider = Provider<SupabaseAuthDatasource>(
 );
 
 abstract class SupabaseAuthDatasource {
-  Future<AuthCheckedUser> login(String email, String password);
-  Future<AuthCheckedUser> signup(String name, String email, String password);
-  Future<AuthCheckedUser> logout();
+  Future<AuthCheckResponseModel> login(String email, String password);
+  Future<AuthCheckResponseModel> signup(String name, String email, String password);
+  Future<AuthCheckResponseModel> logout();
 }

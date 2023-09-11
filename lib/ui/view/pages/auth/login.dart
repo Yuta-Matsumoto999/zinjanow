@@ -83,7 +83,7 @@ class LoginState extends ConsumerState<Login> {
     await ref.read(loginNotifierProvider.notifier).login(email, password);
 
     loginProvider.state.when(data: (authState) {
-      if(authState.isAuth == true) {
+      if(authState.message == null) {
         _setButtonLoading("success");
         Navigator.pushAndRemoveUntil(
           context, 

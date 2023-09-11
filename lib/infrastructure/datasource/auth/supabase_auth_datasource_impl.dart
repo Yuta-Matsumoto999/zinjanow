@@ -1,20 +1,20 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:zinjanow_app/infrastructure/datasource/auth/supabase_auth_datasource.dart';
-import 'package:zinjanow_app/infrastructure/model/auth/auth_checked_user.dart';
+import 'package:zinjanow_app/infrastructure/model/auth/auth_check_response_model.dart';
 
 class SupabaseAuthDatasourceImpl implements SupabaseAuthDatasource {
   final supabase = Supabase.instance.client;
 
   @override
-  Future<AuthCheckedUser> login(email, password) async {
+  Future<AuthCheckResponseModel> login(email, password) async {
     try {
       await supabase.auth.signInWithPassword(
         email: email,
         password: password
       );
-      return AuthCheckedUser(isAuth: true, message: null);
+      return AuthCheckResponseModel(message: null);
     } on AuthException catch(err) {
-      return AuthCheckedUser(isAuth: false, message: err.message);
+      return AuthCheckResponseModel(message: err.message);
     } catch (err) {
       // ここで通信エラーのハンドリング
       throw Exception();
@@ -22,28 +22,28 @@ class SupabaseAuthDatasourceImpl implements SupabaseAuthDatasource {
   }
 
   @override
-  Future<AuthCheckedUser> signup(String name, String email, String password) async {
+  Future<AuthCheckResponseModel> signup(String name, String email, String password) async {
     try {
       await supabase.auth.signUp(
         email: email,
         password: password,
-        data: {"user_name": name}
+        data: {"user_name": name, "role": "general"}
       );
-      return AuthCheckedUser(isAuth: true, message: null);
+      return AuthCheckResponseModel(message: null);
     } on AuthException catch (err) {
-      return AuthCheckedUser(isAuth: false, message: err.message);
+      return AuthCheckResponseModel(message: err.message);
     } catch(err) {
       throw Exception();
     }
   }
 
   @override
-  Future<AuthCheckedUser> logout() async {
+  Future<AuthCheckResponseModel> logout() async {
     try {
       await supabase.auth.signOut();
-      return AuthCheckedUser(isAuth: false, message: null);
+      return AuthCheckResponseModel(message: null);
     } on AuthException catch (err) {
-      return AuthCheckedUser(isAuth: true, message: err.message);
+      return AuthCheckResponseModel(message: err.message);
     } catch(err) {
       throw Exception();
     }

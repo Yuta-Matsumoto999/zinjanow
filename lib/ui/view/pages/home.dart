@@ -32,7 +32,7 @@ class HomeState extends ConsumerState<Home> {
     await ref.read(logoutNotifierProvider.notifier).logout();
 
     logoutProvider.state.when(data: (authState) {
-      if(authState.isAuth == false) {
+      if(authState.message == null) {
         _setIsLoading("success");
         Navigator.pushAndRemoveUntil(
           context, 

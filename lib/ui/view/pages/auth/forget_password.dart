@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
 import 'package:zinjanow_app/ui/view/components/auth/button/rounded_button.dart';
 import 'package:zinjanow_app/ui/view/components/auth/form/outline_text_form.dart';
@@ -8,19 +9,20 @@ import 'package:zinjanow_app/ui/view/validation/validator/email_validator.dart';
 import 'package:zinjanow_app/ui/view/validation/validator/max_validator.dart';
 import 'package:zinjanow_app/ui/view/validation/validator/required_validator.dart';
 
-class ForgetPassWord extends StatefulWidget {
+class ForgetPassWord extends ConsumerStatefulWidget {
   const ForgetPassWord({super.key});
 
   @override
-  State<ForgetPassWord> createState() => _ForgetPassWordState();
+  ForgetPassWordState createState() => ForgetPassWordState();
 }
 
-class _ForgetPassWordState extends State<ForgetPassWord> {
+class ForgetPassWordState extends ConsumerState<ForgetPassWord> {
   final _formKey = GlobalKey<FormState>();
 
   String email = '';
   bool isValidEmail = true;
   bool isButtonActive = false;
+  String? errorMessage;
   String buttonLoading = "idel";
 
   void _setEmail(String value) {
@@ -42,13 +44,19 @@ class _ForgetPassWordState extends State<ForgetPassWord> {
     }
   }
 
+  void _setErrorMessage(String? value) {
+    setState(() {
+      errorMessage = value;
+    });
+  }
+
   void _setButtonLoading(String value) {
     setState(() {
       buttonLoading = value;
     });
   }
 
-  void _navigateCompletePage() {
+  void sendResetLink() {
     _setButtonLoading("loading");
 
     // ここでログイン処理
@@ -100,7 +108,7 @@ class _ForgetPassWordState extends State<ForgetPassWord> {
                         child: OutlineTextForm(
                           label: "Email", 
                           hintText: "Email Address",
-                          onChangeCallBack: _setEmail,
+                          setValue: _setEmail,
                           validators: [
                             RequiredValidator(),
                             EmailValidator(),
@@ -119,7 +127,7 @@ class _ForgetPassWordState extends State<ForgetPassWord> {
                           textColor: CustomColor.textWhite, 
                           marginTop: 0, 
                           marginBottom: 15, 
-                          onPressedCallBack: _navigateCompletePage, 
+                          onPressedCallBack: sendResetLink, 
                           isActive: isButtonActive,
                           isLoading: buttonLoading,
                         ),
