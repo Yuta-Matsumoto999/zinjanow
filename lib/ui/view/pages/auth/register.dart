@@ -5,6 +5,7 @@ import 'package:zinjanow_app/ui/notify/auth/signup_notifier.dart';
 import 'package:zinjanow_app/ui/view/components/auth/button/google_login_button.dart';
 import 'package:zinjanow_app/ui/view/components/auth/button/rounded_button.dart';
 import 'package:zinjanow_app/ui/view/components/auth/form/outline_text_form.dart';
+import 'package:zinjanow_app/ui/view/components/auth/layout.dart';
 import 'package:zinjanow_app/ui/view/pages/auth/login.dart';
 import 'package:zinjanow_app/ui/view/pages/home.dart';
 import 'package:zinjanow_app/ui/view/validation/validator/confirm_validator.dart';
@@ -109,11 +110,11 @@ class RegisterState extends ConsumerState<Register> {
 
   Future<void> _signup() async {
     _setButtonLoading("loading");
-    final signupProvider = ref.watch(signupNotifierProvider.notifier);
     await ref.read(signupNotifierProvider.notifier).signup(name, email, password);
+    final signupProvider = ref.watch(signupNotifierProvider);
 
-    signupProvider.state.when(data: (authState) {
-      if(authState.isAuth == true) {
+    signupProvider.when(data: (authState) {
+      if(authState.message == null) {
         _setButtonLoading("success");
         Navigator.pushAndRemoveUntil(
           context, 
@@ -178,144 +179,139 @@ class RegisterState extends ConsumerState<Register> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(left: 15, right: 15, top: 50, bottom: 50),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                margin: const EdgeInsets.only(top: 20),
-                child: const Center(
-                  child: Text("Sign Up", style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 28,
-                      fontWeight: FontWeight.w900
+    return Layout(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(top: 20),
+            child: const Center(
+              child: Text("Sign Up", style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 28,
+                  fontWeight: FontWeight.w900
+                ),
+              ),
+            )
+          ),
+          Container(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    margin: const EdgeInsets.only(top: 5, bottom: 10),
+                    child: OutlineTextForm(
+                      label: "Name", 
+                      hintText: "Your NickName",
+                      setValue: _setName,
+                      validators: [
+                        RequiredValidator(),
+                        MaxValidator(100)
+                      ],
+                      setIsValid: _setIsValidName,
+                      buttonState: buttonLoading,
+                      usedPassword: false,
                     ),
                   ),
-                )
-              ),
-              Container(
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    children: <Widget>[
-                      Container(
-                        margin: const EdgeInsets.only(top: 5, bottom: 10),
-                        child: OutlineTextForm(
-                          label: "Name", 
-                          hintText: "Your NickName",
-                          setValue: _setName,
-                          validators: [
-                            RequiredValidator(),
-                            MaxValidator(100)
-                          ],
-                          setIsValid: _setIsValidName,
-                          buttonState: buttonLoading,
-                          usedPassword: false,
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(vertical: 10),
-                        child: OutlineTextForm(
-                          label: "Email", 
-                          hintText: "Email Address",
-                          setValue: _setEmail,
-                          validators: [
-                            RequiredValidator(),
-                            EmailValidator(),
-                            MaxValidator(100)
-                          ],
-                          setIsValid: _setIsValidEmail,
-                          buttonState: buttonLoading,
-                          usedPassword: false,
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(vertical: 10),
-                        child: OutlineTextForm(
-                          label: "Password", 
-                          hintText: "password",
-                          setValue: _setPassword,
-                          validators: [
-                            RequiredValidator(),
-                            MinValidator(6),
-                            MaxValidator(100)
-                          ],
-                          setIsValid: _setIsValidPassword,
-                          buttonState: buttonLoading,
-                          usedPassword: true,
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(vertical: 10),
-                        child: OutlineTextForm(
-                          label: "Password-comfirm", 
-                          hintText: "password confirm",
-                          setValue: _setPasswordConfirm,
-                          validators: [
-                            RequiredValidator(),
-                            ConfirmValidator(password, "password"),
-                            MinValidator(6),
-                            MaxValidator(100)
-                          ],
-                          setIsValid: _setIsValidPasswordConfirm,
-                          buttonState: buttonLoading,
-                          usedPassword: true,
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 20),
-                        child: RoundedButton(
-                          title: "Sign Up", 
-                          backGroundColor: CustomColor.buttonBlack, 
-                          textColor: CustomColor.textWhite, 
-                          marginTop: 0, 
-                          marginBottom: 15, 
-                          onPressedCallBack: _signup, 
-                          isActive: isButtonActive,
-                          isLoading: buttonLoading,
-                        ),
-                      ),
-                      Container(
-                        child: TextButton(
-                          onPressed: () => {
-                            Navigator.push(
-                              context, 
-                              MaterialPageRoute(builder: (context) => const Login())
-                            )
-                          },
-                          child: const Text("Do you already have an account??", style: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              color: Colors.black87,
-                              fontSize: 14
-                            ),
-                          ),
-                        )
-                      ),
-                      const Divider(
-                        height: 20,
-                        indent: 10,
-                        endIndent: 10,
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 5),
-                        child: const Text("SignIn With Google", style: TextStyle(
-                          color: Colors.black54,
-                          fontWeight: FontWeight.w600
-                        ),),
-                      ),
-                      GoogleLoginButton(onPressedCallBack: _googleAuthenticate, buttonState: buttonLoading)
-                    ],
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    child: OutlineTextForm(
+                      label: "Email", 
+                      hintText: "Email Address",
+                      setValue: _setEmail,
+                      validators: [
+                        RequiredValidator(),
+                        EmailValidator(),
+                        MaxValidator(100)
+                      ],
+                      setIsValid: _setIsValidEmail,
+                      buttonState: buttonLoading,
+                      usedPassword: false,
+                    ),
                   ),
-                ),
-              ),            
-            ],
-          ),
-        )
-      )
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    child: OutlineTextForm(
+                      label: "Password", 
+                      hintText: "password",
+                      setValue: _setPassword,
+                      validators: [
+                        RequiredValidator(),
+                        MinValidator(6),
+                        MaxValidator(100)
+                      ],
+                      setIsValid: _setIsValidPassword,
+                      buttonState: buttonLoading,
+                      usedPassword: true,
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    child: OutlineTextForm(
+                      label: "Password-comfirm", 
+                      hintText: "password confirm",
+                      setValue: _setPasswordConfirm,
+                      validators: [
+                        RequiredValidator(),
+                        ConfirmValidator(password, "password"),
+                        MinValidator(6),
+                        MaxValidator(100)
+                      ],
+                      setIsValid: _setIsValidPasswordConfirm,
+                      buttonState: buttonLoading,
+                      usedPassword: true,
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 20),
+                    child: RoundedButton(
+                      title: "Sign Up", 
+                      backGroundColor: CustomColor.buttonBlack, 
+                      textColor: CustomColor.textWhite, 
+                      marginTop: 0, 
+                      marginBottom: 15, 
+                      onPressedCallBack: _signup, 
+                      isActive: isButtonActive,
+                      isLoading: buttonLoading,
+                    ),
+                  ),
+                  Container(
+                    child: TextButton(
+                      onPressed: () => {
+                        Navigator.push(
+                          context, 
+                          MaterialPageRoute(builder: (context) => const Login())
+                        )
+                      },
+                      child: const Text("Do you already have an account??", style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black87,
+                          fontSize: 14
+                        ),
+                      ),
+                    )
+                  ),
+                  const Divider(
+                    height: 20,
+                    indent: 10,
+                    endIndent: 10,
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 5),
+                    child: const Text("SignIn With Google", style: TextStyle(
+                      color: Colors.black54,
+                      fontWeight: FontWeight.w600
+                    ),),
+                  ),
+                  GoogleLoginButton(onPressedCallBack: _googleAuthenticate, buttonState: buttonLoading)
+                ],
+              ),
+            ),
+          ),            
+        ],
+      ),
     );
   }
 }
