@@ -6,6 +6,21 @@ class SupabaseAuthDatasourceImpl implements SupabaseAuthDatasource {
   final supabase = Supabase.instance.client;
 
   @override
+  Future<AuthCheckResponseModel> check() async {
+    try {
+      final res = supabase.auth.currentSession;
+
+      if(res != null) {
+        return AuthCheckResponseModel(isAuth: true, message: null);
+      } else {
+        return AuthCheckResponseModel(isAuth: false, message: null);
+      }
+    } catch(err) {
+      throw Exception();
+    }
+  }
+
+  @override
   Future<AuthCheckResponseModel> login(email, password) async {
     try {
       await supabase.auth.signInWithPassword(
