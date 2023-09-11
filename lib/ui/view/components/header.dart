@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zinjanow_app/core/constants/customColor.dart';
 
 class Header extends StatefulWidget implements PreferredSizeWidget {
   const Header({super.key});
@@ -48,6 +49,7 @@ class _HeaderState extends State<Header> {
           )
         ],
       ),
+      backgroundColor: Color(CustomColor.mainBackground),
     );
   }
 }
