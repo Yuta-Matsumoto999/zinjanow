@@ -1,24 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:zinjanow_app/ui/notify/auth/user_notifier.dart';
 
-class UserName extends StatefulWidget {
+class UserName extends ConsumerWidget {
   const UserName({super.key});
 
   @override
-  State<UserName> createState() => _UserNameState();
-}
-
-class _UserNameState extends State<UserName> {
-  @override
-  Widget build(BuildContext context) {
-    return const Row(
-      children: [
-        Text("Yuta 👋", style: TextStyle(
-            color: Colors.black87,
-            fontSize: 30,
-            fontWeight: FontWeight.w900
+  Widget build(BuildContext context, WidgetRef ref) {
+    final userState = ref.watch(userNotifierProvider);
+    return userState.when(
+      data: (state) {
+        return Row(
+          children: [
+            Text("${state.name}👋", style: const TextStyle(
+                color: Colors.black87,
+                fontSize: 30,
+                fontWeight: FontWeight.w900
+              ),
+            ),
+          ]
+        );
+      }, 
+      error: (error, _) {
+        return Center(
+          child: Text(
+            error.toString(),
           ),
-        ),
-      ]
+        );
+      },
+      loading: () {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      }
     );
   }
 }
