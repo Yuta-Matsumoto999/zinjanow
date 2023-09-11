@@ -114,7 +114,7 @@ class RegisterState extends ConsumerState<Register> {
     final signupProvider = ref.watch(signupNotifierProvider);
 
     signupProvider.when(data: (authState) {
-      if(authState.message == null) {
+      if(authState.isAuth == true) {
         _setButtonLoading("success");
         Navigator.pushAndRemoveUntil(
           context, 

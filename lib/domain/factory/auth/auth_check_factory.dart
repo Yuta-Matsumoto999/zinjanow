@@ -9,6 +9,7 @@ final authCheckProvider = Provider(
 
 abstract class AuthCheckFactory {
   AuthCheck create({
+    required bool isAuth,
     String? message
   });
 

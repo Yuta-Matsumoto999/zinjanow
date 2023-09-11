@@ -32,7 +32,7 @@ class HomeState extends ConsumerState<Home> {
 
     logoutProvider.when(
       data: (authState) {
-      if(authState.message == null) {
+      if(authState.isAuth == false) {
         _setIsLoading("success");
         Navigator.pushAndRemoveUntil(
           context, 

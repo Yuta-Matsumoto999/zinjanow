@@ -4,8 +4,9 @@ import 'package:zinjanow_app/infrastructure/model/auth/auth_check_response_model
 
 class AuthCheckFactoryImpl implements AuthCheckFactory {
   @override
-  AuthCheck create({String? message}) {
+  AuthCheck create({ required bool isAuth, String? message}) {
     return AuthCheck(
+      isAuth: isAuth,
       message: message
     );
   }
@@ -13,6 +14,7 @@ class AuthCheckFactoryImpl implements AuthCheckFactory {
   @override
   AuthCheck createFromModel(AuthCheckResponseModel authCheckResponseModel) {
     return AuthCheck(
+      isAuth: authCheckResponseModel.isAuth,
       message: authCheckResponseModel.message
     );
   }

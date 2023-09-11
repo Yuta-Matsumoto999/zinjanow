@@ -12,9 +12,9 @@ class SupabaseAuthDatasourceImpl implements SupabaseAuthDatasource {
         email: email,
         password: password
       );
-      return AuthCheckResponseModel(message: null);
+      return AuthCheckResponseModel(isAuth: true, message: null);
     } on AuthException catch(err) {
-      return AuthCheckResponseModel(message: err.message);
+      return AuthCheckResponseModel(isAuth: false, message: err.message);
     } catch (err) {
       // ここで通信エラーのハンドリング
       throw Exception();
@@ -29,9 +29,9 @@ class SupabaseAuthDatasourceImpl implements SupabaseAuthDatasource {
         password: password,
         data: {"user_name": name, "role": "general"}
       );
-      return AuthCheckResponseModel(message: null);
+      return AuthCheckResponseModel(isAuth: true, message: null);
     } on AuthException catch (err) {
-      return AuthCheckResponseModel(message: err.message);
+      return AuthCheckResponseModel(isAuth: false, message: err.message);
     } catch(err) {
       throw Exception();
     }
@@ -41,9 +41,9 @@ class SupabaseAuthDatasourceImpl implements SupabaseAuthDatasource {
   Future<AuthCheckResponseModel> logout() async {
     try {
       await supabase.auth.signOut();
-      return AuthCheckResponseModel(message: null);
+      return AuthCheckResponseModel(isAuth:false, message: null);
     } on AuthException catch (err) {
-      return AuthCheckResponseModel(message: err.message);
+      return AuthCheckResponseModel(isAuth: true, message: err.message);
     } catch(err) {
       throw Exception();
     }

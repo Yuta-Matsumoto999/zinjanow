@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AuthState {
+  bool get isAuth => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -28,7 +29,7 @@ abstract class $AuthStateCopyWith<$Res> {
   factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) then) =
       _$AuthStateCopyWithImpl<$Res, AuthState>;
   @useResult
-  $Res call({String? message});
+  $Res call({bool isAuth, String? message});
 }
 
 /// @nodoc
@@ -44,9 +45,14 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isAuth = null,
     Object? message = freezed,
   }) {
     return _then(_value.copyWith(
+      isAuth: null == isAuth
+          ? _value.isAuth
+          : isAuth // ignore: cast_nullable_to_non_nullable
+              as bool,
       message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -62,7 +68,7 @@ abstract class _$$_AuthStateCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
       __$$_AuthStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? message});
+  $Res call({bool isAuth, String? message});
 }
 
 /// @nodoc
@@ -76,9 +82,14 @@ class __$$_AuthStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isAuth = null,
     Object? message = freezed,
   }) {
     return _then(_$_AuthState(
+      isAuth: null == isAuth
+          ? _value.isAuth
+          : isAuth // ignore: cast_nullable_to_non_nullable
+              as bool,
       message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -90,14 +101,16 @@ class __$$_AuthStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_AuthState implements _AuthState {
-  _$_AuthState({this.message});
+  _$_AuthState({required this.isAuth, this.message});
 
+  @override
+  final bool isAuth;
   @override
   final String? message;
 
   @override
   String toString() {
-    return 'AuthState(message: $message)';
+    return 'AuthState(isAuth: $isAuth, message: $message)';
   }
 
   @override
@@ -105,11 +118,12 @@ class _$_AuthState implements _AuthState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AuthState &&
+            (identical(other.isAuth, isAuth) || other.isAuth == isAuth) &&
             (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message);
+  int get hashCode => Object.hash(runtimeType, isAuth, message);
 
   @JsonKey(ignore: true)
   @override
@@ -119,8 +133,11 @@ class _$_AuthState implements _AuthState {
 }
 
 abstract class _AuthState implements AuthState {
-  factory _AuthState({final String? message}) = _$_AuthState;
+  factory _AuthState({required final bool isAuth, final String? message}) =
+      _$_AuthState;
 
+  @override
+  bool get isAuth;
   @override
   String? get message;
   @override

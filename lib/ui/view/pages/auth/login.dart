@@ -84,7 +84,7 @@ class LoginState extends ConsumerState<Login> {
     final loginProvider = ref.watch(loginNotifierProvider);
 
     loginProvider.when(data: (authState) {
-      if(authState.message == null) {
+      if(authState.isAuth == true) {
         _setButtonLoading("success");
         Navigator.pushAndRemoveUntil(
           context, 
