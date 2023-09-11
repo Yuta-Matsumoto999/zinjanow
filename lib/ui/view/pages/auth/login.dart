@@ -85,9 +85,10 @@ class LoginState extends ConsumerState<Login> {
     loginProvider.state.when(data: (authState) {
       if(authState.isAuth == true) {
         _setButtonLoading("success");
-        Navigator.push(
+        Navigator.pushAndRemoveUntil(
           context, 
-          MaterialPageRoute(builder: (context) => const Home())
+          MaterialPageRoute(builder: (context) => const Home()), 
+          (route) => false
         );
       } else {
         _setButtonLoading("idel");
