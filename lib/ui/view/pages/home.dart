@@ -4,8 +4,8 @@ import 'package:zinjanow_app/core/constants/customColor.dart';
 import 'package:zinjanow_app/ui/notify/auth/logout_notifier.dart';
 import 'package:zinjanow_app/ui/view/components/auth/button/rounded_button.dart';
 import 'package:zinjanow_app/ui/view/components/category_title.dart';
-import 'package:zinjanow_app/ui/view/components/header.dart';
 import 'package:zinjanow_app/ui/view/components/home/user_name.dart';
+import 'package:zinjanow_app/ui/view/components/layout.dart';
 import 'package:zinjanow_app/ui/view/pages/welcome.dart';
 
 class Home extends ConsumerStatefulWidget {
@@ -16,7 +16,6 @@ class Home extends ConsumerStatefulWidget {
 }
 
 class HomeState extends ConsumerState<Home> {
-
   String isLoading = "idel";
 
   void _setIsLoading(String value) {
@@ -28,10 +27,11 @@ class HomeState extends ConsumerState<Home> {
   void _logout() async {
     _setIsLoading("loading");
 
-    final logoutProvider = ref.watch(logoutNotifierProvider.notifier);
     await ref.read(logoutNotifierProvider.notifier).logout();
+    final logoutProvider = ref.watch(logoutNotifierProvider);
 
-    logoutProvider.state.when(data: (authState) {
+    logoutProvider.when(
+      data: (authState) {
       if(authState.message == null) {
         _setIsLoading("success");
         Navigator.pushAndRemoveUntil(
@@ -42,23 +42,20 @@ class HomeState extends ConsumerState<Home> {
       } else {
         _setIsLoading("idel");
       }
-    },
-    error: (error,_) {
-      //
-    },
-    loading: () {
-      _setIsLoading("loading");
-    }
-  );
-
+      },
+      error: (error,_) {
+        //
+      },
+      loading: () {
+        _setIsLoading("loading");
+      }
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: Header(),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
+    return Layout(
+      child: SingleChildScrollView(
         child: Column(
           children: [
             const UserName(),
@@ -76,7 +73,7 @@ class HomeState extends ConsumerState<Home> {
               onPressedCallBack: _logout,
             )
           ]
-        ) 
+        ),
       )
     );
   }
