@@ -12,7 +12,7 @@ class UserName extends ConsumerWidget {
       data: (state) {
         return Row(
           children: [
-            Text("${state.name}👋", style: const TextStyle(
+            Text("${state.name}🤙", style: const TextStyle(
                 color: Colors.black87,
                 fontSize: 30,
                 fontWeight: FontWeight.w900

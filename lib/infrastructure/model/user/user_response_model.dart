@@ -3,7 +3,7 @@ class UserResponseModel {
   final String name;
   final String email;
   final String? role;
-  final String? avator_url;
+  final String? avatar_url;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -12,7 +12,7 @@ class UserResponseModel {
     required this.name,
     required this.email,
     this.role,
-    this.avator_url,
+    this.avatar_url,
     required this.createdAt,
     required this.updatedAt
   });
@@ -23,7 +23,7 @@ class UserResponseModel {
       name: json["username"],
       email: json["email"],
       role: json["role"],
-      avator_url: json["avator_url"],
+      avatar_url: json["avatar_url"],
       createdAt: DateTime.parse(json["created_at"]), 
       updatedAt: DateTime.parse(json["updated_at"])
     );

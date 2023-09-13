@@ -1,11 +1,11 @@
 class User {
   final String name;
   final String email;
-  final String? avator;
+  final String? avatar;
 
   User({
     required this.name,
     required this.email,
-    this.avator
+    this.avatar
   });
 }
