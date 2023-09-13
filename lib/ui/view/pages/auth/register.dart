@@ -305,7 +305,7 @@ class RegisterState extends ConsumerState<Register> {
                       fontWeight: FontWeight.w600
                     ),),
                   ),
-                  GoogleLoginButton(onPressedCallBack: _googleAuthenticate, buttonState: buttonLoading)
+                  GoogleLoginButton()
                 ],
               ),
             ),
