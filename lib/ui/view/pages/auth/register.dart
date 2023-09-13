@@ -300,12 +300,12 @@ class RegisterState extends ConsumerState<Register> {
                   ),
                   Container(
                     margin: const EdgeInsets.only(top: 5),
-                    child: const Text("SignIn With Google", style: TextStyle(
+                    child: const Text("Sign in with Google", style: TextStyle(
                       color: Colors.black54,
                       fontWeight: FontWeight.w600
                     ),),
                   ),
-                  GoogleLoginButton()
+                  const GoogleLoginButton()
                 ],
               ),
             ),

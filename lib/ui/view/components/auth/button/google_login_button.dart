@@ -97,21 +97,30 @@ class GoogleLoginButtonState extends ConsumerState<GoogleLoginButton> {
       margin: const EdgeInsets.only(top: 10),
       child: Center(
         child: SizedBox(
-          width: size.width * 0.7,
-          height: size.height * 0.068,
+          width: size.width * 0.75,
+          height: size.height * 0.07,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blueAccent,
               foregroundColor: Colors.white,
-              shape: const StadiumBorder(),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8)
+              ),
               splashFactory: NoSplash.splashFactory
             ),
             onPressed: isActive ? () => _googleSignUp() : null,
             child: (() {
               if (isLoading == "idel") {
-                return Idel(title: "Google", textColor: CustomColor.textWhite);
+                return Idel(
+                  title: "Google", 
+                  textColor: CustomColor.textWhite, 
+                  icon: Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    child: const ImageIcon(AssetImage("images/google-icon-2048x2048-czn3g8x8.png"), size: 20)
+                  )
+                );
               } else if(isLoading == "loading") {
-                return Laoding(textColor: CustomColor.textWhite, backGroundColor: CustomColor.buttonBlack);
+                return const Laoding(textColor: CustomColor.textWhite, backGroundColor: CustomColor.buttonBlack);
               } else if(isLoading == "success") {
                 return const Success();
               }

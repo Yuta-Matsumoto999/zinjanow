@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
-import 'package:zinjanow_app/ui/notify/auth/google_signup_notifier.dart';
 import 'package:zinjanow_app/ui/notify/auth/login_notifier.dart';
 import 'package:zinjanow_app/ui/view/components/auth/button/google_login_button.dart';
 import 'package:zinjanow_app/ui/view/components/auth/button/rounded_button.dart';
@@ -251,13 +250,13 @@ class LoginState extends ConsumerState<Login> {
                   ),
                   Container(
                     margin: const EdgeInsets.only(top: 5),
-                    child: const Text("Log In With Google", style: TextStyle(
+                    child: const Text("Sign in with Google", style: TextStyle(
                         color: Colors.black54,
                         fontWeight: FontWeight.w600
                       ),
                     ),
                   ),
-                  GoogleLoginButton()
+                  const GoogleLoginButton()
                 ],
               ),
             ),
