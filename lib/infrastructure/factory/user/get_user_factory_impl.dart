@@ -4,11 +4,11 @@ import 'package:zinjanow_app/infrastructure/model/user/user_response_model.dart'
 
 class GetUserFactoryImpl implements GetUserFactory {
   @override
-  User create({required String name, required String email, String? icon}) {
+  User create({required String name, required String email, String? avator}) {
     return User(
       name: name, 
       email: email, 
-      icon: icon
+      avator: avator
     );
   }
 
@@ -17,7 +17,7 @@ class GetUserFactoryImpl implements GetUserFactory {
     return User(
       name: userResponseModel.name, 
       email: userResponseModel.email,
-      icon: userResponseModel.icon
+      avator: userResponseModel.avator_url
     );
   }
 }

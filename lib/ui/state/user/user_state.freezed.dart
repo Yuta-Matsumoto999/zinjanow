@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$UserState {
   String? get name => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
-  String? get icon => throw _privateConstructorUsedError;
+  String? get avator => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserStateCopyWith<UserState> get copyWith =>
@@ -30,7 +30,7 @@ abstract class $UserStateCopyWith<$Res> {
   factory $UserStateCopyWith(UserState value, $Res Function(UserState) then) =
       _$UserStateCopyWithImpl<$Res, UserState>;
   @useResult
-  $Res call({String? name, String? email, String? icon});
+  $Res call({String? name, String? email, String? avator});
 }
 
 /// @nodoc
@@ -48,7 +48,7 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
   $Res call({
     Object? name = freezed,
     Object? email = freezed,
-    Object? icon = freezed,
+    Object? avator = freezed,
   }) {
     return _then(_value.copyWith(
       name: freezed == name
@@ -59,9 +59,9 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      icon: freezed == icon
-          ? _value.icon
-          : icon // ignore: cast_nullable_to_non_nullable
+      avator: freezed == avator
+          ? _value.avator
+          : avator // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -74,7 +74,7 @@ abstract class _$$_UserStateCopyWith<$Res> implements $UserStateCopyWith<$Res> {
       __$$_UserStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? name, String? email, String? icon});
+  $Res call({String? name, String? email, String? avator});
 }
 
 /// @nodoc
@@ -90,7 +90,7 @@ class __$$_UserStateCopyWithImpl<$Res>
   $Res call({
     Object? name = freezed,
     Object? email = freezed,
-    Object? icon = freezed,
+    Object? avator = freezed,
   }) {
     return _then(_$_UserState(
       name: freezed == name
@@ -101,9 +101,9 @@ class __$$_UserStateCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      icon: freezed == icon
-          ? _value.icon
-          : icon // ignore: cast_nullable_to_non_nullable
+      avator: freezed == avator
+          ? _value.avator
+          : avator // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -112,18 +112,18 @@ class __$$_UserStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_UserState implements _UserState {
-  _$_UserState({this.name, this.email, this.icon});
+  _$_UserState({this.name, this.email, this.avator});
 
   @override
   final String? name;
   @override
   final String? email;
   @override
-  final String? icon;
+  final String? avator;
 
   @override
   String toString() {
-    return 'UserState(name: $name, email: $email, icon: $icon)';
+    return 'UserState(name: $name, email: $email, avator: $avator)';
   }
 
   @override
@@ -133,11 +133,11 @@ class _$_UserState implements _UserState {
             other is _$_UserState &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
-            (identical(other.icon, icon) || other.icon == icon));
+            (identical(other.avator, avator) || other.avator == avator));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, email, icon);
+  int get hashCode => Object.hash(runtimeType, name, email, avator);
 
   @JsonKey(ignore: true)
   @override
@@ -150,14 +150,14 @@ abstract class _UserState implements UserState {
   factory _UserState(
       {final String? name,
       final String? email,
-      final String? icon}) = _$_UserState;
+      final String? avator}) = _$_UserState;
 
   @override
   String? get name;
   @override
   String? get email;
   @override
-  String? get icon;
+  String? get avator;
   @override
   @JsonKey(ignore: true)
   _$$_UserStateCopyWith<_$_UserState> get copyWith =>

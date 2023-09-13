@@ -2,8 +2,8 @@ class UserResponseModel {
   final String id;
   final String name;
   final String email;
-  final String role;
-  final String? icon;
+  final String? role;
+  final String? avator_url;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -11,8 +11,8 @@ class UserResponseModel {
     required this.id,
     required this.name,
     required this.email,
-    required this.role,
-    this.icon,
+    this.role,
+    this.avator_url,
     required this.createdAt,
     required this.updatedAt
   });
@@ -21,9 +21,9 @@ class UserResponseModel {
     return UserResponseModel(
       id: json["id"],
       name: json["username"],
-      email: json["email"], 
+      email: json["email"],
       role: json["role"],
-      icon: json["icon"],
+      avator_url: json["avator_url"],
       createdAt: DateTime.parse(json["created_at"]), 
       updatedAt: DateTime.parse(json["updated_at"])
     );

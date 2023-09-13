@@ -11,7 +11,7 @@ abstract class GetUserFactory {
   User create({
     required String name,
     required String email,
-    String? icon
+    String? avator
   });
 
   User createFromModel(UserResponseModel userResponseModel);

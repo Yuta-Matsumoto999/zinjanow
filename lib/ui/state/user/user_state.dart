@@ -8,14 +8,14 @@ class UserState with _$UserState {
   factory UserState({
     String? name,
     String? email,
-    String? icon
+    String? avator
   }) = _UserState;
 
   factory UserState.fromEntity(User user) {
     return UserState(
       name: user.name, 
       email: user.email,
-      icon: user.icon
+      avator: user.avator
     );
   }
 }
