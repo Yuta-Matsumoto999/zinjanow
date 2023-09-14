@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
+import 'package:zinjanow_app/ui/notify/auth/user_notifier.dart';
 import 'package:zinjanow_app/ui/view/components/header.dart';
 
 class Layout extends ConsumerStatefulWidget {
@@ -18,7 +18,11 @@ class Layout extends ConsumerStatefulWidget {
 
 class LayoutState extends ConsumerState<Layout> {
   @override
+
+
+  @override
   Widget build(BuildContext context) {
+    ref.watch(userNotifierProvider);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: const Header(),
