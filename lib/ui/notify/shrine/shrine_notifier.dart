@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zinjanow_app/domain/usecase/shrine/get_shrine_usecase.dart';
 import 'package:zinjanow_app/ui/state/shrine/shrine_state.dart';
 
-final shrineNotifierProvider = StateNotifierProvider<ShrineNotifier, AsyncValue<List<ShrineState>>>(
+final shrineNotifierProvider = StateNotifierProvider.autoDispose<ShrineNotifier, AsyncValue<List<ShrineState>>>(
   (ref) => ShrineNotifier(
     getShrineUsecase: ref.watch(getShrineUsecaseProvider)
   )
@@ -15,10 +15,10 @@ class ShrineNotifier extends StateNotifier<AsyncValue<List<ShrineState>>> {
     required GetShrineUsecase getShrineUsecase
   }) : _getShrineUsecase = getShrineUsecase,
   super(const AsyncLoading()) {
-    _fetch();
+    fetch();
   }
 
-  Future<void> _fetch() async {
+  Future<void> fetch() async {
     state = await AsyncValue.guard(() async {
       final res = await _getShrineUsecase.excute();
       return res.map((e) => ShrineState.fromEntity(e)).toList();
