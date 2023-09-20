@@ -44,8 +44,8 @@ class GoogleShrineDatasourceImpl implements GoogleShrineDatasource {
         queryParameters: {
           "keyword": "神社",
           "location": "$latitude, $longitude",
-          "radius": 2000,
           "language": "ja",
+          "rankby": "distance",
           "key": apiKey
         }
       );
