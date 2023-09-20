@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:zinjanow_app/ui/notify/auth/user_notifier.dart';
+import 'package:zinjanow_app/ui/notify/user/user_notifier.dart';
 
 class UserName extends ConsumerWidget {
   const UserName({super.key});
@@ -10,15 +10,11 @@ class UserName extends ConsumerWidget {
     final userState = ref.watch(userNotifierProvider);
     return userState.when(
       data: (state) {
-        return Row(
-          children: [
-            Text("${state.name}🤙", style: const TextStyle(
-                color: Colors.black87,
-                fontSize: 30,
-                fontWeight: FontWeight.w900
-              ),
-            ),
-          ]
+        return Text(state.name.toString(), style: const TextStyle(
+            color: Color(0xFAFDFDFE),
+            fontSize: 22,
+            fontWeight: FontWeight.w900
+          )
         );
       }, 
       error: (error, _) {
