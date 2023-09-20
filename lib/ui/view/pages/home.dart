@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
 import 'package:zinjanow_app/ui/notify/auth/logout_notifier.dart';
+import 'package:zinjanow_app/ui/notify/shrine/shrine_notifier.dart';
 import 'package:zinjanow_app/ui/view/components/auth/button/rounded_button.dart';
 import 'package:zinjanow_app/ui/view/components/category_title.dart';
-import 'package:zinjanow_app/ui/view/components/home/user_name.dart';
-import 'package:zinjanow_app/ui/view/components/layout.dart';
+import 'package:zinjanow_app/ui/view/components/common/header.dart';
+import 'package:zinjanow_app/ui/view/components/home/current_shrines.dart';
 import 'package:zinjanow_app/ui/view/pages/welcome.dart';
 
 class Home extends ConsumerStatefulWidget {
@@ -22,6 +23,10 @@ class HomeState extends ConsumerState<Home> {
     setState(() {
       isLoading = value;
     });
+  }
+
+  Future<void> _onRefreshShrineState() async {
+    await ref.read(shrineNotifierProvider.notifier).fetch();
   }
 
   void _logout() async {
@@ -54,26 +59,47 @@ class HomeState extends ConsumerState<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Layout(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            const UserName(),
-            const CategoryTitle(titleText: "current shrines"),
-            const CategoryTitle(titleText: "checked in"),
-            const CategoryTitle(titleText: "favorite"),
-            RoundedButton(
-              title: "Logout", 
-              backGroundColor: CustomColor.buttonBlack, 
-              textColor: CustomColor.buttonWhite, 
-              marginTop: 30,
-              marginBottom: 30, 
-              isActive: true, 
-              isLoading: isLoading,
-              onPressedCallBack: _logout,
+    ref.watch(shrineNotifierProvider);
+    Size size = MediaQuery.of(context).size;
+    return Scaffold(
+      backgroundColor: const Color(CustomColor.mainBackground),
+      body: Stack(
+        // alignment: AlignmentDirectional.center,
+        children: [
+          const Header(),
+          Container(
+            margin: EdgeInsets.only(top: 150),
+            width: size.width,
+            height: size.height * 100,
+            decoration: BoxDecoration(
+              color: const Color(CustomColor.mainBackground),
+              borderRadius: BorderRadius.circular(16)
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: RefreshIndicator(
+              onRefresh: _onRefreshShrineState,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const CategoryTitle(titleText: "Shrines"),
+                    const CurrentShrine(),
+                    RoundedButton(
+                      title: "Logout", 
+                      backGroundColor: CustomColor.buttonBlack, 
+                      textColor: CustomColor.buttonWhite, 
+                      marginTop: 30,
+                      marginBottom: 30, 
+                      isActive: true, 
+                      isLoading: isLoading,
+                      onPressedCallBack: _logout,
+                    )
+                  ],
+                ),
+              ),
             )
-          ]
-        ),
+          )
+        ],
       )
     );
   }

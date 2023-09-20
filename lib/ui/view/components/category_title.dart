@@ -10,16 +10,12 @@ class CategoryTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 20, bottom: 20),
-      child: Row(
-        children: [
-          Text(titleText, style: const TextStyle(
-              color: Colors.black54,
-              fontWeight: FontWeight.w600,
-              fontSize: 18
-            ),
-          ),
-        ]
+      margin: const EdgeInsets.only(top: 25),
+      child: Text(titleText, style: const TextStyle(
+          color: Colors.black,
+          fontWeight: FontWeight.w700,
+          fontSize: 20
+        )
       )
     );
   }
