@@ -23,7 +23,8 @@ mixin _$ShrineState {
   double? get lat => throw _privateConstructorUsedError;
   double? get lng => throw _privateConstructorUsedError;
   String? get mapUrl => throw _privateConstructorUsedError;
-  int? get distance => throw _privateConstructorUsedError;
+  String? get distance => throw _privateConstructorUsedError;
+  String? get duration => throw _privateConstructorUsedError;
   num? get rating => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -45,7 +46,8 @@ abstract class $ShrineStateCopyWith<$Res> {
       double? lat,
       double? lng,
       String? mapUrl,
-      int? distance,
+      String? distance,
+      String? duration,
       num? rating});
 }
 
@@ -70,6 +72,7 @@ class _$ShrineStateCopyWithImpl<$Res, $Val extends ShrineState>
     Object? lng = freezed,
     Object? mapUrl = freezed,
     Object? distance = freezed,
+    Object? duration = freezed,
     Object? rating = freezed,
   }) {
     return _then(_value.copyWith(
@@ -104,7 +107,11 @@ class _$ShrineStateCopyWithImpl<$Res, $Val extends ShrineState>
       distance: freezed == distance
           ? _value.distance
           : distance // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
+      duration: freezed == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as String?,
       rating: freezed == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
@@ -129,7 +136,8 @@ abstract class _$$_ShrineStateCopyWith<$Res>
       double? lat,
       double? lng,
       String? mapUrl,
-      int? distance,
+      String? distance,
+      String? duration,
       num? rating});
 }
 
@@ -152,6 +160,7 @@ class __$$_ShrineStateCopyWithImpl<$Res>
     Object? lng = freezed,
     Object? mapUrl = freezed,
     Object? distance = freezed,
+    Object? duration = freezed,
     Object? rating = freezed,
   }) {
     return _then(_$_ShrineState(
@@ -186,7 +195,11 @@ class __$$_ShrineStateCopyWithImpl<$Res>
       distance: freezed == distance
           ? _value.distance
           : distance // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
+      duration: freezed == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as String?,
       rating: freezed == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
@@ -207,6 +220,7 @@ class _$_ShrineState implements _ShrineState {
       this.lng,
       this.mapUrl,
       this.distance,
+      this.duration,
       this.rating})
       : _photos = photos,
         _reviews = reviews;
@@ -242,13 +256,15 @@ class _$_ShrineState implements _ShrineState {
   @override
   final String? mapUrl;
   @override
-  final int? distance;
+  final String? distance;
+  @override
+  final String? duration;
   @override
   final num? rating;
 
   @override
   String toString() {
-    return 'ShrineState(id: $id, name: $name, photos: $photos, reviews: $reviews, lat: $lat, lng: $lng, mapUrl: $mapUrl, distance: $distance, rating: $rating)';
+    return 'ShrineState(id: $id, name: $name, photos: $photos, reviews: $reviews, lat: $lat, lng: $lng, mapUrl: $mapUrl, distance: $distance, duration: $duration, rating: $rating)';
   }
 
   @override
@@ -265,6 +281,8 @@ class _$_ShrineState implements _ShrineState {
             (identical(other.mapUrl, mapUrl) || other.mapUrl == mapUrl) &&
             (identical(other.distance, distance) ||
                 other.distance == distance) &&
+            (identical(other.duration, duration) ||
+                other.duration == duration) &&
             (identical(other.rating, rating) || other.rating == rating));
   }
 
@@ -279,6 +297,7 @@ class _$_ShrineState implements _ShrineState {
       lng,
       mapUrl,
       distance,
+      duration,
       rating);
 
   @JsonKey(ignore: true)
@@ -297,7 +316,8 @@ abstract class _ShrineState implements ShrineState {
       final double? lat,
       final double? lng,
       final String? mapUrl,
-      final int? distance,
+      final String? distance,
+      final String? duration,
       final num? rating}) = _$_ShrineState;
 
   @override
@@ -315,7 +335,9 @@ abstract class _ShrineState implements ShrineState {
   @override
   String? get mapUrl;
   @override
-  int? get distance;
+  String? get distance;
+  @override
+  String? get duration;
   @override
   num? get rating;
   @override

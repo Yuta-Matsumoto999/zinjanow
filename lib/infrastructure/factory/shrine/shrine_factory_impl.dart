@@ -25,7 +25,6 @@ class ShrineFactoryImpl implements ShrineFactory {
     double? lat,
     double? lng,
     String? mapUrl,
-    int? distance,
     num? rating
   }) {
     return Shrine(
@@ -36,7 +35,6 @@ class ShrineFactoryImpl implements ShrineFactory {
       lat: lat,
       lng: lng,
       mapUrl: mapUrl,
-      distance: distance,
       rating: rating
     );
   }
@@ -51,7 +49,6 @@ class ShrineFactoryImpl implements ShrineFactory {
       lat: shrineResponseModel.lat,
       lng: shrineResponseModel.lng,
       mapUrl: shrineResponseModel.mapUrl,
-      distance: shrineResponseModel.distance,
       rating: shrineResponseModel.rating
     );
   }

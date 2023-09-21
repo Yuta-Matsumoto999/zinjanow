@@ -9,7 +9,6 @@ class ShrineResponseModel {
   final double? lat;
   final double? lng;
   final String? mapUrl;
-  final int? distance;
   final num? rating;
 
   ShrineResponseModel({
@@ -20,7 +19,6 @@ class ShrineResponseModel {
     this.lat,
     this.lng,
     this.mapUrl,
-    this.distance,
     this.rating
   });
 
@@ -36,7 +34,6 @@ class ShrineResponseModel {
       lat: lat,
       lng: lng,
       mapUrl: json["url"],
-      distance: json["distance"],
       rating: json["rating"]
     );
   }

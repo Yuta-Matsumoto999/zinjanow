@@ -16,7 +16,8 @@ class ShrineState with _$ShrineState {
     double? lat,
     double? lng,
     String? mapUrl,
-    int? distance,
+    String? distance,
+    String? duration,
     num? rating
   }) = _ShrineState;
 
@@ -30,6 +31,7 @@ class ShrineState with _$ShrineState {
       lng: shrine.lng,
       mapUrl: shrine.mapUrl,
       distance: shrine.distance,
+      duration: shrine.duration,
       rating: shrine.rating
     );
   }

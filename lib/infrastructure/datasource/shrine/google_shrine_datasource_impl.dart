@@ -3,11 +3,13 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:zinjanow_app/infrastructure/datasource/shrine/google_shrine_datasource.dart';
 import 'package:zinjanow_app/infrastructure/model/shrine/current_location_response_model.dart';
+import 'package:zinjanow_app/infrastructure/model/shrine/shirine_distance_response_model.dart';
 import 'package:zinjanow_app/infrastructure/model/shrine/shrine_model.dart';
 import 'package:zinjanow_app/infrastructure/model/shrine/shrine_response_model.dart';
 
 class GoogleShrineDatasourceImpl implements GoogleShrineDatasource {
   final apiKey = dotenv.get("GOOGLE_MAP_API_KEY");
+  final dio = Dio();
 
   @override
   Future<CurrentLocationResponseModel> getCurrentLocation() async {
@@ -45,7 +47,6 @@ class GoogleShrineDatasourceImpl implements GoogleShrineDatasource {
 
       return CurrentLocationResponseModel.fromJson(location);
     } catch(err) {
-      print(err);
       throw Exception();
     }
   }
@@ -53,8 +54,6 @@ class GoogleShrineDatasourceImpl implements GoogleShrineDatasource {
   @override
   Future<ShrineModel> getShrines(lat, lng) async {
     try {
-      final dio = Dio();
-
       // 近くの神社を取得
       final res = await dio.get(
         "https://maps.googleapis.com/maps/api/place/nearbysearch/json",
@@ -66,7 +65,7 @@ class GoogleShrineDatasourceImpl implements GoogleShrineDatasource {
           "key": apiKey
         }
       );
-
+      
       return ShrineModel.fromJson(res.data);
     } catch(err) {
       throw Exception();
@@ -75,21 +74,37 @@ class GoogleShrineDatasourceImpl implements GoogleShrineDatasource {
 
   @override
   Future<ShrineResponseModel> getShrineDetail(String placeId) async {
-    final dio = Dio();
+    try {
+      final res = await dio.get(
+        "https://maps.googleapis.com/maps/api/place/details/json",
+        queryParameters: {
+          "place_id": placeId,
+          "key": apiKey
+        }
+      );
 
-    final res = await dio.get(
-      "https://maps.googleapis.com/maps/api/place/details/json",
-      queryParameters: {
-        "place_id": placeId,
-        "key": apiKey
-      }
-    );
-
-    return ShrineResponseModel.fromJson(res.data);
+      return ShrineResponseModel.fromJson(res.data);
+    } catch (err) {
+      throw Exception();
+    }
   }
 
-  // 現在地から検索先までの距離を取得
-  Future<int> getDistance (currentLatitude, currentLongitude, shrineLatitude, shrineLongitude) async {
-    return 1;
+  @override
+  Future<ShrineDistanceResponseModel> getShrineDistance (currentLatitude, currentLongitude, shrineLatitude, shrineLongitude) async {
+    try {
+      final res = await dio.get(
+        "https://maps.googleapis.com/maps/api/distancematrix/json",
+        queryParameters: {
+          "destinations": ["$shrineLatitude, $shrineLongitude"],
+          "origins": ["$currentLatitude, $currentLongitude"],
+          "mode": "walking",
+          "key": apiKey
+        }
+      );
+
+      return ShrineDistanceResponseModel.fromJson(res.data["rows"][0]["elements"][0]);
+    } catch (err) {
+      throw Exception();
+    }
   }
 }

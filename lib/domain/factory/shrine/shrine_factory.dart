@@ -21,7 +21,6 @@ abstract class ShrineFactory {
     List<Photo>? photos,
     List<Review>? reviews,
     String? mapUrl,
-    int? distance,
     num? rating
   });
 

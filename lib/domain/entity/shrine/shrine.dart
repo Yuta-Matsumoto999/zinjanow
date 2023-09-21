@@ -9,8 +9,9 @@ class Shrine {
   final double? lat;
   final double? lng;
   final String? mapUrl;
-  final int? distance;
   final num? rating;
+  String? distance;
+  String? duration;
 
   Shrine({
     this.id,
@@ -20,7 +21,8 @@ class Shrine {
     this.lat,
     this.lng,
     this.mapUrl,
+    this.rating,
     this.distance,
-    this.rating
+    this.duration
   });
 }
