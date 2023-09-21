@@ -46,7 +46,7 @@ class Header extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: const Color(0x59efefef),
+                      color: const Color(0x66efefef),
                       borderRadius: BorderRadius.circular(10)
                     ),
                     child: const Icon(Icons.notifications, color: Colors.white,size: 21,),
