@@ -3,7 +3,7 @@ import 'package:zinjanow_app/domain/entity/shrine/current_location.dart';
 import 'package:zinjanow_app/infrastructure/factory/shrine/current_location_factory_impl.dart';
 import 'package:zinjanow_app/infrastructure/model/shrine/current_location_response_model.dart';
 
-final currentLocationFactoryProvider = Provider(
+final currentLocationFactoryProvider = Provider<CurrentLocationFactory>(
   (ref) => CurrentLocationFactoryImpl()
 );
 
