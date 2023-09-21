@@ -2,11 +2,15 @@ import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:zinjanow_app/infrastructure/datasource/shrine/google_shrine_datasource.dart';
+import 'package:zinjanow_app/infrastructure/model/shrine/current_location_response_model.dart';
 import 'package:zinjanow_app/infrastructure/model/shrine/shrine_model.dart';
+import 'package:zinjanow_app/infrastructure/model/shrine/shrine_response_model.dart';
 
 class GoogleShrineDatasourceImpl implements GoogleShrineDatasource {
+  final apiKey = dotenv.get("GOOGLE_MAP_API_KEY");
+
   @override
-  Future<ShrineModel> getShrines() async {
+  Future<CurrentLocationResponseModel> getCurrentLocation() async {
     bool serviceEnabled;
     LocationPermission locationPermission;
 
@@ -34,8 +38,21 @@ class GoogleShrineDatasourceImpl implements GoogleShrineDatasource {
       final latitude = currentPosition.latitude;
       final longitude = currentPosition.longitude;
 
-      final apiKey = dotenv.get("GOOGLE_MAP_API_KEY");
+      final location = {
+        "lat": latitude,
+        "lng": longitude
+      };
 
+      return CurrentLocationResponseModel.fromJson(location);
+    } catch(err) {
+      print(err);
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<ShrineModel> getShrines(lat, lng) async {
+    try {
       final dio = Dio();
 
       // 近くの神社を取得
@@ -43,7 +60,7 @@ class GoogleShrineDatasourceImpl implements GoogleShrineDatasource {
         "https://maps.googleapis.com/maps/api/place/nearbysearch/json",
         queryParameters: {
           "keyword": "神社",
-          "location": "$latitude, $longitude",
+          "location": "$lat, $lng",
           "language": "ja",
           "rankby": "distance",
           "key": apiKey
@@ -56,10 +73,8 @@ class GoogleShrineDatasourceImpl implements GoogleShrineDatasource {
     }
   }
 
-  // place詳細を取得
-  Future<ShrineModel> getPlaceDetail(String placeId) async {
-    final apiKey = dotenv.get("GOOGLE_MAP_API_KEY");
-
+  @override
+  Future<ShrineResponseModel> getShrineDetail(String placeId) async {
     final dio = Dio();
 
     final res = await dio.get(
@@ -70,7 +85,7 @@ class GoogleShrineDatasourceImpl implements GoogleShrineDatasource {
       }
     );
 
-    return ShrineModel.fromJson(res.data);
+    return ShrineResponseModel.fromJson(res.data);
   }
 
   // 現在地から検索先までの距離を取得

@@ -45,9 +45,9 @@ class CurrentShrineState extends ConsumerState<CurrentShrine> {
                         padding: const EdgeInsets.all(5),
                         decoration: const BoxDecoration(
                           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(16), bottomRight: Radius.circular(16)),
-                          color: Color(0x99ffffff),
+                          color: Color(0xA6ffffff),
                         ),
-                        child: Text(shrines[index].name, style: const TextStyle(
+                        child: Text(shrines[index].name!, style: const TextStyle(
                           fontWeight: FontWeight.w400
                         ),),
                       ),

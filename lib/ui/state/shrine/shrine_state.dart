@@ -1,6 +1,6 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:zinjanow_app/domain/entity/shrine.dart';
+import 'package:zinjanow_app/domain/entity/shrine/shrine.dart';
 import 'package:zinjanow_app/domain/value/Photo.dart';
 import 'package:zinjanow_app/domain/value/review.dart';
 
@@ -9,12 +9,15 @@ part 'shrine_state.freezed.dart';
 @freezed
 class ShrineState with _$ShrineState {
   factory ShrineState({
-    required String id,
-    required String name,
+    String? id,
+    String? name,
     List<Photo>? photos,
     List<Review>? reviews,
+    double? lat,
+    double? lng,
     String? mapUrl,
-    int? distance
+    int? distance,
+    num? rating
   }) = _ShrineState;
 
   factory ShrineState.fromEntity(Shrine shrine) {
@@ -23,8 +26,11 @@ class ShrineState with _$ShrineState {
       name: shrine.name,
       photos: shrine.photos,
       reviews: shrine.reviews,
+      lat: shrine.lat,
+      lng: shrine.lng,
       mapUrl: shrine.mapUrl,
-      distance: shrine.distance
+      distance: shrine.distance,
+      rating: shrine.rating
     );
   }
 }

@@ -16,12 +16,15 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ShrineState {
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
   List<Photo>? get photos => throw _privateConstructorUsedError;
   List<Review>? get reviews => throw _privateConstructorUsedError;
+  double? get lat => throw _privateConstructorUsedError;
+  double? get lng => throw _privateConstructorUsedError;
   String? get mapUrl => throw _privateConstructorUsedError;
   int? get distance => throw _privateConstructorUsedError;
+  num? get rating => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ShrineStateCopyWith<ShrineState> get copyWith =>
@@ -35,12 +38,15 @@ abstract class $ShrineStateCopyWith<$Res> {
       _$ShrineStateCopyWithImpl<$Res, ShrineState>;
   @useResult
   $Res call(
-      {String id,
-      String name,
+      {String? id,
+      String? name,
       List<Photo>? photos,
       List<Review>? reviews,
+      double? lat,
+      double? lng,
       String? mapUrl,
-      int? distance});
+      int? distance,
+      num? rating});
 }
 
 /// @nodoc
@@ -56,22 +62,25 @@ class _$ShrineStateCopyWithImpl<$Res, $Val extends ShrineState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? name = null,
+    Object? id = freezed,
+    Object? name = freezed,
     Object? photos = freezed,
     Object? reviews = freezed,
+    Object? lat = freezed,
+    Object? lng = freezed,
     Object? mapUrl = freezed,
     Object? distance = freezed,
+    Object? rating = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       photos: freezed == photos
           ? _value.photos
           : photos // ignore: cast_nullable_to_non_nullable
@@ -80,6 +89,14 @@ class _$ShrineStateCopyWithImpl<$Res, $Val extends ShrineState>
           ? _value.reviews
           : reviews // ignore: cast_nullable_to_non_nullable
               as List<Review>?,
+      lat: freezed == lat
+          ? _value.lat
+          : lat // ignore: cast_nullable_to_non_nullable
+              as double?,
+      lng: freezed == lng
+          ? _value.lng
+          : lng // ignore: cast_nullable_to_non_nullable
+              as double?,
       mapUrl: freezed == mapUrl
           ? _value.mapUrl
           : mapUrl // ignore: cast_nullable_to_non_nullable
@@ -88,6 +105,10 @@ class _$ShrineStateCopyWithImpl<$Res, $Val extends ShrineState>
           ? _value.distance
           : distance // ignore: cast_nullable_to_non_nullable
               as int?,
+      rating: freezed == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as num?,
     ) as $Val);
   }
 }
@@ -101,12 +122,15 @@ abstract class _$$_ShrineStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String id,
-      String name,
+      {String? id,
+      String? name,
       List<Photo>? photos,
       List<Review>? reviews,
+      double? lat,
+      double? lng,
       String? mapUrl,
-      int? distance});
+      int? distance,
+      num? rating});
 }
 
 /// @nodoc
@@ -120,22 +144,25 @@ class __$$_ShrineStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? name = null,
+    Object? id = freezed,
+    Object? name = freezed,
     Object? photos = freezed,
     Object? reviews = freezed,
+    Object? lat = freezed,
+    Object? lng = freezed,
     Object? mapUrl = freezed,
     Object? distance = freezed,
+    Object? rating = freezed,
   }) {
     return _then(_$_ShrineState(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       photos: freezed == photos
           ? _value._photos
           : photos // ignore: cast_nullable_to_non_nullable
@@ -144,6 +171,14 @@ class __$$_ShrineStateCopyWithImpl<$Res>
           ? _value._reviews
           : reviews // ignore: cast_nullable_to_non_nullable
               as List<Review>?,
+      lat: freezed == lat
+          ? _value.lat
+          : lat // ignore: cast_nullable_to_non_nullable
+              as double?,
+      lng: freezed == lng
+          ? _value.lng
+          : lng // ignore: cast_nullable_to_non_nullable
+              as double?,
       mapUrl: freezed == mapUrl
           ? _value.mapUrl
           : mapUrl // ignore: cast_nullable_to_non_nullable
@@ -152,6 +187,10 @@ class __$$_ShrineStateCopyWithImpl<$Res>
           ? _value.distance
           : distance // ignore: cast_nullable_to_non_nullable
               as int?,
+      rating: freezed == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as num?,
     ));
   }
 }
@@ -160,19 +199,22 @@ class __$$_ShrineStateCopyWithImpl<$Res>
 
 class _$_ShrineState implements _ShrineState {
   _$_ShrineState(
-      {required this.id,
-      required this.name,
+      {this.id,
+      this.name,
       final List<Photo>? photos,
       final List<Review>? reviews,
+      this.lat,
+      this.lng,
       this.mapUrl,
-      this.distance})
+      this.distance,
+      this.rating})
       : _photos = photos,
         _reviews = reviews;
 
   @override
-  final String id;
+  final String? id;
   @override
-  final String name;
+  final String? name;
   final List<Photo>? _photos;
   @override
   List<Photo>? get photos {
@@ -194,13 +236,19 @@ class _$_ShrineState implements _ShrineState {
   }
 
   @override
+  final double? lat;
+  @override
+  final double? lng;
+  @override
   final String? mapUrl;
   @override
   final int? distance;
+  @override
+  final num? rating;
 
   @override
   String toString() {
-    return 'ShrineState(id: $id, name: $name, photos: $photos, reviews: $reviews, mapUrl: $mapUrl, distance: $distance)';
+    return 'ShrineState(id: $id, name: $name, photos: $photos, reviews: $reviews, lat: $lat, lng: $lng, mapUrl: $mapUrl, distance: $distance, rating: $rating)';
   }
 
   @override
@@ -212,9 +260,12 @@ class _$_ShrineState implements _ShrineState {
             (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality().equals(other._photos, _photos) &&
             const DeepCollectionEquality().equals(other._reviews, _reviews) &&
+            (identical(other.lat, lat) || other.lat == lat) &&
+            (identical(other.lng, lng) || other.lng == lng) &&
             (identical(other.mapUrl, mapUrl) || other.mapUrl == mapUrl) &&
             (identical(other.distance, distance) ||
-                other.distance == distance));
+                other.distance == distance) &&
+            (identical(other.rating, rating) || other.rating == rating));
   }
 
   @override
@@ -224,8 +275,11 @@ class _$_ShrineState implements _ShrineState {
       name,
       const DeepCollectionEquality().hash(_photos),
       const DeepCollectionEquality().hash(_reviews),
+      lat,
+      lng,
       mapUrl,
-      distance);
+      distance,
+      rating);
 
   @JsonKey(ignore: true)
   @override
@@ -236,25 +290,34 @@ class _$_ShrineState implements _ShrineState {
 
 abstract class _ShrineState implements ShrineState {
   factory _ShrineState(
-      {required final String id,
-      required final String name,
+      {final String? id,
+      final String? name,
       final List<Photo>? photos,
       final List<Review>? reviews,
+      final double? lat,
+      final double? lng,
       final String? mapUrl,
-      final int? distance}) = _$_ShrineState;
+      final int? distance,
+      final num? rating}) = _$_ShrineState;
 
   @override
-  String get id;
+  String? get id;
   @override
-  String get name;
+  String? get name;
   @override
   List<Photo>? get photos;
   @override
   List<Review>? get reviews;
   @override
+  double? get lat;
+  @override
+  double? get lng;
+  @override
   String? get mapUrl;
   @override
   int? get distance;
+  @override
+  num? get rating;
   @override
   @JsonKey(ignore: true)
   _$$_ShrineStateCopyWith<_$_ShrineState> get copyWith =>

@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:zinjanow_app/domain/entity/shrine.dart';
+import 'package:zinjanow_app/domain/entity/shrine/shrine.dart';
 import 'package:zinjanow_app/domain/factory/shrine/shrine_photo_factory.dart';
 import 'package:zinjanow_app/domain/factory/shrine/shrine_review_factory.dart';
 import 'package:zinjanow_app/domain/value/Photo.dart';
@@ -21,7 +21,8 @@ abstract class ShrineFactory {
     List<Photo>? photos,
     List<Review>? reviews,
     String? mapUrl,
-    int? distance
+    int? distance,
+    num? rating
   });
 
   Shrine createFromModel(ShrineResponseModel shrineResponseModel);

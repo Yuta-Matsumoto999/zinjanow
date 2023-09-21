@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:zinjanow_app/domain/entity/shrine.dart';
+import 'package:zinjanow_app/domain/entity/shrine/shrine.dart';
 import 'package:zinjanow_app/domain/factory/shrine/shrine_factory.dart';
 import 'package:zinjanow_app/infrastructure/datasource/shrine/google_shrine_datasource.dart';
 import 'package:zinjanow_app/infrastructure/repository/shrine/get_shrine_repository_impl.dart';
@@ -12,5 +12,5 @@ final getShrineRepositoryProvider = Provider<GetShrineRepository>(
 );
 
 abstract class GetShrineRepository {
-  Future<List<Shrine>> getShrines();
+  Future<List<Shrine>> getShrines(lat, lng);
 }
