@@ -19,8 +19,29 @@ https://pub.dev/packages/supabase_flutter<br />
 <b>freezed 2.4.2</b><br />
 https://pub.dev/packages/freezed<br />
 <br />
-<b>flutter_riverpod 2.4.0</b><br />
+<b>freezed_annotation 2.2.0</b><br />
+https://pub.dev/packages/freezed_annotation<br />
+<br />
+<b>flutter_riverpod 2.3.2</b><br />
 https://pub.dev/packages/flutter_riverpod<br />
+<br />
+<b>flutter_dotenv 5.1.0</b><br />
+https://pub.dev/packages/flutter_dotenv<br />
+<br />
+<b>build_runner 2.3.2</b><br />
+https://pub.dev/packages/build_runner<br />
+<br />
+<b>flutter_auth 6.0.2</b><br />
+https://pub.dev/packages/flutter_appauth<br />
+<br />
+<b>crypto 3.0.3</b><br />
+https://pub.dev/packages/crypto<br />
+<br />
+<b>geolocator 10.0.1</b><br />
+https://pub.dev/packages/geolocator<br />
+<br />
+<b>dio 5.3.2</b><br />
+https://pub.dev/packages/dio<br />
 <br />
 ※ add here<br />
 <br />
