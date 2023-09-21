@@ -19,7 +19,7 @@ class CurrentShrineState extends ConsumerState<CurrentShrine> {
         return GridView.builder(
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           itemCount: shrines.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisSpacing: 20,
@@ -47,9 +47,55 @@ class CurrentShrineState extends ConsumerState<CurrentShrine> {
                           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(16), bottomRight: Radius.circular(16)),
                           color: Color(0xA6ffffff),
                         ),
-                        child: Text(shrines[index].name!, style: const TextStyle(
-                          fontWeight: FontWeight.w400
-                        ),),
+                        child: Column(
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.symmetric(vertical: 3),
+                              child: Text(shrines[index].name!, style: const TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16
+                                )
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  margin: const EdgeInsets.only(right: 5),
+                                  child: Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.location_pin,
+                                        size: 14,
+                                      ),
+                                      Text(shrines[index].distance!, style: const TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 12
+                                        )
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.only(left: 5),
+                                  child: Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.directions_walk,
+                                        size: 14,
+                                      ),
+                                      Text(shrines[index].duration!, style: const TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 12
+                                        )
+                                      )
+                                    ],
+                                  )
+                                )
+                              ],
+                            )
+                          ],
+                        )
                       ),
                     )
                   ],
