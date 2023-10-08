@@ -19,7 +19,6 @@ mixin _$ShrineState {
   String? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   List<Photo>? get photos => throw _privateConstructorUsedError;
-  List<Review>? get reviews => throw _privateConstructorUsedError;
   double? get lat => throw _privateConstructorUsedError;
   double? get lng => throw _privateConstructorUsedError;
   String? get mapUrl => throw _privateConstructorUsedError;
@@ -42,7 +41,6 @@ abstract class $ShrineStateCopyWith<$Res> {
       {String? id,
       String? name,
       List<Photo>? photos,
-      List<Review>? reviews,
       double? lat,
       double? lng,
       String? mapUrl,
@@ -67,7 +65,6 @@ class _$ShrineStateCopyWithImpl<$Res, $Val extends ShrineState>
     Object? id = freezed,
     Object? name = freezed,
     Object? photos = freezed,
-    Object? reviews = freezed,
     Object? lat = freezed,
     Object? lng = freezed,
     Object? mapUrl = freezed,
@@ -88,10 +85,6 @@ class _$ShrineStateCopyWithImpl<$Res, $Val extends ShrineState>
           ? _value.photos
           : photos // ignore: cast_nullable_to_non_nullable
               as List<Photo>?,
-      reviews: freezed == reviews
-          ? _value.reviews
-          : reviews // ignore: cast_nullable_to_non_nullable
-              as List<Review>?,
       lat: freezed == lat
           ? _value.lat
           : lat // ignore: cast_nullable_to_non_nullable
@@ -132,7 +125,6 @@ abstract class _$$_ShrineStateCopyWith<$Res>
       {String? id,
       String? name,
       List<Photo>? photos,
-      List<Review>? reviews,
       double? lat,
       double? lng,
       String? mapUrl,
@@ -155,7 +147,6 @@ class __$$_ShrineStateCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? photos = freezed,
-    Object? reviews = freezed,
     Object? lat = freezed,
     Object? lng = freezed,
     Object? mapUrl = freezed,
@@ -176,10 +167,6 @@ class __$$_ShrineStateCopyWithImpl<$Res>
           ? _value._photos
           : photos // ignore: cast_nullable_to_non_nullable
               as List<Photo>?,
-      reviews: freezed == reviews
-          ? _value._reviews
-          : reviews // ignore: cast_nullable_to_non_nullable
-              as List<Review>?,
       lat: freezed == lat
           ? _value.lat
           : lat // ignore: cast_nullable_to_non_nullable
@@ -215,15 +202,13 @@ class _$_ShrineState implements _ShrineState {
       {this.id,
       this.name,
       final List<Photo>? photos,
-      final List<Review>? reviews,
       this.lat,
       this.lng,
       this.mapUrl,
       this.distance,
       this.duration,
       this.rating})
-      : _photos = photos,
-        _reviews = reviews;
+      : _photos = photos;
 
   @override
   final String? id;
@@ -235,16 +220,6 @@ class _$_ShrineState implements _ShrineState {
     final value = _photos;
     if (value == null) return null;
     if (_photos is EqualUnmodifiableListView) return _photos;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<Review>? _reviews;
-  @override
-  List<Review>? get reviews {
-    final value = _reviews;
-    if (value == null) return null;
-    if (_reviews is EqualUnmodifiableListView) return _reviews;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -264,7 +239,7 @@ class _$_ShrineState implements _ShrineState {
 
   @override
   String toString() {
-    return 'ShrineState(id: $id, name: $name, photos: $photos, reviews: $reviews, lat: $lat, lng: $lng, mapUrl: $mapUrl, distance: $distance, duration: $duration, rating: $rating)';
+    return 'ShrineState(id: $id, name: $name, photos: $photos, lat: $lat, lng: $lng, mapUrl: $mapUrl, distance: $distance, duration: $duration, rating: $rating)';
   }
 
   @override
@@ -275,7 +250,6 @@ class _$_ShrineState implements _ShrineState {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality().equals(other._photos, _photos) &&
-            const DeepCollectionEquality().equals(other._reviews, _reviews) &&
             (identical(other.lat, lat) || other.lat == lat) &&
             (identical(other.lng, lng) || other.lng == lng) &&
             (identical(other.mapUrl, mapUrl) || other.mapUrl == mapUrl) &&
@@ -292,7 +266,6 @@ class _$_ShrineState implements _ShrineState {
       id,
       name,
       const DeepCollectionEquality().hash(_photos),
-      const DeepCollectionEquality().hash(_reviews),
       lat,
       lng,
       mapUrl,
@@ -312,7 +285,6 @@ abstract class _ShrineState implements ShrineState {
       {final String? id,
       final String? name,
       final List<Photo>? photos,
-      final List<Review>? reviews,
       final double? lat,
       final double? lng,
       final String? mapUrl,
@@ -326,8 +298,6 @@ abstract class _ShrineState implements ShrineState {
   String? get name;
   @override
   List<Photo>? get photos;
-  @override
-  List<Review>? get reviews;
   @override
   double? get lat;
   @override
