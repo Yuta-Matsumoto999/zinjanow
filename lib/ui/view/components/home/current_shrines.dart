@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zinjanow_app/ui/notify/shrine/shrine_notifier.dart';
+import 'package:zinjanow_app/ui/view/pages/shrine_detail.dart';
 
 class CurrentShrine extends ConsumerStatefulWidget {
   const CurrentShrine({super.key});
@@ -31,78 +32,86 @@ class CurrentShrineState extends ConsumerState<CurrentShrine> {
             ), 
             itemBuilder: (context, index) {
               return SizedBox(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    image: DecorationImage(
-                      image: NetworkImage(shrines[index].photos!.first.url.toString()),
-                      fit: BoxFit.cover
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context, 
+                      MaterialPageRoute(builder: (context) => const ShrineDetail())
+                    );
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      image: DecorationImage(
+                        image: NetworkImage(shrines[index].photos!.first.url.toString()),
+                        fit: BoxFit.cover
+                      )
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        FractionallySizedBox(
+                          widthFactor: 1.0,
+                          child: Container(
+                            padding: const EdgeInsets.all(5),
+                            decoration: const BoxDecoration(
+                              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(16), bottomRight: Radius.circular(16)),
+                              color: Color(0xA6ffffff),
+                            ),
+                            child: Column(
+                              children: [
+                                Container(
+                                  margin: const EdgeInsets.symmetric(vertical: 3),
+                                  child: Text(shrines[index].name!, style: const TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16
+                                    )
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      margin: const EdgeInsets.only(right: 5),
+                                      child: Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.location_pin,
+                                            size: 14,
+                                          ),
+                                          Text(shrines[index].distance!, style: const TextStyle(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 12
+                                            )
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      margin: const EdgeInsets.only(left: 5),
+                                      child: Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.directions_walk,
+                                            size: 14,
+                                          ),
+                                          Text(shrines[index].duration!, style: const TextStyle(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 12
+                                            )
+                                          )
+                                        ],
+                                      )
+                                    )
+                                  ],
+                                )
+                              ],
+                            )
+                          ),
+                        )
+                      ],
                     )
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      FractionallySizedBox(
-                        widthFactor: 1.0,
-                        child: Container(
-                          padding: const EdgeInsets.all(5),
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(16), bottomRight: Radius.circular(16)),
-                            color: Color(0xA6ffffff),
-                          ),
-                          child: Column(
-                            children: [
-                              Container(
-                                margin: const EdgeInsets.symmetric(vertical: 3),
-                                child: Text(shrines[index].name!, style: const TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 16
-                                  )
-                                ),
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    margin: const EdgeInsets.only(right: 5),
-                                    child: Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.location_pin,
-                                          size: 14,
-                                        ),
-                                        Text(shrines[index].distance!, style: const TextStyle(
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 12
-                                          )
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: const EdgeInsets.only(left: 5),
-                                    child: Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.directions_walk,
-                                          size: 14,
-                                        ),
-                                        Text(shrines[index].duration!, style: const TextStyle(
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 12
-                                          )
-                                        )
-                                      ],
-                                    )
-                                  )
-                                ],
-                              )
-                            ],
-                          )
-                        ),
-                      )
-                    ],
-                  )
                 )
               );
             }
