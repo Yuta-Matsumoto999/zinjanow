@@ -18,7 +18,6 @@ class ShrineFactoryImpl implements ShrineFactory {
     List<Photo>? photos,
     double? lat,
     double? lng,
-    String? mapUrl,
     num? rating
   }) {
     return Shrine(
@@ -27,7 +26,6 @@ class ShrineFactoryImpl implements ShrineFactory {
       photos: photos,
       lat: lat,
       lng: lng,
-      mapUrl: mapUrl,
       rating: rating
     );
   }
@@ -40,7 +38,6 @@ class ShrineFactoryImpl implements ShrineFactory {
       photos: _shrinePhotoFactory.createFromModel(shrineResponseModel.photos),
       lat: shrineResponseModel.lat,
       lng: shrineResponseModel.lng,
-      mapUrl: shrineResponseModel.mapUrl,
       rating: shrineResponseModel.rating
     );
   }

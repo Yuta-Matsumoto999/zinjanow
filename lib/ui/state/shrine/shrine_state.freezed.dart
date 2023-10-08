@@ -21,7 +21,6 @@ mixin _$ShrineState {
   List<Photo>? get photos => throw _privateConstructorUsedError;
   double? get lat => throw _privateConstructorUsedError;
   double? get lng => throw _privateConstructorUsedError;
-  String? get mapUrl => throw _privateConstructorUsedError;
   String? get distance => throw _privateConstructorUsedError;
   String? get duration => throw _privateConstructorUsedError;
   num? get rating => throw _privateConstructorUsedError;
@@ -43,7 +42,6 @@ abstract class $ShrineStateCopyWith<$Res> {
       List<Photo>? photos,
       double? lat,
       double? lng,
-      String? mapUrl,
       String? distance,
       String? duration,
       num? rating});
@@ -67,7 +65,6 @@ class _$ShrineStateCopyWithImpl<$Res, $Val extends ShrineState>
     Object? photos = freezed,
     Object? lat = freezed,
     Object? lng = freezed,
-    Object? mapUrl = freezed,
     Object? distance = freezed,
     Object? duration = freezed,
     Object? rating = freezed,
@@ -93,10 +90,6 @@ class _$ShrineStateCopyWithImpl<$Res, $Val extends ShrineState>
           ? _value.lng
           : lng // ignore: cast_nullable_to_non_nullable
               as double?,
-      mapUrl: freezed == mapUrl
-          ? _value.mapUrl
-          : mapUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
       distance: freezed == distance
           ? _value.distance
           : distance // ignore: cast_nullable_to_non_nullable
@@ -127,7 +120,6 @@ abstract class _$$_ShrineStateCopyWith<$Res>
       List<Photo>? photos,
       double? lat,
       double? lng,
-      String? mapUrl,
       String? distance,
       String? duration,
       num? rating});
@@ -149,7 +141,6 @@ class __$$_ShrineStateCopyWithImpl<$Res>
     Object? photos = freezed,
     Object? lat = freezed,
     Object? lng = freezed,
-    Object? mapUrl = freezed,
     Object? distance = freezed,
     Object? duration = freezed,
     Object? rating = freezed,
@@ -175,10 +166,6 @@ class __$$_ShrineStateCopyWithImpl<$Res>
           ? _value.lng
           : lng // ignore: cast_nullable_to_non_nullable
               as double?,
-      mapUrl: freezed == mapUrl
-          ? _value.mapUrl
-          : mapUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
       distance: freezed == distance
           ? _value.distance
           : distance // ignore: cast_nullable_to_non_nullable
@@ -204,7 +191,6 @@ class _$_ShrineState implements _ShrineState {
       final List<Photo>? photos,
       this.lat,
       this.lng,
-      this.mapUrl,
       this.distance,
       this.duration,
       this.rating})
@@ -229,8 +215,6 @@ class _$_ShrineState implements _ShrineState {
   @override
   final double? lng;
   @override
-  final String? mapUrl;
-  @override
   final String? distance;
   @override
   final String? duration;
@@ -239,7 +223,7 @@ class _$_ShrineState implements _ShrineState {
 
   @override
   String toString() {
-    return 'ShrineState(id: $id, name: $name, photos: $photos, lat: $lat, lng: $lng, mapUrl: $mapUrl, distance: $distance, duration: $duration, rating: $rating)';
+    return 'ShrineState(id: $id, name: $name, photos: $photos, lat: $lat, lng: $lng, distance: $distance, duration: $duration, rating: $rating)';
   }
 
   @override
@@ -252,7 +236,6 @@ class _$_ShrineState implements _ShrineState {
             const DeepCollectionEquality().equals(other._photos, _photos) &&
             (identical(other.lat, lat) || other.lat == lat) &&
             (identical(other.lng, lng) || other.lng == lng) &&
-            (identical(other.mapUrl, mapUrl) || other.mapUrl == mapUrl) &&
             (identical(other.distance, distance) ||
                 other.distance == distance) &&
             (identical(other.duration, duration) ||
@@ -268,7 +251,6 @@ class _$_ShrineState implements _ShrineState {
       const DeepCollectionEquality().hash(_photos),
       lat,
       lng,
-      mapUrl,
       distance,
       duration,
       rating);
@@ -287,7 +269,6 @@ abstract class _ShrineState implements ShrineState {
       final List<Photo>? photos,
       final double? lat,
       final double? lng,
-      final String? mapUrl,
       final String? distance,
       final String? duration,
       final num? rating}) = _$_ShrineState;
@@ -302,8 +283,6 @@ abstract class _ShrineState implements ShrineState {
   double? get lat;
   @override
   double? get lng;
-  @override
-  String? get mapUrl;
   @override
   String? get distance;
   @override

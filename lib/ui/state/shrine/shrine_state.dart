@@ -2,7 +2,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:zinjanow_app/domain/entity/shrine/shrine.dart';
 import 'package:zinjanow_app/domain/value/Photo.dart';
-import 'package:zinjanow_app/domain/value/review.dart';
 
 part 'shrine_state.freezed.dart';
 
@@ -14,7 +13,6 @@ class ShrineState with _$ShrineState {
     List<Photo>? photos,
     double? lat,
     double? lng,
-    String? mapUrl,
     String? distance,
     String? duration,
     num? rating
@@ -27,7 +25,6 @@ class ShrineState with _$ShrineState {
       photos: shrine.photos,
       lat: shrine.lat,
       lng: shrine.lng,
-      mapUrl: shrine.mapUrl,
       distance: shrine.distance,
       duration: shrine.duration,
       rating: shrine.rating
