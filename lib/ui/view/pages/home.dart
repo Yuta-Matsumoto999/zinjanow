@@ -64,16 +64,15 @@ class HomeState extends ConsumerState<Home> {
     return Scaffold(
       backgroundColor: const Color(CustomColor.mainBackground),
       body: Stack(
-        // alignment: AlignmentDirectional.center,
         children: [
           const Header(),
           Container(
-            margin: EdgeInsets.only(top: 150),
+            margin: const EdgeInsets.only(top: 140),
             width: size.width,
             height: size.height * 100,
             decoration: BoxDecoration(
               color: const Color(CustomColor.mainBackground),
-              borderRadius: BorderRadius.circular(16)
+              borderRadius: BorderRadius.circular(20)
             ),
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: RefreshIndicator(

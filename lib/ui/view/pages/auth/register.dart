@@ -165,18 +165,7 @@ class RegisterState extends ConsumerState<Register> {
       });
     });
   }
-
-  void _googleAuthenticate() {
-    // ここにGoogle login の処理
-
-    // 成功したら -> _setButtonLoading("success");
-      // Navigator.push(
-      //   context, 
-      //   MaterialPageRoute(builder: (context) => const Home())
-      // );
-    // 失敗したら -> _setButtonLoading("failed");
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     return Layout(
