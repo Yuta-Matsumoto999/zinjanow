@@ -4,8 +4,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:zinjanow_app/infrastructure/datasource/shrine/google_shrine_datasource.dart';
 import 'package:zinjanow_app/infrastructure/model/shrine/current_location_response_model.dart';
 import 'package:zinjanow_app/infrastructure/model/shrine/shirine_distance_response_model.dart';
+import 'package:zinjanow_app/infrastructure/model/shrine/shrine_detail_model.dart';
 import 'package:zinjanow_app/infrastructure/model/shrine/shrine_model.dart';
-import 'package:zinjanow_app/infrastructure/model/shrine/shrine_response_model.dart';
 
 class GoogleShrineDatasourceImpl implements GoogleShrineDatasource {
   final apiKey = dotenv.get("GOOGLE_MAP_API_KEY");
@@ -73,17 +73,28 @@ class GoogleShrineDatasourceImpl implements GoogleShrineDatasource {
   }
 
   @override
-  Future<ShrineResponseModel> getShrineDetail(String placeId) async {
+  Future<ShrineDetailModel> getShrineDetail(String placeId) async {
     try {
       final res = await dio.get(
         "https://maps.googleapis.com/maps/api/place/details/json",
         queryParameters: {
           "place_id": placeId,
+          "language": "ja",
+          // "fields": [
+          //   "place_id",
+          //   "name",
+          //   "formatted_address",
+          //   "geometry",
+          //   "photos",
+          //   "reviews",
+          //   "url",
+          //   "user_ratings_total"
+          // ],
           "key": apiKey
         }
       );
-
-      return ShrineResponseModel.fromJson(res.data);
+      
+      return ShrineDetailModel.fromJson(res.data["result"]);
     } catch (err) {
       throw Exception();
     }
