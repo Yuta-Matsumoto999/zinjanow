@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:zinjanow_app/ui/notify/shrine/shrine_detail_notifier.dart';
 import 'package:zinjanow_app/ui/notify/shrine/shrine_notifier.dart';
 import 'package:zinjanow_app/ui/view/pages/shrine_detail.dart';
 
@@ -34,9 +35,10 @@ class CurrentShrineState extends ConsumerState<CurrentShrine> {
               return SizedBox(
                 child: GestureDetector(
                   onTap: () {
+                    ref.watch(placeIdProvider.notifier).state = shrines[index].id!;
                     Navigator.push(
                       context, 
-                      MaterialPageRoute(builder: (context) => const ShrineDetail())
+                      MaterialPageRoute(builder: (context) => ShrineDetail(name: shrines[index].name!))
                     );
                   },
                   child: Container(
