@@ -81,7 +81,7 @@ class HomeState extends ConsumerState<Home> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const CategoryTitle(titleText: "Shrines"),
+                    const CategoryTitle(titleText: "SHRINES"),
                     const CurrentShrine(),
                     RoundedButton(
                       title: "Logout", 
