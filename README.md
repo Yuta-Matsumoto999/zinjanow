@@ -43,6 +43,15 @@ https://pub.dev/packages/geolocator<br />
 <b>dio 5.3.2</b><br />
 https://pub.dev/packages/dio<br />
 <br />
+<b>carousel_slider 4.2.1</b><br />
+https://pub.dev/packages/carousel_slider<br />
+<br />
+<b>dotted_line 3.2.2</b><br />
+https://pub.dev/packages/dotted_line<br />
+<br />
+<b>flutter_rating_bar 4.0.1</b><br />
+https://pub.dev/packages/flutter_rating_bar<br />
+<br />
 ※ add here<br />
 <br />
 
