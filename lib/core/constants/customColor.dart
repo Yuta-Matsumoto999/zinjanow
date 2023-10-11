@@ -8,4 +8,5 @@ class CustomColor {
   static const formError = 0xFFf08080;
   static const snackbarError = 0xFFFDE3E1;
   static const snackbarCloseIconColor = 0xFFC3BABA;
+  static const detailHeader = 0x1FFAF9F9;
 }
