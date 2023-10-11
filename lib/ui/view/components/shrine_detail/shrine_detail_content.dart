@@ -1,0 +1,101 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:zinjanow_app/core/constants/customColor.dart';
+import 'package:zinjanow_app/ui/notify/shrine/shrine_detail_notifier.dart';
+import 'package:zinjanow_app/ui/view/components/shrine_detail/img_slider.dart';
+import 'package:zinjanow_app/ui/view/components/shrine_detail/review_list.dart';
+import 'package:zinjanow_app/ui/view/components/shrine_detail/start_bar.dart';
+
+class ShrineDetailContent extends ConsumerWidget {
+  const ShrineDetailContent({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(shrineDetailNotifierProvider);
+    final size = MediaQuery.of(context).size;
+
+    return state.when(
+      data: (shrine) {
+        return Container(
+          margin: const EdgeInsets.only(top: 140),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          width: size.width,
+          height: size.height * 100,
+          decoration: BoxDecoration(
+              color: const Color(CustomColor.mainBackground),
+              borderRadius: BorderRadius.circular(20)
+            ),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(shrine.name!, style: const TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w900
+                        ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          shrine.rating != null ?
+                          Container(
+                            child: Text(shrine.rating.toString(), style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600
+                            ),),
+                          )
+                          : SizedBox(),
+                          shrine.rating != null ?
+                          StartBar(
+                            rating: shrine.rating,
+                          )
+                          : SizedBox()
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                const Divider(
+                  height: 5,
+                  indent: 0,
+                  endIndent: 5,
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 12),
+                  child: const Text("Photos", style: TextStyle(
+                    fontSize: 12
+                  ),),
+                ),
+                ImgSlider(photos: shrine.photos!),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 12),
+                  child: const Text("Reviews", style: TextStyle(
+                    fontSize: 12
+                  ),),
+                ),
+                shrine.reviews != null
+                ?  ReviewList(
+                  reviews: shrine.reviews!,
+                )
+                : Text("レビューはありません。")
+              ],
+            ),
+          )
+        );
+      },
+      error: (_, error) {
+        return const Text("error!!!");
+      }, 
+      loading: () {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      }
+    );
+  }
+}
