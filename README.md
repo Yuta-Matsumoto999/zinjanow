@@ -3,13 +3,58 @@
 ## Overview
 
 I wanted to create something for learning, so I created this application in flutter. It is said that there are about three times as many Shinto shrines and Buddhist temples in Japan as there are convenience stores. This application uses Google Map API to search for shrines within a certain distance from your current location. The searched shrines can be registered as favorites, and if you visit the shrine, you can record your visit (check-in) to the shrine. <br />
-<br />
 
 ## Technologies and Services Used
 
 ・flutter <br />
 ・supabase <br />
 ・Google Map API<br />
+
+## Architecture
+![Alt text](zinjanow_structure.png)
+
+## Directory
+
+```
+lib/
+├── core/
+│   ├── exception/
+│   ├── extention/
+│   └── utils/
+├── domain/
+│   ├── entity/
+│   ├── factory/
+│   ├── repository/
+│   ├── usecase/
+│   └── value/
+├── application/
+│   └── usecase/
+├── infrastructure/
+│   ├── datasource/
+│   ├── model/
+│   ├── factory/
+│   └── repository/
+├── ui/
+│   ├── notify
+│   ├── state
+│   └── view/
+│       ├── components
+│       ├── pages
+│       └── validation
+└── main.dart
+```
+## List of Functions
+
+・Login <br />
+　　・Email and Password <br />
+　　・Google Account <br />
+・Sign up <br />
+　　・Email and Password <br />
+・Search shrines from your location <br />
+・Route indication to the shrine <br />
+・Add shrine to favorites  <br />
+・Add Visit History (check-in) <br />
+・Follow each other account <br />
 <br />
 
 ## Utilized Libraries
@@ -52,19 +97,8 @@ https://pub.dev/packages/dotted_line<br />
 <b>flutter_rating_bar 4.0.1</b><br />
 https://pub.dev/packages/flutter_rating_bar<br />
 <br />
-※ add here<br />
+<b>google_map_flutter 2.5.0</b><br />
+https://pub.dev/packages/google_maps_flutter<br />
 <br />
-
-## List of Functions
-
-・Login <br />
-　　・Email and Password <br />
-　　・Google Account <br />
-・Sign up <br />
-　　・Email and Password <br />
-・Search shrines from your location <br />
-・Route indication to the shrine <br />
-・Add shrine to favorites  <br />
-・Add Visit History (check-in) <br />
-・Follow each other account <br />
+※ add here<br />
 <br />
