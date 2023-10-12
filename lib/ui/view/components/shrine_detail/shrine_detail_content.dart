@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
 import 'package:zinjanow_app/ui/notify/shrine/shrine_detail_notifier.dart';
+import 'package:zinjanow_app/ui/view/components/shrine_detail/google_map_view.dart';
+import 'package:zinjanow_app/ui/view/components/shrine_detail/guidance.dart';
 import 'package:zinjanow_app/ui/view/components/shrine_detail/img_slider.dart';
 import 'package:zinjanow_app/ui/view/components/shrine_detail/review_list.dart';
 import 'package:zinjanow_app/ui/view/components/shrine_detail/start_bar.dart';
@@ -18,7 +20,7 @@ class ShrineDetailContent extends ConsumerWidget {
       data: (shrine) {
         return Container(
           margin: const EdgeInsets.only(top: 140),
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.all(20),
           width: size.width,
           height: size.height * 100,
           decoration: BoxDecoration(
@@ -30,7 +32,7 @@ class ShrineDetailContent extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  margin: const EdgeInsets.symmetric(vertical: 20),
+                  margin: const EdgeInsets.only(bottom: 15),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -49,12 +51,12 @@ class ShrineDetailContent extends ConsumerWidget {
                               fontWeight: FontWeight.w600
                             ),),
                           )
-                          : SizedBox(),
+                          : const SizedBox(),
                           shrine.rating != null ?
                           StartBar(
                             rating: shrine.rating,
                           )
-                          : SizedBox()
+                          : const SizedBox()
                         ],
                       ),
                     ],
@@ -65,24 +67,39 @@ class ShrineDetailContent extends ConsumerWidget {
                   indent: 0,
                   endIndent: 5,
                 ),
+                GoogleMapView(
+                  lat: shrine.lat!,
+                  lng: shrine.lng!,
+                ),
+                Guidance(
+                  name: shrine.name!,
+                  address: shrine.address!,
+                  distance: shrine.distance!,
+                  duration: shrine.duration!,
+                ),
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 12),
                   child: const Text("Photos", style: TextStyle(
-                    fontSize: 12
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600
                   ),),
                 ),
                 ImgSlider(photos: shrine.photos!),
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 12),
                   child: const Text("Reviews", style: TextStyle(
-                    fontSize: 12
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600
                   ),),
                 ),
                 shrine.reviews != null
                 ?  ReviewList(
                   reviews: shrine.reviews!,
                 )
-                : Text("レビューはありません。")
+                : Container(
+                  margin: const EdgeInsets.only(bottom: 20),
+                  child: const Text("レビューはありません。"),
+                ),
               ],
             ),
           )
