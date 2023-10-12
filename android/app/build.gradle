@@ -6,6 +6,15 @@ if (localPropertiesFile.exists()) {
     }
 }
 
+// environment variable file
+def secretProperties = new Properties()
+def secretPropertiesFile = rootProject.file('secret.properties')
+if (secretPropertiesFile.exists()) {
+    secretPropertiesFile.withReader('UTF-8') { reader ->
+        secretProperties.load(reader)
+    }
+}
+
 def flutterRoot = localProperties.getProperty('flutter.sdk')
 if (flutterRoot == null) {
     throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
@@ -48,12 +57,13 @@ android {
         applicationId "com.example.zinjanow_app"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion 23
+        minSdkVersion 20
         targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         manifestPlaceholders += [
-                'appAuthRedirectScheme': "com.googleusercontent.apps.345119062904-s5sha6j9fvopg74qnm44qkudqtldssj5"
+            'appAuthRedirectScheme': "com.googleusercontent.apps.345119062904-s5sha6j9fvopg74qnm44qkudqtldssj5",
+            googleMapApiKey: secretProperties.getProperty('googleMap.apiKey'),
         ]
     }
 
