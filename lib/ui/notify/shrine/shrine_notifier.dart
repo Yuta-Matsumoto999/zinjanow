@@ -24,19 +24,9 @@ class ShrineNotifier extends StateNotifier<AsyncValue<List<ShrineState>>> {
 
   Future<void> fetch() async {
     final currentLocation = ref.read(currentLocationProvider);
-    currentLocation.when(
-      data: (data) async {
-        state = await AsyncValue.guard(() async {
-          final res = await _getShrineUsecase.excute(data.lat, data.lng);
-          return res.map((e) => ShrineState.fromEntity(e)).toList();
-        });
-      }, 
-      error: (_, error) {
-        throw Exception();
-      }, 
-      loading: () {
-        // 
-      }
-    );
+    state = await AsyncValue.guard(() async {
+      final res = await _getShrineUsecase.excute(currentLocation.value!.lat, currentLocation.value!.lng);
+      return res.map((e) => ShrineState.fromEntity(e)).toList();
+    });
   }
 }
