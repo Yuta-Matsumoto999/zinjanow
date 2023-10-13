@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:zinjanow_app/infrastructure/datasource/shrine/google_shrine_datasource.dart';
 import 'package:zinjanow_app/infrastructure/model/shrine/current_location_response_model.dart';
@@ -40,9 +41,17 @@ class GoogleShrineDatasourceImpl implements GoogleShrineDatasource {
       final latitude = currentPosition.latitude;
       final longitude = currentPosition.longitude;
 
+      // 現在地の住所を取得
+      List<Placemark> placemarks = await placemarkFromCoordinates(latitude, longitude);
+
+      final prefecture = placemarks[0].administrativeArea;
+      final city = placemarks[0].locality;
+      final name = placemarks[0].name;
+
       final location = {
         "lat": latitude,
-        "lng": longitude
+        "lng": longitude,
+        "address": "$prefecture$city$name"
       };
 
       return CurrentLocationResponseModel.fromJson(location);

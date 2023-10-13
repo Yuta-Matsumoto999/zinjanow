@@ -4,10 +4,11 @@ import 'package:zinjanow_app/infrastructure/model/shrine/current_location_respon
 
 class CurrentLocationFactoryImpl implements CurrentLocationFactory {
   @override
-  CurrentLocation create({required double lat, required double lng}) {
+  CurrentLocation create({required double lat, required double lng, required String address}) {
     return CurrentLocation(
       lat: lat, 
-      lng: lng
+      lng: lng,
+      address: address
     );
   }
 
@@ -15,7 +16,8 @@ class CurrentLocationFactoryImpl implements CurrentLocationFactory {
   CurrentLocation createFromModel(CurrentLocationResponseModel currentLocationResponseModel) {
     return CurrentLocation(
       lat: currentLocationResponseModel.lat, 
-      lng: currentLocationResponseModel.lng
+      lng: currentLocationResponseModel.lng,
+      address: currentLocationResponseModel.address
     );
   }
 }

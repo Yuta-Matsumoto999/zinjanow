@@ -10,7 +10,8 @@ final currentLocationFactoryProvider = Provider<CurrentLocationFactory>(
 abstract class CurrentLocationFactory {
   CurrentLocation create({
     required double lat,
-    required double lng
+    required double lng,
+    required String address
   });
 
   CurrentLocation createFromModel(CurrentLocationResponseModel currentLocationResponseModel);

@@ -4,7 +4,7 @@ import 'package:zinjanow_app/domain/factory/shrine/current_location_factory.dart
 import 'package:zinjanow_app/infrastructure/datasource/shrine/google_shrine_datasource.dart';
 import 'package:zinjanow_app/infrastructure/repository/shrine/get_current_location_repository_impl.dart';
 
-final getCurrentLocationProvider = Provider<GetCurrentLocationRepository>(
+final getCurrentLocationRepositoryProvider = Provider<GetCurrentLocationRepository>(
   (ref) => GetCurrentLocationRepositoryImpl(
     googleShrineDatasource: ref.watch(googleShrineDatasourceProvider), 
     currentLocationFactory: ref.watch(currentLocationFactoryProvider)
