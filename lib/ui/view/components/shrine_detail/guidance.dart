@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:dotted_line/dotted_line.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:zinjanow_app/ui/notify/shrine/current_location_notifier.dart';
 
-class Guidance extends StatelessWidget {
+class Guidance extends ConsumerWidget {
   final String? name;
   final String? address;
   final String? distance;
@@ -15,8 +17,10 @@ class Guidance extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     Size size = MediaQuery.of(context).size;
+    final currentLocation = ref.read(currentLocationProvider);
+
     return Container(
       margin: const EdgeInsets.only(bottom: 20),
       padding: const EdgeInsets.all(16),
@@ -43,7 +47,7 @@ class Guidance extends StatelessWidget {
                       fontSize: 14,
                       fontWeight: FontWeight.w600
                     ),),
-                    Text(address!, style: const TextStyle(
+                    Text(currentLocation.value!.address, style: const TextStyle(
                       fontSize: 12
                     ),)
                   ],
