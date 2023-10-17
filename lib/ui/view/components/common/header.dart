@@ -1,62 +1,85 @@
 import 'package:flutter/material.dart';
-import 'package:zinjanow_app/core/constants/customColor.dart';
-import 'package:zinjanow_app/ui/view/components/common/header_background.dart';
-import 'package:zinjanow_app/ui/view/components/home/user_name.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:zinjanow_app/ui/notify/user/user_notifier.dart';
+import 'package:zinjanow_app/ui/view/components/common/haeder_text.dart';
+import 'package:zinjanow_app/ui/view/components/common/header_icon.dart';
 
-class Header extends StatelessWidget {
-  const Header({super.key});
+class Header extends ConsumerWidget {
+  final String? backgroundImage;
+  final int color;
+  final double height;
+  final bool visibleText;
+  final bool visibleIcon;
+
+  const Header({
+    Key? key,
+    this.backgroundImage,
+    required this.color,
+    required this.height,
+    required this.visibleText,
+    required this.visibleIcon
+  }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return HeaderBackground(
-      child: Container(
-        height: 160,
-        padding: const EdgeInsets.all(20),
-        decoration: const BoxDecoration(
-          color: Color(CustomColor.mainTheme)
-        ),
-        child: Container(
-          margin: const EdgeInsets.only(top: 45),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
+  Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.watch(userNotifierProvider);
+
+    return user.when(
+      data: (userState) {
+        return Container(
+          height: height,
+          decoration: backgroundImage != null ?
+          BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(backgroundImage.toString()),
+              fit: BoxFit.cover
+            )
+          ) :
+          const BoxDecoration(),
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Color(color),
+            ),
+            child: Container(
+              margin: const EdgeInsets.only(top: 45),
+              child: Column(
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
                         margin: const EdgeInsets.only(left: 10),
-                        child: const Column(
+                        child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Hello", style: TextStyle(
-                                color: Color(0xCCFDFDFE),
-                                fontSize: 18,
-                                fontWeight: FontWeight.w800
-                              )
-                            ),
-                            UserName()
+                            visibleText
+                            ? HeaderText(name: userState.name)
+                            : const SizedBox()
                           ],
                         ),
-                      )
+                      ),
+                      visibleIcon
+                      ? HeaderIcon(iconUrl: userState.avatar,)
+                      : const SizedBox()
                     ],
                   ),
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: const Color(0x66efefef),
-                      borderRadius: BorderRadius.circular(10)
-                    ),
-                    child: const Icon(Icons.notifications, color: Colors.white,size: 21,),
-                  )
                 ],
-              )
-            ],
+              ),
+            )
           ),
-        )
-      ),
+        );
+      }, 
+      error: (_, error) {
+        return const Text("error!!!");
+      }, 
+      loading: () {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      }
     );
   }
 }
