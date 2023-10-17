@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
 import 'package:zinjanow_app/ui/notify/auth/logout_notifier.dart';
+import 'package:zinjanow_app/ui/notify/shrine/current_location_notifier.dart';
 import 'package:zinjanow_app/ui/notify/shrine/shrine_notifier.dart';
 import 'package:zinjanow_app/ui/view/components/auth/button/rounded_button.dart';
 import 'package:zinjanow_app/ui/view/components/category_title.dart';
@@ -26,6 +27,7 @@ class MainPageState extends ConsumerState<MainPage> {
   }
 
   Future<void> _onRefreshShrineState() async {
+    await ref.read(currentLocationProvider.notifier).fetch();
     await ref.read(shrineNotifierProvider.notifier).fetch();
   }
 
@@ -59,7 +61,6 @@ class MainPageState extends ConsumerState<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    ref.watch(shrineNotifierProvider);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(
