@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:zinjanow_app/core/constants/customColor.dart';
-import 'package:zinjanow_app/ui/notify/auth/logout_notifier.dart';
-import 'package:zinjanow_app/ui/notify/shrine/shrine_notifier.dart';
-import 'package:zinjanow_app/ui/view/components/auth/button/rounded_button.dart';
-import 'package:zinjanow_app/ui/view/components/category_title.dart';
-import 'package:zinjanow_app/ui/view/components/common/header.dart';
-import 'package:zinjanow_app/ui/view/components/home/current_shrines.dart';
-import 'package:zinjanow_app/ui/view/pages/welcome.dart';
+import 'package:zinjanow_app/ui/notify/user/user_notifier.dart';
+import 'package:zinjanow_app/ui/view/pages/main_page.dart';
+import 'package:zinjanow_app/ui/view/pages/my_page.dart';
 
 class Home extends ConsumerStatefulWidget {
   const Home({super.key});
@@ -17,88 +12,34 @@ class Home extends ConsumerStatefulWidget {
 }
 
 class HomeState extends ConsumerState<Home> {
-  String isLoading = "idel";
+  static const _pages = [
+    MainPage(),
+    MyPage()
+  ];
 
-  void _setIsLoading(String value) {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
     setState(() {
-      isLoading = value;
+      _selectedIndex = index;
     });
   }
 
-  Future<void> _onRefreshShrineState() async {
-    await ref.read(shrineNotifierProvider.notifier).fetch();
-  }
-
-  void _logout() async {
-    _setIsLoading("loading");
-
-    await ref.read(logoutNotifierProvider.notifier).logout();
-    final logoutProvider = ref.watch(logoutNotifierProvider);
-
-    logoutProvider.when(
-      data: (authState) {
-      if(authState.isAuth == false) {
-        _setIsLoading("success");
-        Navigator.pushAndRemoveUntil(
-          context, 
-          MaterialPageRoute(builder: (context) => const Welcome()), 
-          (route) => false
-        );
-      } else {
-        _setIsLoading("idel");
-      }
-      },
-      error: (error,_) {
-        //
-      },
-      loading: () {
-        _setIsLoading("loading");
-      }
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
-    ref.watch(shrineNotifierProvider);
-    Size size = MediaQuery.of(context).size;
+    ref.watch(userNotifierProvider.notifier).fetch();
     return Scaffold(
-      backgroundColor: const Color(CustomColor.mainBackground),
-      body: Stack(
-        children: [
-          const Header(),
-          Container(
-            margin: const EdgeInsets.only(top: 140),
-            width: size.width,
-            height: size.height * 100,
-            decoration: BoxDecoration(
-              color: const Color(CustomColor.mainBackground),
-              borderRadius: BorderRadius.circular(20)
-            ),
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: RefreshIndicator(
-              onRefresh: _onRefreshShrineState,
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const CategoryTitle(titleText: "SHRINES"),
-                    const CurrentShrine(),
-                    RoundedButton(
-                      title: "Logout", 
-                      backGroundColor: CustomColor.buttonBlack, 
-                      textColor: CustomColor.buttonWhite, 
-                      marginTop: 30,
-                      marginBottom: 30, 
-                      isActive: true, 
-                      isLoading: isLoading,
-                      onPressedCallBack: _logout,
-                    )
-                  ],
-                ),
-              ),
-            )
-          )
+      body: _pages[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.grey.shade200,
+        currentIndex: _selectedIndex,
+        onTap:_onItemTapped,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.account_circle), label: "Profile"),
         ],
+        type: BottomNavigationBarType.fixed,
       )
     );
   }
