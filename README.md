@@ -100,8 +100,11 @@ https://pub.dev/packages/flutter_rating_bar<br />
 <b>google_map_flutter 2.5.0</b><br />
 https://pub.dev/packages/google_maps_flutter<br />
 <br />
-<b>geocoding 2.1.1</b<br />
+<b>geocoding 2.1.1</b><br />
 https://pub.dev/packages/geocoding<br />
+<br />
+<b>loading_animation_widget 1.2.0+4</b><br />
+https://pub.dev/packages/loading_animation_widget<br />
 <br />
 ※ add here<br />
 <br />
