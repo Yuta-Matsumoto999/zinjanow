@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zinjanow_app/ui/notify/shrine/shrine_detail_notifier.dart';
 import 'package:zinjanow_app/ui/notify/shrine/shrine_notifier.dart';
+import 'package:zinjanow_app/ui/view/components/common/loading_dots_wave.dart';
 import 'package:zinjanow_app/ui/view/pages/shrine_detail.dart';
 
 class CurrentShrine extends ConsumerStatefulWidget {
@@ -12,9 +13,11 @@ class CurrentShrine extends ConsumerStatefulWidget {
 }
 
 class CurrentShrineState extends ConsumerState<CurrentShrine> {
+
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(shrineNotifierProvider);
+    final size = MediaQuery.of(context).size;
 
     return state.when(
       data: (shrines) {
@@ -124,8 +127,10 @@ class CurrentShrineState extends ConsumerState<CurrentShrine> {
         return const Text("failed: dont't get shrines");
       }, 
       loading: () {
-        return const Center(
-          child: CircularProgressIndicator(),
+        return Container(
+          width: size.width,
+          height: size.height * 0.1,
+          child: const LoadingDotsWave(size: 50)
         );
       }
     );
