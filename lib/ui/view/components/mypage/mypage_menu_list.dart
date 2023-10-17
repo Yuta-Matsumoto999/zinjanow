@@ -4,46 +4,17 @@ import 'package:zinjanow_app/core/constants/customColor.dart';
 import 'package:zinjanow_app/ui/view/components/mypage/mypage_menu_item.dart';
 
 class MypageMenuList extends StatelessWidget {
-  const MypageMenuList({super.key});
-
-  static const items = [
-    {
-      "title": "Edit Profile",
-      "icon": "images/1077063.png",
-      "iconColor": 0xFFEA4C89,
-      "iconBackgroundColor": 0xFFFBDBE7
-    },
-    {
-      "title": "My Stats",
-      "icon": "images/4252963.png",
-      "iconColor": 0xFF4BEBAD,
-      "iconBackgroundColor": 0xFFD9FAEE
-    },
-    {
-      "title": "Find Friends",
-      "icon": "images/qrcodescan_120401.png",
-      "iconColor": 0xFF6F6CF5,
-      "iconBackgroundColor": 0xFFDFDEFD
-    },
-    {
-      "title": "Settings",
-      "icon": "images/126472.png",
-      "iconColor": 0xFFF87211,
-      "iconBackgroundColor": 0xFFFEE3CF
-    },
-    {
-      "title": "Help",
-      "icon": "images/545270-200.png",
-      "iconColor": 0xFF1C1C1C,
-      "iconBackgroundColor": 0xFFD1D1D1
-    }
-  ];
+  final List items;
+  const MypageMenuList({
+    Key? key,
+    required this.items
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.only(top: size.height * 0.32),
+      margin: EdgeInsets.only(top: size.height * 0.38),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: const Color(CustomColor.mainBackground),

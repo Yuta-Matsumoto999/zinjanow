@@ -28,18 +28,23 @@ class MypageMenuItem extends StatelessWidget {
               Container(
                 width: 60,
                 height: 60,
-                padding: const EdgeInsets.all(18),
+                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   color: Color(iconBackgroundColor!),
                   borderRadius: BorderRadius.circular(20)
                 ),
-                child: Image.asset(
-                  icon,
-                  color: Color(iconColor!),
+                child: Container(
+                  width: 40,
+                  height: 40,
+                  child: Image.asset(
+                    icon,
+                    color: Color(iconColor!),
+                    fit: BoxFit.cover,
+                  ),
                 )
               ),
               Container(
-                margin: const EdgeInsets.only(left: 12),
+                margin: const EdgeInsets.only(left: 16),
                 child: Text(
                   title,
                   style: const TextStyle(
@@ -50,7 +55,10 @@ class MypageMenuItem extends StatelessWidget {
               )
             ],
           ),
-          const Icon(Icons.navigate_next)
+          const Icon(
+            Icons.navigate_next,
+            size: 24,
+          )
         ]
       ),
     );

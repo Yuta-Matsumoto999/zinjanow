@@ -14,7 +14,7 @@ class MypageIcon extends ConsumerWidget {
       data: (userState) {
         return Container(
           width: size.width,
-          height: size.height * 0.33,
+          height: size.height * 0.4,
           decoration: const BoxDecoration(
             color: Color(0xFFEEECED)
           ),
@@ -27,9 +27,9 @@ class MypageIcon extends ConsumerWidget {
                     border: Border.all(width: 3, color: Colors.white),
                     borderRadius: BorderRadius.circular(50)
                   ),
-                  height: 100,
-                  width: 100,
-                  margin: const EdgeInsets.only(bottom: 20),
+                  height: 110,
+                  width: 110,
+                  margin: const EdgeInsets.only(bottom: 10),
                     child: ClipRRect(
                     borderRadius: BorderRadius.circular(50),
                     child: user.value!.avatar != null ? 
