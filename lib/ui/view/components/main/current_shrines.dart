@@ -120,8 +120,8 @@ class CurrentShrineState extends ConsumerState<CurrentShrine> {
           ),
         );
       }, 
-      error: (_, error) {
-        return const Text("error!!!");
+      error: (hoge, error) {
+        return const Text("failed: dont't get shrines");
       }, 
       loading: () {
         return const Center(
