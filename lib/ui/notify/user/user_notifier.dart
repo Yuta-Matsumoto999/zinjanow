@@ -14,11 +14,9 @@ class UserNotifier extends StateNotifier<AsyncValue<UserState>> {
   UserNotifier({
     required GetUserUsecase getUserUsecase
   }) : _getUserUsecase = getUserUsecase,
-  super(const AsyncLoading()) {
-    _fetch();
-  }
+  super(const AsyncLoading());
 
-  Future<void> _fetch() async {
+  Future<void> fetch() async {
     state = await AsyncValue.guard(() async {
       final res = await _getUserUsecase.excute();
       return UserState.fromEntity(res);
