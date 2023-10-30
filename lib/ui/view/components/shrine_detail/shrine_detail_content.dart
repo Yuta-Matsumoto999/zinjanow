@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zinjanow_app/ui/notify/shrine/shrine_detail_notifier.dart';
+import 'package:zinjanow_app/ui/view/components/common/loading_dots_wave.dart';
 import 'package:zinjanow_app/ui/view/components/shrine_detail/google_map_view.dart';
 import 'package:zinjanow_app/ui/view/components/shrine_detail/guidance.dart';
 import 'package:zinjanow_app/ui/view/components/shrine_detail/img_slider.dart';
@@ -12,6 +13,7 @@ class ShrineDetailContent extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final size = MediaQuery.of(context).size;
     final state = ref.watch(shrineDetailNotifierProvider);
 
     return state.when(
@@ -95,8 +97,10 @@ class ShrineDetailContent extends ConsumerWidget {
         return const Text("error!!!");
       }, 
       loading: () {
-        return const Center(
-          child: CircularProgressIndicator(),
+        return Container(
+          width: size.width,
+          height: size.height * 0.1,
+          child: const LoadingDotsWave(size: 50)
         );
       }
     );

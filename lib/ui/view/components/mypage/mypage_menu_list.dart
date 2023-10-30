@@ -14,7 +14,7 @@ class MypageMenuList extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.only(top: size.height * 0.38),
+      margin: EdgeInsets.only(top: size.height * 0.37),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: const Color(CustomColor.mainBackground),
