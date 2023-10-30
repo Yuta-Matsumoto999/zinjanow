@@ -42,6 +42,10 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+/android/secret.properties
+
+# iOS
+/ios/Runner/Environment.swift
 
 # enviroment variables
 .env
