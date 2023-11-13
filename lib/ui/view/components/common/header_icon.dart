@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:zinjanow_app/ui/view/components/common/user_icon.dart';
+import 'package:zinjanow_app/ui/view/pages/profile.dart';
 
 class HeaderIcon extends StatelessWidget {
   final String? iconUrl;
@@ -9,23 +11,19 @@ class HeaderIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      foregroundDecoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50),
-        border: Border.all(width: 3, color: Colors.white)
-      ),
-      width: 40,
-      height: 40,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(50),
-        child: iconUrl != null ?
-        Image.network(
-          iconUrl.toString(),
-        )
-        : Image.asset(
-          "images/ifn1058.png"
-        )
-      ),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const Profile()),
+        );
+      },
+      child: UserIcon(
+        iconUrl: iconUrl,
+        height: 40, 
+        width: 40, 
+        circular: 50
+      )
     );
   }
 }
