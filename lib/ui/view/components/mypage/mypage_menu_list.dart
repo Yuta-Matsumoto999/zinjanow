@@ -34,11 +34,21 @@ class MypageMenuList extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: items.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return MypageMenuItem(
-                    title: items[index]["title"].toString(),
-                    icon: items[index]["icon"].toString(),
-                    iconColor: toInt(items[index]["iconColor"]),
-                    iconBackgroundColor: toInt(items[index]["iconBackgroundColor"]), 
+                  return GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => items[index]["navigator"])
+                      );
+                    },
+                    child: MypageMenuItem(
+                      title: items[index]["title"].toString(),
+                      icon: items[index]["icon"].toString(),
+                      iconColor: toInt(items[index]["iconColor"]),
+                      iconBackgroundColor: toInt(items[index]["iconBackgroundColor"]),
+                    )
                   );
                 }
               )
