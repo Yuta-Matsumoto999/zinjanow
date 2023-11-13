@@ -3,7 +3,7 @@ import 'package:zinjanow_app/domain/usecase/shrine/get_shrine_usecase.dart';
 import 'package:zinjanow_app/ui/notify/shrine/current_location_notifier.dart';
 import 'package:zinjanow_app/ui/state/shrine/shrine_state.dart';
 
-final shrineNotifierProvider = StateNotifierProvider<ShrineNotifier, AsyncValue<List<ShrineState>>>(
+final shrineNotifierProvider = StateNotifierProvider.autoDispose<ShrineNotifier, AsyncValue<List<ShrineState>>>(
   (ref) => ShrineNotifier(
     getShrineUsecase: ref.watch(getShrineUsecaseProvider),
     ref: ref
@@ -27,10 +27,14 @@ class ShrineNotifier extends StateNotifier<AsyncValue<List<ShrineState>>> {
 
     currentLocation.when(
       data: (currentLocationState) async {
-        state = await AsyncValue.guard(() async {
-          final res = await _getShrineUsecase.excute(currentLocationState.lat, currentLocationState.lng);
-          return res.map((e) => ShrineState.fromEntity(e)).toList();
-        });
+        try {
+          state = await AsyncValue.guard(() async {
+            final res = await _getShrineUsecase.excute(currentLocationState.lat, currentLocationState.lng);
+            return res.map((e) => ShrineState.fromEntity(e)).toList();
+          });
+        } catch (e) {
+          print("failed: dispose widget before update shrineState");
+        }
       },
       error: (message, error) {
         print(message);
