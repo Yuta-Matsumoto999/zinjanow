@@ -27,6 +27,7 @@ class UserIcon extends StatelessWidget {
         child: iconUrl != null ?
         Image.network(
           iconUrl.toString(),
+          fit: BoxFit.cover,
         )
         : Image.asset(
           "images/ifn1058.png"
