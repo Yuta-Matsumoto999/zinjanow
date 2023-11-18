@@ -25,7 +25,6 @@ class HomeState extends ConsumerState<Home> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     ref.watch(userNotifierProvider.notifier).fetch();
@@ -37,7 +36,7 @@ class HomeState extends ConsumerState<Home> {
         onTap:_onItemTapped,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.account_circle), label: "Profile"),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Setting"),
         ],
         type: BottomNavigationBarType.fixed,
       )

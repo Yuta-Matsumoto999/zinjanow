@@ -4,7 +4,7 @@ import 'package:zinjanow_app/core/constants/customColor.dart';
 import 'package:zinjanow_app/ui/notify/auth/logout_notifier.dart';
 import 'package:zinjanow_app/ui/notify/shrine/current_location_notifier.dart';
 import 'package:zinjanow_app/ui/notify/shrine/shrine_notifier.dart';
-import 'package:zinjanow_app/ui/view/components/auth/button/rounded_button.dart';
+import 'package:zinjanow_app/ui/view/components/auth/button/logout_button.dart';
 import 'package:zinjanow_app/ui/view/components/category_title.dart';
 import 'package:zinjanow_app/ui/view/components/common/header.dart';
 import 'package:zinjanow_app/ui/view/components/main/current_shrines.dart';
@@ -41,6 +41,7 @@ class MainPageState extends ConsumerState<MainPage> {
       data: (authState) {
       if(authState.isAuth == false) {
         _setIsLoading("success");
+        ref.read(shrineNotifierProvider.notifier).dispose();
         Navigator.pushAndRemoveUntil(
           context, 
           MaterialPageRoute(builder: (context) => const Welcome()), 
@@ -83,22 +84,13 @@ class MainPageState extends ConsumerState<MainPage> {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: RefreshIndicator(
               onRefresh: _onRefreshShrineState,
-              child: SingleChildScrollView(
+              child: const SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const CategoryTitle(titleText: "SHRINES"),
-                    const CurrentShrine(),
-                    RoundedButton(
-                      title: "Logout", 
-                      backGroundColor: CustomColor.buttonBlack, 
-                      textColor: CustomColor.buttonWhite, 
-                      marginTop: 30,
-                      marginBottom: 30, 
-                      isActive: true, 
-                      isLoading: isLoading,
-                      onPressedCallBack: _logout,
-                    )
+                    CategoryTitle(titleText: "SHRINES"),
+                    CurrentShrine(),
+                    LogoutButton()
                   ],
                 ),
               ),
