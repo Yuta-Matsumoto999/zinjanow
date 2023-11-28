@@ -1,14 +1,16 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-class Follow extends StatelessWidget {
-  const Follow({super.key});
+@RoutePage()
+class QrCodePage extends StatelessWidget {
+  const QrCodePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Follow",
+          "Scan QR Code",
           style: TextStyle(
             fontWeight: FontWeight.w600
           ),

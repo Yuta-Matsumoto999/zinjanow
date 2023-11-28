@@ -107,11 +107,11 @@ class _$ShrineStateCopyWithImpl<$Res, $Val extends ShrineState>
 }
 
 /// @nodoc
-abstract class _$$_ShrineStateCopyWith<$Res>
+abstract class _$$ShrineStateImplCopyWith<$Res>
     implements $ShrineStateCopyWith<$Res> {
-  factory _$$_ShrineStateCopyWith(
-          _$_ShrineState value, $Res Function(_$_ShrineState) then) =
-      __$$_ShrineStateCopyWithImpl<$Res>;
+  factory _$$ShrineStateImplCopyWith(
+          _$ShrineStateImpl value, $Res Function(_$ShrineStateImpl) then) =
+      __$$ShrineStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -126,11 +126,11 @@ abstract class _$$_ShrineStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ShrineStateCopyWithImpl<$Res>
-    extends _$ShrineStateCopyWithImpl<$Res, _$_ShrineState>
-    implements _$$_ShrineStateCopyWith<$Res> {
-  __$$_ShrineStateCopyWithImpl(
-      _$_ShrineState _value, $Res Function(_$_ShrineState) _then)
+class __$$ShrineStateImplCopyWithImpl<$Res>
+    extends _$ShrineStateCopyWithImpl<$Res, _$ShrineStateImpl>
+    implements _$$ShrineStateImplCopyWith<$Res> {
+  __$$ShrineStateImplCopyWithImpl(
+      _$ShrineStateImpl _value, $Res Function(_$ShrineStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -145,7 +145,7 @@ class __$$_ShrineStateCopyWithImpl<$Res>
     Object? duration = freezed,
     Object? rating = freezed,
   }) {
-    return _then(_$_ShrineState(
+    return _then(_$ShrineStateImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -184,8 +184,8 @@ class __$$_ShrineStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ShrineState implements _ShrineState {
-  _$_ShrineState(
+class _$ShrineStateImpl implements _ShrineState {
+  _$ShrineStateImpl(
       {this.id,
       this.name,
       final List<Photo>? photos,
@@ -230,7 +230,7 @@ class _$_ShrineState implements _ShrineState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ShrineState &&
+            other is _$ShrineStateImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality().equals(other._photos, _photos) &&
@@ -258,8 +258,8 @@ class _$_ShrineState implements _ShrineState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ShrineStateCopyWith<_$_ShrineState> get copyWith =>
-      __$$_ShrineStateCopyWithImpl<_$_ShrineState>(this, _$identity);
+  _$$ShrineStateImplCopyWith<_$ShrineStateImpl> get copyWith =>
+      __$$ShrineStateImplCopyWithImpl<_$ShrineStateImpl>(this, _$identity);
 }
 
 abstract class _ShrineState implements ShrineState {
@@ -271,7 +271,7 @@ abstract class _ShrineState implements ShrineState {
       final double? lng,
       final String? distance,
       final String? duration,
-      final num? rating}) = _$_ShrineState;
+      final num? rating}) = _$ShrineStateImpl;
 
   @override
   String? get id;
@@ -291,6 +291,6 @@ abstract class _ShrineState implements ShrineState {
   num? get rating;
   @override
   @JsonKey(ignore: true)
-  _$$_ShrineStateCopyWith<_$_ShrineState> get copyWith =>
+  _$$ShrineStateImplCopyWith<_$ShrineStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

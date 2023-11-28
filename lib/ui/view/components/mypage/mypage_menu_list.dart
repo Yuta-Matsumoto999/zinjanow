@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
@@ -37,11 +38,7 @@ class MypageMenuList extends StatelessWidget {
                   return GestureDetector(
                     behavior: HitTestBehavior.opaque,
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => items[index]["navigator"])
-                      );
+                      context.router.push(items[index]["navigator"]);
                     },
                     child: MypageMenuItem(
                       title: items[index]["title"].toString(),

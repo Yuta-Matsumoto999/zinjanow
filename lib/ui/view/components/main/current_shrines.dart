@@ -1,9 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zinjanow_app/ui/notify/shrine/shrine_detail_notifier.dart';
 import 'package:zinjanow_app/ui/notify/shrine/shrine_notifier.dart';
 import 'package:zinjanow_app/ui/view/components/common/loading_dots_wave.dart';
-import 'package:zinjanow_app/ui/view/pages/shrine_detail.dart';
+import 'package:zinjanow_app/ui/view/root/app_router.dart';
 
 class CurrentShrine extends ConsumerStatefulWidget {
   const CurrentShrine({super.key});
@@ -39,10 +40,7 @@ class CurrentShrineState extends ConsumerState<CurrentShrine> {
                 child: GestureDetector(
                   onTap: () {
                     ref.watch(placeIdProvider.notifier).state = shrines[index].id!;
-                    Navigator.push(
-                      context, 
-                      MaterialPageRoute(builder: (context) => ShrineDetail(name: shrines[index].name!))
-                    );
+                    context.router.push(const ShrineDetailRoute());
                   },
                   child: Container(
                     decoration: BoxDecoration(

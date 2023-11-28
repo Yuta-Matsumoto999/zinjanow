@@ -1,67 +1,38 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
-import 'package:zinjanow_app/ui/notify/auth/logout_notifier.dart';
 import 'package:zinjanow_app/ui/notify/shrine/current_location_notifier.dart';
 import 'package:zinjanow_app/ui/notify/shrine/shrine_notifier.dart';
+import 'package:zinjanow_app/ui/notify/user/user_notifier.dart';
 import 'package:zinjanow_app/ui/view/components/auth/button/logout_button.dart';
 import 'package:zinjanow_app/ui/view/components/category_title.dart';
 import 'package:zinjanow_app/ui/view/components/common/header.dart';
 import 'package:zinjanow_app/ui/view/components/main/current_shrines.dart';
-import 'package:zinjanow_app/ui/view/pages/welcome.dart';
 
-class MainPage extends ConsumerStatefulWidget {
-  const MainPage({super.key});
-
-  @override
-  MainPageState createState() => MainPageState();
+@RoutePage()
+class HomeAutoRouterPage extends AutoRouter {
+  const HomeAutoRouterPage({super.key});
 }
 
-class MainPageState extends ConsumerState<MainPage> {
-  String isLoading = "idel";
+@RoutePage()
+class HomePage extends ConsumerStatefulWidget {
+  const HomePage({super.key});
 
-  void _setIsLoading(String value) {
-    setState(() {
-      isLoading = value;
-    });
-  }
+  @override
+  HomePageState createState() => HomePageState();
+}
+
+class HomePageState extends ConsumerState<HomePage> {
 
   Future<void> _onRefreshShrineState() async {
     await ref.read(currentLocationProvider.notifier).fetch();
     await ref.read(shrineNotifierProvider.notifier).fetch();
   }
 
-  void _logout() async {
-    _setIsLoading("loading");
-
-    await ref.read(logoutNotifierProvider.notifier).logout();
-    final logoutProvider = ref.watch(logoutNotifierProvider);
-
-    logoutProvider.when(
-      data: (authState) {
-      if(authState.isAuth == false) {
-        _setIsLoading("success");
-        ref.read(shrineNotifierProvider.notifier).dispose();
-        Navigator.pushAndRemoveUntil(
-          context, 
-          MaterialPageRoute(builder: (context) => const Welcome()), 
-          (route) => false
-        );
-      } else {
-        _setIsLoading("idel");
-      }
-      },
-      error: (error,_) {
-        //
-      },
-      loading: () {
-        _setIsLoading("loading");
-      }
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
+    ref.watch(userNotifierProvider.notifier).fetch();
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(

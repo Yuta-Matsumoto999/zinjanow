@@ -1,18 +1,20 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-class Help extends StatelessWidget {
-  const Help({super.key});
+@RoutePage()
+class SettingsPage extends StatelessWidget {
+  const SettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Help",
+          "Settings",
           style: TextStyle(
             fontWeight: FontWeight.w600
           ),
-        ),
+        )
       ),
     );
   }

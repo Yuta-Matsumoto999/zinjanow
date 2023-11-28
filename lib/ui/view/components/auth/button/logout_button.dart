@@ -1,9 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
 import 'package:zinjanow_app/ui/notify/auth/logout_notifier.dart';
 import 'package:zinjanow_app/ui/view/components/auth/button/rounded_button.dart';
-import 'package:zinjanow_app/ui/view/pages/welcome.dart';
+import 'package:zinjanow_app/ui/view/root/app_router.dart';
 
 class LogoutButton extends ConsumerStatefulWidget {
   const LogoutButton({super.key});
@@ -31,10 +32,9 @@ class LogoutButtonState extends ConsumerState<LogoutButton> {
       data: (authState) {
       if(authState.isAuth == false) {
         _setIsLoading("success");
-        Navigator.pushAndRemoveUntil(
-          context, 
-          MaterialPageRoute(builder: (context) => const Welcome()), 
-          (route) => false
+        context.router.pushAndPopUntil(
+          const WelcomeRoute(), 
+          predicate: (route) => false
         );
       } else {
         _setIsLoading("idel");

@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
@@ -5,7 +6,7 @@ import 'package:zinjanow_app/ui/notify/auth/google_signup_notifier.dart';
 import 'package:zinjanow_app/ui/view/components/auth/button/idel.dart';
 import 'package:zinjanow_app/ui/view/components/auth/button/loading.dart';
 import 'package:zinjanow_app/ui/view/components/auth/button/success.dart';
-import 'package:zinjanow_app/ui/view/pages/home.dart';
+import 'package:zinjanow_app/ui/view/root/app_router.dart';
 
 class GoogleLoginButton extends ConsumerStatefulWidget {
   const GoogleLoginButton({super.key});
@@ -39,11 +40,7 @@ class GoogleLoginButtonState extends ConsumerState<GoogleLoginButton> {
       data: (state) {
         _setIsLoading("success");
         if(state.isAuth == true) {
-          Navigator.pushAndRemoveUntil(
-            context, 
-            MaterialPageRoute(builder: (context) => const Home()), 
-            (route) => false
-          );
+          context.router.push(const RouterRoute());
         } else {
           _setIsLoading("idel");
 
