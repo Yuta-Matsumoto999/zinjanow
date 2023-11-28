@@ -49,21 +49,12 @@ class Header extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Container(
-                        margin: const EdgeInsets.only(left: 10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            visibleText
-                            ? HeaderText(name: userState.name)
-                            : const SizedBox()
-                          ],
-                        ),
-                      ),
+                      visibleText
+                        ? HeaderText(name: userState.name)
+                        : const SizedBox(),
                       visibleIcon
-                      ? HeaderIcon(iconUrl: userState.avatar,)
-                      : const SizedBox()
+                        ? HeaderIcon(iconUrl: userState.avatar,)
+                        : const SizedBox()
                     ],
                   ),
                 ],

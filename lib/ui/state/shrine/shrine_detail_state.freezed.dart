@@ -135,11 +135,11 @@ class _$ShrineDetailStateCopyWithImpl<$Res, $Val extends ShrineDetailState>
 }
 
 /// @nodoc
-abstract class _$$_ShrineDetailStateCopyWith<$Res>
+abstract class _$$ShrineDetailStateImplCopyWith<$Res>
     implements $ShrineDetailStateCopyWith<$Res> {
-  factory _$$_ShrineDetailStateCopyWith(_$_ShrineDetailState value,
-          $Res Function(_$_ShrineDetailState) then) =
-      __$$_ShrineDetailStateCopyWithImpl<$Res>;
+  factory _$$ShrineDetailStateImplCopyWith(_$ShrineDetailStateImpl value,
+          $Res Function(_$ShrineDetailStateImpl) then) =
+      __$$ShrineDetailStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -158,11 +158,11 @@ abstract class _$$_ShrineDetailStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ShrineDetailStateCopyWithImpl<$Res>
-    extends _$ShrineDetailStateCopyWithImpl<$Res, _$_ShrineDetailState>
-    implements _$$_ShrineDetailStateCopyWith<$Res> {
-  __$$_ShrineDetailStateCopyWithImpl(
-      _$_ShrineDetailState _value, $Res Function(_$_ShrineDetailState) _then)
+class __$$ShrineDetailStateImplCopyWithImpl<$Res>
+    extends _$ShrineDetailStateCopyWithImpl<$Res, _$ShrineDetailStateImpl>
+    implements _$$ShrineDetailStateImplCopyWith<$Res> {
+  __$$ShrineDetailStateImplCopyWithImpl(_$ShrineDetailStateImpl _value,
+      $Res Function(_$ShrineDetailStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -181,7 +181,7 @@ class __$$_ShrineDetailStateCopyWithImpl<$Res>
     Object? distance = freezed,
     Object? duration = freezed,
   }) {
-    return _then(_$_ShrineDetailState(
+    return _then(_$ShrineDetailStateImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -236,8 +236,8 @@ class __$$_ShrineDetailStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ShrineDetailState implements _ShrineDetailState {
-  _$_ShrineDetailState(
+class _$ShrineDetailStateImpl implements _ShrineDetailState {
+  _$ShrineDetailStateImpl(
       {this.id,
       this.name,
       this.address,
@@ -303,7 +303,7 @@ class _$_ShrineDetailState implements _ShrineDetailState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ShrineDetailState &&
+            other is _$ShrineDetailStateImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.address, address) || other.address == address) &&
@@ -340,8 +340,8 @@ class _$_ShrineDetailState implements _ShrineDetailState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ShrineDetailStateCopyWith<_$_ShrineDetailState> get copyWith =>
-      __$$_ShrineDetailStateCopyWithImpl<_$_ShrineDetailState>(
+  _$$ShrineDetailStateImplCopyWith<_$ShrineDetailStateImpl> get copyWith =>
+      __$$ShrineDetailStateImplCopyWithImpl<_$ShrineDetailStateImpl>(
           this, _$identity);
 }
 
@@ -358,7 +358,7 @@ abstract class _ShrineDetailState implements ShrineDetailState {
       final String? mapUrl,
       final int? user_ratings_total,
       final String? distance,
-      final String? duration}) = _$_ShrineDetailState;
+      final String? duration}) = _$ShrineDetailStateImpl;
 
   @override
   String? get id;
@@ -386,6 +386,6 @@ abstract class _ShrineDetailState implements ShrineDetailState {
   String? get duration;
   @override
   @JsonKey(ignore: true)
-  _$$_ShrineDetailStateCopyWith<_$_ShrineDetailState> get copyWith =>
+  _$$ShrineDetailStateImplCopyWith<_$ShrineDetailStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

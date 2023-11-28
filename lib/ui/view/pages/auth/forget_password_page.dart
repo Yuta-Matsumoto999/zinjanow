@@ -1,23 +1,24 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
 import 'package:zinjanow_app/ui/view/components/auth/button/rounded_button.dart';
 import 'package:zinjanow_app/ui/view/components/auth/form/outline_text_form.dart';
 import 'package:zinjanow_app/ui/view/components/auth/layout.dart';
-import 'package:zinjanow_app/ui/view/pages/auth/complete_password_reset_link.dart';
-import 'package:zinjanow_app/ui/view/pages/auth/register.dart';
+import 'package:zinjanow_app/ui/view/root/app_router.dart';
 import 'package:zinjanow_app/ui/view/validation/validator/email_validator.dart';
 import 'package:zinjanow_app/ui/view/validation/validator/max_validator.dart';
 import 'package:zinjanow_app/ui/view/validation/validator/required_validator.dart';
 
-class ForgetPassWord extends ConsumerStatefulWidget {
-  const ForgetPassWord({super.key});
+@RoutePage()
+class ForgetPassWordPage extends ConsumerStatefulWidget {
+  const ForgetPassWordPage({super.key});
 
   @override
-  ForgetPassWordState createState() => ForgetPassWordState();
+  ForgetPassWordPageState createState() => ForgetPassWordPageState();
 }
 
-class ForgetPassWordState extends ConsumerState<ForgetPassWord> {
+class ForgetPassWordPageState extends ConsumerState<ForgetPassWordPage> {
   final _formKey = GlobalKey<FormState>();
 
   String email = '';
@@ -133,12 +134,7 @@ class ForgetPassWordState extends ConsumerState<ForgetPassWord> {
                   Container(
                     margin: const EdgeInsets.only(top: 5),
                     child: TextButton(
-                      onPressed: () => {
-                        Navigator.push(
-                          context, 
-                          MaterialPageRoute(builder: (context) => const Register())
-                        )
-                      },
+                      onPressed: () => context.router.push(const RegisterRoute()),
                       child: const Text("Would you like to create an account??", style: TextStyle(
                           fontWeight: FontWeight.w400,
                           color: Colors.black87,

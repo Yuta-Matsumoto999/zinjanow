@@ -1,4 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:zinjanow_app/ui/view/components/common/user_icon.dart';
+import 'package:zinjanow_app/ui/view/root/app_router.dart';
 
 class HeaderIcon extends StatelessWidget {
   final String? iconUrl;
@@ -9,23 +12,16 @@ class HeaderIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      foregroundDecoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50),
-        border: Border.all(width: 3, color: Colors.white)
-      ),
-      width: 40,
-      height: 40,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(50),
-        child: iconUrl != null ?
-        Image.network(
-          iconUrl.toString(),
-        )
-        : Image.asset(
-          "images/ifn1058.png"
-        )
-      ),
+    return GestureDetector(
+      onTap: () {
+        context.router.push(const ProfileRoute());
+      },
+      child: UserIcon(
+        iconUrl: iconUrl,
+        height: 40, 
+        width: 40, 
+        circular: 50
+      )
     );
   }
 }

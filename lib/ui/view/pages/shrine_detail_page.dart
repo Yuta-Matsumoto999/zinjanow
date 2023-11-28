@@ -1,14 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
 import 'package:zinjanow_app/ui/view/components/common/header.dart';
 import 'package:zinjanow_app/ui/view/components/shrine_detail/shrine_detail_content.dart';
 
-class ShrineDetail extends StatelessWidget {
-  final String? name;
-  const ShrineDetail({
-    Key? key,
-    this.name
-  }): super(key: key);
+@RoutePage()
+class ShrineDetailPage extends StatelessWidget {
+  const ShrineDetailPage({super.key});
 
   @override
   Widget build(BuildContext context) {

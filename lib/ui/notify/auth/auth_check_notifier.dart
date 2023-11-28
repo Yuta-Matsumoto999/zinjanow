@@ -14,11 +14,9 @@ class AuthCheckNotifier extends StateNotifier<AsyncValue<AuthState>> {
   AuthCheckNotifier({
     required AuthStateCheckUsecase authStateCheckUsecase
   }) : _authStateCheckUsecase = authStateCheckUsecase,
-  super(const AsyncLoading()) {
-    _check();
-  }
+  super(const AsyncLoading());
 
-  Future<void> _check() async {
+  Future<void> check() async {
     state = await AsyncValue.guard(() async {
       final res = await _authStateCheckUsecase.excute();
       return AuthState.fromEntity(res);

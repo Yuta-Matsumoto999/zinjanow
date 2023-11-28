@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zinjanow_app/ui/notify/user/user_notifier.dart';
+import 'package:zinjanow_app/ui/view/components/common/user_icon.dart';
 
 class MypageIcon extends ConsumerWidget {
   const MypageIcon({super.key});
@@ -23,25 +24,12 @@ class MypageIcon extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  foregroundDecoration: BoxDecoration(
-                    border: Border.all(width: 3, color: Colors.white),
-                    borderRadius: BorderRadius.circular(50)
-                  ),
-                  height: 110,
-                  width: 110,
                   margin: const EdgeInsets.only(bottom: 10),
-                    child: ClipRRect(
-                    borderRadius: BorderRadius.circular(50),
-                    child: user.value!.avatar != null ? 
-                    Image.network(
-                      user.value!.avatar.toString(),
-                      fit: BoxFit.cover,
-                    )
-                    : Container(
-                      width: size.width,
-                      height: size.height,
-                      child: const Icon(Icons.account_circle),
-                    )
+                  child: UserIcon(
+                    iconUrl: user.value!.avatar,
+                    height: 110, 
+                    width: 110, 
+                    circular: 50,
                   ),
                 ),
                 Text(

@@ -1,15 +1,14 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
 import 'package:zinjanow_app/ui/view/components/auth/button/rounded_button.dart';
 import 'package:zinjanow_app/ui/view/components/welcome/background.dart';
-import 'package:zinjanow_app/ui/view/pages/auth/login.dart';
-import 'package:zinjanow_app/ui/view/pages/auth/register.dart';
+import 'package:zinjanow_app/ui/view/root/app_router.dart';
 
-class Welcome extends ConsumerWidget {
-  final authProvider = "name";
-
-  const Welcome({super.key});
+@RoutePage()
+class WelcomePage extends ConsumerWidget {
+  const WelcomePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -39,10 +38,7 @@ class Welcome extends ConsumerWidget {
             marginTop: 0, 
             marginBottom: 38, 
             onPressedCallBack: () => {
-              Navigator.push(
-                context, 
-                MaterialPageRoute(builder: (context) => const Login())
-              )
+              context.router.push(const LoginRoute())
             }, 
             isActive: true,
             isLoading: "idel",
@@ -54,10 +50,7 @@ class Welcome extends ConsumerWidget {
             marginTop: 0, 
             marginBottom: 0, 
             onPressedCallBack: () => {
-              Navigator.push(
-                context, 
-                MaterialPageRoute(builder: (context) => const Register())
-              )
+              context.router.push(const RegisterRoute())
             },  
             isActive: true,
             isLoading: "idel",

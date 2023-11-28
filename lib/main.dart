@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
-import 'package:zinjanow_app/ui/view/pages/splash.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:zinjanow_app/ui/view/root/app_router.dart';
 
 void main() async {
   await dotenv.load(fileName: '.env');
@@ -14,23 +14,24 @@ void main() async {
   );
 
   runApp(
-    const ProviderScope(child: MyApp())
+    ProviderScope(child: MyApp())
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
 
+  final _appRouter = AppRouter();
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: _appRouter.config(),
       title: 'Zinjanow',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(CustomColor.mainTheme)),
         useMaterial3: true,
       ),
-      home: const Splash()
     );
   }
 }

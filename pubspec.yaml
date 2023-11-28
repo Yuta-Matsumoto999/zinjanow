@@ -51,6 +51,8 @@ dependencies:
   google_maps_flutter: ^2.5.0
   geocoding: ^2.1.1
   loading_animation_widget: ^1.2.0+4
+  auto_route: ^6.3.0
+  auto_route_generator: ^6.2.0
 
 dev_dependencies:
   flutter_test:

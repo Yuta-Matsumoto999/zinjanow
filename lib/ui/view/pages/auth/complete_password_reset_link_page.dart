@@ -1,25 +1,24 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:zinjanow_app/core/constants/customColor.dart';
 import 'package:zinjanow_app/ui/view/components/auth/button/rounded_button.dart';
-import 'package:zinjanow_app/ui/view/pages/auth/forget_password.dart';
-import 'package:zinjanow_app/ui/view/pages/auth/login.dart';
+import 'package:zinjanow_app/ui/view/pages/auth/forget_password_page.dart';
+import 'package:zinjanow_app/ui/view/root/app_router.dart';
 
-class CompletePasswordResetLink extends StatefulWidget {
-  const CompletePasswordResetLink({super.key});
+@RoutePage()
+class CompletePasswordResetLinkPage extends StatefulWidget {
+  const CompletePasswordResetLinkPage({super.key});
 
   @override
-  State<CompletePasswordResetLink> createState() => _CompletePasswordResetLinkState();
+  State<CompletePasswordResetLinkPage> createState() => _CompletePasswordResetLinkPageState();
 }
 
-class _CompletePasswordResetLinkState extends State<CompletePasswordResetLink> {
+class _CompletePasswordResetLinkPageState extends State<CompletePasswordResetLinkPage> {
   bool isButtonActive = true;
   String buttonLoading = "idel";
 
   void _navigateLoginPage() {
-    Navigator.push(
-      context, 
-      MaterialPageRoute(builder: (context) => const Login())
-    );
+    context.router.push(const LoginRoute());
   }
 
   @override
@@ -58,7 +57,7 @@ class _CompletePasswordResetLinkState extends State<CompletePasswordResetLink> {
                     onPressed: () => {
                       Navigator.push(
                         context, 
-                        MaterialPageRoute(builder: (context) => const ForgetPassWord())
+                        MaterialPageRoute(builder: (context) => const ForgetPassWordPage())
                       )
                     },
                     child: const Text("Request Reset Link Again", style: TextStyle(

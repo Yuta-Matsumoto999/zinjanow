@@ -62,21 +62,22 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
 }
 
 /// @nodoc
-abstract class _$$_AuthStateCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
-  factory _$$_AuthStateCopyWith(
-          _$_AuthState value, $Res Function(_$_AuthState) then) =
-      __$$_AuthStateCopyWithImpl<$Res>;
+abstract class _$$AuthStateImplCopyWith<$Res>
+    implements $AuthStateCopyWith<$Res> {
+  factory _$$AuthStateImplCopyWith(
+          _$AuthStateImpl value, $Res Function(_$AuthStateImpl) then) =
+      __$$AuthStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool isAuth, String? message});
 }
 
 /// @nodoc
-class __$$_AuthStateCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$_AuthState>
-    implements _$$_AuthStateCopyWith<$Res> {
-  __$$_AuthStateCopyWithImpl(
-      _$_AuthState _value, $Res Function(_$_AuthState) _then)
+class __$$AuthStateImplCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$AuthStateImpl>
+    implements _$$AuthStateImplCopyWith<$Res> {
+  __$$AuthStateImplCopyWithImpl(
+      _$AuthStateImpl _value, $Res Function(_$AuthStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -85,7 +86,7 @@ class __$$_AuthStateCopyWithImpl<$Res>
     Object? isAuth = null,
     Object? message = freezed,
   }) {
-    return _then(_$_AuthState(
+    return _then(_$AuthStateImpl(
       isAuth: null == isAuth
           ? _value.isAuth
           : isAuth // ignore: cast_nullable_to_non_nullable
@@ -100,8 +101,8 @@ class __$$_AuthStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AuthState implements _AuthState {
-  _$_AuthState({required this.isAuth, this.message});
+class _$AuthStateImpl implements _AuthState {
+  _$AuthStateImpl({required this.isAuth, this.message});
 
   @override
   final bool isAuth;
@@ -117,7 +118,7 @@ class _$_AuthState implements _AuthState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AuthState &&
+            other is _$AuthStateImpl &&
             (identical(other.isAuth, isAuth) || other.isAuth == isAuth) &&
             (identical(other.message, message) || other.message == message));
   }
@@ -128,13 +129,13 @@ class _$_AuthState implements _AuthState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AuthStateCopyWith<_$_AuthState> get copyWith =>
-      __$$_AuthStateCopyWithImpl<_$_AuthState>(this, _$identity);
+  _$$AuthStateImplCopyWith<_$AuthStateImpl> get copyWith =>
+      __$$AuthStateImplCopyWithImpl<_$AuthStateImpl>(this, _$identity);
 }
 
 abstract class _AuthState implements AuthState {
   factory _AuthState({required final bool isAuth, final String? message}) =
-      _$_AuthState;
+      _$AuthStateImpl;
 
   @override
   bool get isAuth;
@@ -142,6 +143,6 @@ abstract class _AuthState implements AuthState {
   String? get message;
   @override
   @JsonKey(ignore: true)
-  _$$_AuthStateCopyWith<_$_AuthState> get copyWith =>
+  _$$AuthStateImplCopyWith<_$AuthStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

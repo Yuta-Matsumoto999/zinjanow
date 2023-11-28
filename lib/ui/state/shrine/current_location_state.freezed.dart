@@ -70,22 +70,22 @@ class _$CurrentLocationStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_CurrentLocationStateCopyWith<$Res>
+abstract class _$$CurrentLocationStateImplCopyWith<$Res>
     implements $CurrentLocationStateCopyWith<$Res> {
-  factory _$$_CurrentLocationStateCopyWith(_$_CurrentLocationState value,
-          $Res Function(_$_CurrentLocationState) then) =
-      __$$_CurrentLocationStateCopyWithImpl<$Res>;
+  factory _$$CurrentLocationStateImplCopyWith(_$CurrentLocationStateImpl value,
+          $Res Function(_$CurrentLocationStateImpl) then) =
+      __$$CurrentLocationStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({double lat, double lng, String address});
 }
 
 /// @nodoc
-class __$$_CurrentLocationStateCopyWithImpl<$Res>
-    extends _$CurrentLocationStateCopyWithImpl<$Res, _$_CurrentLocationState>
-    implements _$$_CurrentLocationStateCopyWith<$Res> {
-  __$$_CurrentLocationStateCopyWithImpl(_$_CurrentLocationState _value,
-      $Res Function(_$_CurrentLocationState) _then)
+class __$$CurrentLocationStateImplCopyWithImpl<$Res>
+    extends _$CurrentLocationStateCopyWithImpl<$Res, _$CurrentLocationStateImpl>
+    implements _$$CurrentLocationStateImplCopyWith<$Res> {
+  __$$CurrentLocationStateImplCopyWithImpl(_$CurrentLocationStateImpl _value,
+      $Res Function(_$CurrentLocationStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -95,7 +95,7 @@ class __$$_CurrentLocationStateCopyWithImpl<$Res>
     Object? lng = null,
     Object? address = null,
   }) {
-    return _then(_$_CurrentLocationState(
+    return _then(_$CurrentLocationStateImpl(
       lat: null == lat
           ? _value.lat
           : lat // ignore: cast_nullable_to_non_nullable
@@ -114,8 +114,8 @@ class __$$_CurrentLocationStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CurrentLocationState implements _CurrentLocationState {
-  _$_CurrentLocationState(
+class _$CurrentLocationStateImpl implements _CurrentLocationState {
+  _$CurrentLocationStateImpl(
       {required this.lat, required this.lng, required this.address});
 
   @override
@@ -134,7 +134,7 @@ class _$_CurrentLocationState implements _CurrentLocationState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CurrentLocationState &&
+            other is _$CurrentLocationStateImpl &&
             (identical(other.lat, lat) || other.lat == lat) &&
             (identical(other.lng, lng) || other.lng == lng) &&
             (identical(other.address, address) || other.address == address));
@@ -146,16 +146,17 @@ class _$_CurrentLocationState implements _CurrentLocationState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CurrentLocationStateCopyWith<_$_CurrentLocationState> get copyWith =>
-      __$$_CurrentLocationStateCopyWithImpl<_$_CurrentLocationState>(
-          this, _$identity);
+  _$$CurrentLocationStateImplCopyWith<_$CurrentLocationStateImpl>
+      get copyWith =>
+          __$$CurrentLocationStateImplCopyWithImpl<_$CurrentLocationStateImpl>(
+              this, _$identity);
 }
 
 abstract class _CurrentLocationState implements CurrentLocationState {
   factory _CurrentLocationState(
       {required final double lat,
       required final double lng,
-      required final String address}) = _$_CurrentLocationState;
+      required final String address}) = _$CurrentLocationStateImpl;
 
   @override
   double get lat;
@@ -165,6 +166,6 @@ abstract class _CurrentLocationState implements CurrentLocationState {
   String get address;
   @override
   @JsonKey(ignore: true)
-  _$$_CurrentLocationStateCopyWith<_$_CurrentLocationState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$CurrentLocationStateImplCopyWith<_$CurrentLocationStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
